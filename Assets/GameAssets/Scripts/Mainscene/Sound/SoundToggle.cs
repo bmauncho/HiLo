@@ -18,8 +18,8 @@ public class SoundToggle : MonoBehaviour
 
     public void SoundPressed ()
     {
-        //CommandCenter.Instance.settingsManager_.ToogleSound(soundToggle.isOn);
-        //TheSound = CommandCenter.Instance.settingsManager_.Sound;
+        CommandCenter.Instance.settingsManager_.ToogleSound(soundToggle.isOn);
+        TheSound = CommandCenter.Instance.settingsManager_.Sound;
         if (soundToggle.isOn)
         {
             toggle.sprite = on_;
@@ -33,7 +33,7 @@ public class SoundToggle : MonoBehaviour
 
     public void Refresh ()
     {
-        //TheSound = CommandCenter.Instance.settingsManager_.Sound;
+        TheSound = CommandCenter.Instance.settingsManager_.Sound;
         soundToggle.isOn = TheSound;
         if (soundToggle.isOn)
         {
