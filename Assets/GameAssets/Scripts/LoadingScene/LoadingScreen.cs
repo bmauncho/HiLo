@@ -150,12 +150,15 @@ public class LoadingScreen : MonoBehaviour
         else
         {
             Debug.Log("loading Scene!");
+            string loadingText = $"connecting...";
+            setLoadingText(loadingText);
             AsyncOperation handle = SceneManager.LoadSceneAsync("MainScene" , LoadSceneMode.Additive);
             handle.allowSceneActivation = false;
 
             while (handle.progress < 0.9f)
             {
                 ShowProgress(handle.progress);
+                loadingText = $"downloading resources...[{( progress * 100f ):F0}%]";
                 yield return new WaitForSeconds(0.1f);
             }
 
@@ -167,10 +170,14 @@ public class LoadingScreen : MonoBehaviour
                 {
                     displayedProgress += 0.05f;
                     ShowProgress(displayedProgress);
+                    loadingText = $"downloading resources...[{( progress * 100f ):F0}%]";
                     yield return new WaitForSeconds(0.1f);
                 }
             }
-
+            yield return new WaitForSeconds(0.25f);
+            loadingText = $"complete.";
+            setLoadingText(loadingText);
+            yield return new WaitForSeconds(0.5f);
             if (!startBtn && !LoadingContent)
             {
                 Activate();
