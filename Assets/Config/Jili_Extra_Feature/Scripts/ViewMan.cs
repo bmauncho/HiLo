@@ -12,6 +12,7 @@ public class ViewMan : MonoBehaviour
     public Vector2 ScaleMultiplier;
     public float NewScaleMultiplier;
     public float ScaleFactor;
+    public float ScaleOffset;
     float forceupdatetimestamp;
     public CanvasScaler canvasScaler;
     AnimationCurve ScaleCurve = new AnimationCurve();
@@ -62,7 +63,7 @@ public class ViewMan : MonoBehaviour
             }
             else
             {
-                canvasScaler.matchWidthOrHeight = ScaleFactor;
+                canvasScaler.matchWidthOrHeight = ScaleFactor + ScaleOffset;
 
                 canvasScaler.screenMatchMode = CanvasScaler.ScreenMatchMode.MatchWidthOrHeight;
             }
