@@ -1,0 +1,1869 @@
+fileFormatVersion: 2
+guid: ff0fdc1f858e31e4bb965728a73bcf27
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Font_Colored_A
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 7
+        width: 23
+        height: 31
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 37c353e2a6067ef478847328540db587
+      internalID: 446429891
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Font_Colored_C
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 7
+        width: 22
+        height: 31
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 211e6614ca4a63c44a96bbe1aa3c0a82
+      internalID: -967258744
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Font_Colored_D
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 8
+        width: 21
+        height: 30
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0a26ddb52d79a0b449d9cfe24efa7d47
+      internalID: -1186253150
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Font_Colored_G
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 7
+        width: 23
+        height: 31
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8afc345c6772f0443afc3b628257d63e
+      internalID: -844993495
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Font_Colored_B
+      rect:
+        serializedVersion: 2
+        x: 97
+        y: 8
+        width: 20
+        height: 30
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e9937bae6156a6f459dfab76f4910105
+      internalID: 483209294
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Font_Colored_E
+      rect:
+        serializedVersion: 2
+        x: 119
+        y: 8
+        width: 19
+        height: 30
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e7edf725f9c37294196ab931808283c1
+      internalID: 345931820
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Font_Colored_K
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 7
+        width: 21
+        height: 31
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 52808f9dc275bb346abc6e526d3bc52f
+      internalID: 2063848661
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Font_Colored_R
+      rect:
+        serializedVersion: 2
+        x: 163
+        y: 7
+        width: 21
+        height: 31
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3460f2050eaa49b4f89e8e1c4102de30
+      internalID: 712492624
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Font_Colored_H
+      rect:
+        serializedVersion: 2
+        x: 186
+        y: 7
+        width: 20
+        height: 31
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0d79464e4435db04caf8aeacb8a43572
+      internalID: 1118422211
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Font_Colored_T
+      rect:
+        serializedVersion: 2
+        x: 207
+        y: 7
+        width: 21
+        height: 31
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 32db35e34a88dc14e817250c665c9be0
+      internalID: 288297747
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Font_Colored_I
+      rect:
+        serializedVersion: 2
+        x: 229
+        y: 7
+        width: 8
+        height: 31
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0809eb1c8d32cb842ba2a695a2013cda
+      internalID: 1459101800
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Font_Colored_M
+      rect:
+        serializedVersion: 2
+        x: 239
+        y: 8
+        width: 19
+        height: 30
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4f67db14c0b5a1b4bb2838230cb1a5b3
+      internalID: -2127970025
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Font_Colored_F
+      rect:
+        serializedVersion: 2
+        x: 261
+        y: 8
+        width: 18
+        height: 30
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aedb77ed8ff92a740b0b250910fc5adb
+      internalID: 684522875
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Font_Colored_O
+      rect:
+        serializedVersion: 2
+        x: 280
+        y: 7
+        width: 23
+        height: 31
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 11e7377746d001940b3381d4dc075b25
+      internalID: 469410972
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Font_Colored_S
+      rect:
+        serializedVersion: 2
+        x: 305
+        y: 7
+        width: 20
+        height: 31
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e25ff652144be7c4092289da12c905df
+      internalID: 514050142
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Font_Colored_X
+      rect:
+        serializedVersion: 2
+        x: 327
+        y: 8
+        width: 23
+        height: 30
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 88de27b5cdd4c53479ede60ce8cc0280
+      internalID: -2129136743
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Font_Colored_N
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 8
+        width: 19
+        height: 30
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7364c51b86b68ff41866e9c47555bc6a
+      internalID: -154198439
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Font_Colored_P
+      rect:
+        serializedVersion: 2
+        x: 373
+        y: 8
+        width: 20
+        height: 30
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8f7fdd90052defb4185f2ac93fa68892
+      internalID: -914614554
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Font_Colored_V
+      rect:
+        serializedVersion: 2
+        x: 395
+        y: 8
+        width: 23
+        height: 30
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9bc6c4e29df7c1a4e97e5fd9de03884f
+      internalID: -1802758265
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Font_Colored_U
+      rect:
+        serializedVersion: 2
+        x: 420
+        y: 7
+        width: 20
+        height: 31
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d40b66d6470381d4db2cf125e1b0a9d2
+      internalID: -405163670
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Font_Colored_Y
+      rect:
+        serializedVersion: 2
+        x: 442
+        y: 8
+        width: 23
+        height: 30
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4496bfba1e69996479c4c4f36a48fadd
+      internalID: 1286640232
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Font_Colored_W
+      rect:
+        serializedVersion: 2
+        x: 466
+        y: 7
+        width: 24
+        height: 31
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4bfcff886ffa72c47a4020c5c0e6a026
+      internalID: 1720594469
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Font_Colored_L
+      rect:
+        serializedVersion: 2
+        x: 492
+        y: 7
+        width: 18
+        height: 30
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 09b86f641e51f3c438b22302e86c3ebd
+      internalID: -1307509400
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Font_Colored_J
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 7
+        width: 17
+        height: 31
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c53cb837031dd4443a622b265aec16f3
+      internalID: -552382682
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Font_Colored_Q
+      rect:
+        serializedVersion: 2
+        x: 531
+        y: 5
+        width: 24
+        height: 33
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b0e82a5e309a789408a6b98735a707dc
+      internalID: -574095553
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Font_Colored_Z
+      rect:
+        serializedVersion: 2
+        x: 557
+        y: 8
+        width: 21
+        height: 30
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1250c0fc877b3be40ba01b4a657cd92d
+      internalID: 328708411
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Font_Colored_a
+      rect:
+        serializedVersion: 2
+        x: 580
+        y: 7
+        width: 17
+        height: 24
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f0613b1db64a9144a8ec4a3a1597d33e
+      internalID: -1508809781
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Font_Colored_b
+      rect:
+        serializedVersion: 2
+        x: 599
+        y: 7
+        width: 18
+        height: 31
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: df2e53a425931704ea80c44feeccfd67
+      internalID: 19430723
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Font_Colored_d
+      rect:
+        serializedVersion: 2
+        x: 619
+        y: 7
+        width: 18
+        height: 31
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ca98672aeb2b06e49b34db310d3117b7
+      internalID: 1318341655
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Font_Colored_c
+      rect:
+        serializedVersion: 2
+        x: 639
+        y: 7
+        width: 17
+        height: 24
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 957167767c53d1144b5e51c5ecd8f375
+      internalID: -1713712552
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Font_Colored_m
+      rect:
+        serializedVersion: 2
+        x: 658
+        y: 7
+        width: 20
+        height: 24
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f3be8fbc654b8394dbd54eddd39f5bd6
+      internalID: 1940646609
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Font_Colored_f
+      rect:
+        serializedVersion: 2
+        x: 680
+        y: 8
+        width: 14
+        height: 30
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5fe84faa3ba3acd4da37091c6b03fcad
+      internalID: -914326083
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Font_Colored_e
+      rect:
+        serializedVersion: 2
+        x: 696
+        y: 7
+        width: 17
+        height: 24
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 16712e90e709cd447ace4d84d588c05d
+      internalID: -754734899
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Font_Colored_h
+      rect:
+        serializedVersion: 2
+        x: 715
+        y: 7
+        width: 17
+        height: 31
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 52600d3a388bd8441a39974a1dd67a33
+      internalID: 1492615246
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Font_Colored_n
+      rect:
+        serializedVersion: 2
+        x: 734
+        y: 7
+        width: 17
+        height: 24
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6c62bba8e342f644187b7d9b5a1c1f7e
+      internalID: 2004205592
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Font_Colored_p
+      rect:
+        serializedVersion: 2
+        x: 752
+        y: 0
+        width: 19
+        height: 31
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f17ea06c3769415439d7e731844fb4e6
+      internalID: 139064863
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Font_Colored_q
+      rect:
+        serializedVersion: 2
+        x: 773
+        y: 0
+        width: 18
+        height: 31
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 29c5d47190875a749b9f130fe0f58b05
+      internalID: -75028184
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Font_Colored_o
+      rect:
+        serializedVersion: 2
+        x: 793
+        y: 7
+        width: 19
+        height: 24
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1631a5ef2af979d40a3a034776f8c8f4
+      internalID: 204467104
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Font_Colored_r
+      rect:
+        serializedVersion: 2
+        x: 814
+        y: 8
+        width: 13
+        height: 23
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 76ab78f08623d674b95e332b33b9db57
+      internalID: -199466353
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Font_Colored_g
+      rect:
+        serializedVersion: 2
+        x: 829
+        y: 0
+        width: 18
+        height: 31
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e0ca3659f56c19b4da59f799259c7ec7
+      internalID: -843299638
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Font_Colored_i
+      rect:
+        serializedVersion: 2
+        x: 848
+        y: 7
+        width: 8
+        height: 31
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3e51f561e20211d418c98fc295aedbdb
+      internalID: -1835059875
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Font_Colored_k
+      rect:
+        serializedVersion: 2
+        x: 858
+        y: 7
+        width: 17
+        height: 31
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2ddf4f685e4e016449ba8e8b7dbeb55d
+      internalID: -1196747396
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Font_Colored_l
+      rect:
+        serializedVersion: 2
+        x: 876
+        y: 7
+        width: 8
+        height: 31
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9615682914c9ff24daea1bd59bb13b8e
+      internalID: 2027373100
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Font_Colored_s
+      rect:
+        serializedVersion: 2
+        x: 886
+        y: 6
+        width: 17
+        height: 24
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a74474df7d4edf64fb622a78ef029802
+      internalID: -1883668488
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Font_Colored_t
+      rect:
+        serializedVersion: 2
+        x: 905
+        y: 7
+        width: 13
+        height: 30
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1a70285cf3479d64697ea096d2a72911
+      internalID: 242605537
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Font_Colored_v
+      rect:
+        serializedVersion: 2
+        x: 920
+        y: 7
+        width: 19
+        height: 23
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f60c137fa134066459d5c104c8c4cf82
+      internalID: -162795844
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Font_Colored_w
+      rect:
+        serializedVersion: 2
+        x: 940
+        y: 7
+        width: 21
+        height: 23
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ff5f3bc4f6f0caf4d982616f7b527797
+      internalID: -1593691638
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Font_Colored_u
+      rect:
+        serializedVersion: 2
+        x: 962
+        y: 7
+        width: 18
+        height: 23
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f77e5963c42cecc429421bf6d8eeded4
+      internalID: 1589179424
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Font_Colored_z
+      rect:
+        serializedVersion: 2
+        x: 982
+        y: 8
+        width: 17
+        height: 22
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d671bc8c587b94d428623b39d67697a1
+      internalID: -656907157
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Font_Colored_j
+      rect:
+        serializedVersion: 2
+        x: 1001
+        y: 1
+        width: 10
+        height: 37
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 527a9a8b65f14544799a3da5fe4fabc7
+      internalID: -53253437
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Font_Colored_x
+      rect:
+        serializedVersion: 2
+        x: 1013
+        y: 7
+        width: 19
+        height: 23
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9b8cda27fc76ea743a1bfaf947bb99d9
+      internalID: 970006649
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Font_Colored_y
+      rect:
+        serializedVersion: 2
+        x: 1034
+        y: 0
+        width: 19
+        height: 30
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a0c67b5f5cc14be48b552acf57504852
+      internalID: 525032882
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Font_Colored_$
+      rect:
+        serializedVersion: 2
+        x: 1055
+        y: 7
+        width: 18
+        height: 30
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3073586944710a14c9d8f4d46cfdc4bc
+      internalID: -677372263
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Font_Colored_(
+      rect:
+        serializedVersion: 2
+        x: 1075
+        y: 9
+        width: 9
+        height: 26
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a94ba6aabc0734c479d98e3f68f46c58
+      internalID: 544266156
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Font_Colored_)
+      rect:
+        serializedVersion: 2
+        x: 1086
+        y: 9
+        width: 10
+        height: 26
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0ca023948f704c64cbcbe9db4c2d6c69
+      internalID: 1817682896
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Font_Colored_comma
+      rect:
+        serializedVersion: 2
+        x: 1098
+        y: 3
+        width: 7
+        height: 12
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 57f3d9293f95f724ab4ade086662f1f3
+      internalID: 1780354502
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Font_Colored_fullstop
+      rect:
+        serializedVersion: 2
+        x: 1107
+        y: 8
+        width: 6
+        height: 7
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 86c6624f760110c45908f65c5bcadbe9
+      internalID: -1891901621
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Font_Colored_Pound
+      rect:
+        serializedVersion: 2
+        x: 1115
+        y: 8
+        width: 17
+        height: 28
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 167d8c78232529247b66c8b18af574fb
+      internalID: -36847044
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Font_Colored_Philippine_Peso
+      rect:
+        serializedVersion: 2
+        x: 1134
+        y: 8
+        width: 20
+        height: 28
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 73ce6ad8d3d9d7f458fac6e703d0d7d2
+      internalID: 764336783
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Font_Colored_SouthKoreanWon
+      rect:
+        serializedVersion: 2
+        x: 1155
+        y: 7
+        width: 22
+        height: 28
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c0def84f0655a604eb80589eb42f441b
+      internalID: 1414588033
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Font_Colored_Euro
+      rect:
+        serializedVersion: 2
+        x: 1179
+        y: 8
+        width: 20
+        height: 28
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8b954aea2a2cd794ab582504febb22ef
+      internalID: -1615822457
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Font_Colored_VietnameseDong
+      rect:
+        serializedVersion: 2
+        x: 1201
+        y: 8
+        width: 17
+        height: 29
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 216c6e194e6812e48842bd0b6db46042
+      internalID: 966084592
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Font_Colored_Yen
+      rect:
+        serializedVersion: 2
+        x: 1220
+        y: 8
+        width: 19
+        height: 28
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 443c5fa16f499d245b50dd6305c815d9
+      internalID: 2137631923
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Font_Colored_Bitcoin
+      rect:
+        serializedVersion: 2
+        x: 1241
+        y: 7
+        width: 19
+        height: 30
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 94055d113f61ea548989304028cfc3bf
+      internalID: 2068580892
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Font_Colored_
+      rect:
+        serializedVersion: 2
+        x: 1262
+        y: 8
+        width: 9
+        height: 27
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7bb2d4e3432b3634cae06f589de2d3d5
+      internalID: -678917110
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Font_Colored_0
+      rect:
+        serializedVersion: 2
+        x: 1273
+        y: 7
+        width: 21
+        height: 31
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 28230a43bcc8b9e46aeb611d089aa6f6
+      internalID: 1623251199
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Font_Colored_1
+      rect:
+        serializedVersion: 2
+        x: 1297
+        y: 8
+        width: 14
+        height: 30
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9c78299fb5fd85c4aa344efd25f24c7c
+      internalID: -168671266
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Font_Colored_2
+      rect:
+        serializedVersion: 2
+        x: 1316
+        y: 7
+        width: 22
+        height: 31
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f0a837279dc90f44c88f0b9f1a8d49d5
+      internalID: 78718055
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Font_Colored_3
+      rect:
+        serializedVersion: 2
+        x: 1340
+        y: 7
+        width: 21
+        height: 31
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d1e39a131bf3ed04e9cc6b184b67a52d
+      internalID: 989266186
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Font_Colored_4
+      rect:
+        serializedVersion: 2
+        x: 1361
+        y: 8
+        width: 21
+        height: 30
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b8cf0b7619878344bb3a806fb04c547d
+      internalID: 1907699858
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Font_Colored_7
+      rect:
+        serializedVersion: 2
+        x: 1383
+        y: 6
+        width: 21
+        height: 30
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4778b6a874328a3479e68bab6b86dd8e
+      internalID: 1829618598
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Font_Colored_6
+      rect:
+        serializedVersion: 2
+        x: 1405
+        y: 7
+        width: 21
+        height: 31
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a018b06e09b286349804803f51d0a39d
+      internalID: 2021755538
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Font_Colored_5
+      rect:
+        serializedVersion: 2
+        x: 1428
+        y: 7
+        width: 20
+        height: 30
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9a0bc15b3cd907248b253673b293c58a
+      internalID: -832250107
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Font_Colored_9
+      rect:
+        serializedVersion: 2
+        x: 1449
+        y: 7
+        width: 21
+        height: 31
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f4888a7b5b9591e4eae5513e217f382c
+      internalID: 2038088642
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Font_Colored_8
+      rect:
+        serializedVersion: 2
+        x: 1471
+        y: 7
+        width: 21
+        height: 31
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0afec25f45ecdfb43b39d7d775d3705d
+      internalID: 2103184572
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: ebe616ae9ab6f8d46bb8ab6581f66418
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Font_Colored_: -678917110
+      Font_Colored_$: -677372263
+      Font_Colored_(: 544266156
+      Font_Colored_): 1817682896
+      Font_Colored_0: 1623251199
+      Font_Colored_1: -168671266
+      Font_Colored_2: 78718055
+      Font_Colored_3: 989266186
+      Font_Colored_4: 1907699858
+      Font_Colored_5: -832250107
+      Font_Colored_6: 2021755538
+      Font_Colored_7: 1829618598
+      Font_Colored_8: 2103184572
+      Font_Colored_9: 2038088642
+      Font_Colored_A: 446429891
+      Font_Colored_B: 483209294
+      Font_Colored_Bitcoin: 2068580892
+      Font_Colored_C: -967258744
+      Font_Colored_D: -1186253150
+      Font_Colored_E: 345931820
+      Font_Colored_Euro: -1615822457
+      Font_Colored_F: 684522875
+      Font_Colored_G: -844993495
+      Font_Colored_H: 1118422211
+      Font_Colored_I: 1459101800
+      Font_Colored_J: -552382682
+      Font_Colored_K: 2063848661
+      Font_Colored_L: -1307509400
+      Font_Colored_M: -2127970025
+      Font_Colored_N: -154198439
+      Font_Colored_O: 469410972
+      Font_Colored_P: -914614554
+      Font_Colored_Philippine_Peso: 764336783
+      Font_Colored_Pound: -36847044
+      Font_Colored_Q: -574095553
+      Font_Colored_R: 712492624
+      Font_Colored_S: 514050142
+      Font_Colored_SouthKoreanWon: 1414588033
+      Font_Colored_T: 288297747
+      Font_Colored_U: -405163670
+      Font_Colored_V: -1802758265
+      Font_Colored_VietnameseDong: 966084592
+      Font_Colored_W: 1720594469
+      Font_Colored_X: -2129136743
+      Font_Colored_Y: 1286640232
+      Font_Colored_Yen: 2137631923
+      Font_Colored_Z: 328708411
+      Font_Colored_a: -1508809781
+      Font_Colored_b: 19430723
+      Font_Colored_c: -1713712552
+      Font_Colored_comma: 1780354502
+      Font_Colored_d: 1318341655
+      Font_Colored_e: -754734899
+      Font_Colored_f: -914326083
+      Font_Colored_fullstop: -1891901621
+      Font_Colored_g: -843299638
+      Font_Colored_h: 1492615246
+      Font_Colored_i: -1835059875
+      Font_Colored_j: -53253437
+      Font_Colored_k: -1196747396
+      Font_Colored_l: 2027373100
+      Font_Colored_m: 1940646609
+      Font_Colored_n: 2004205592
+      Font_Colored_o: 204467104
+      Font_Colored_p: 139064863
+      Font_Colored_q: -75028184
+      Font_Colored_r: -199466353
+      Font_Colored_s: -1883668488
+      Font_Colored_t: 242605537
+      Font_Colored_u: 1589179424
+      Font_Colored_v: -162795844
+      Font_Colored_w: -1593691638
+      Font_Colored_x: 970006649
+      Font_Colored_y: 525032882
+      Font_Colored_z: -656907157
+      f: -1891901621
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

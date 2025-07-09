@@ -12,6 +12,7 @@ public class CommandCenter : MonoBehaviour
     public PoolManager poolManager_;
     public SettingsManager settingsManager_;
     public SoundManager soundManager_;
+    public TextManager textManager_;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
