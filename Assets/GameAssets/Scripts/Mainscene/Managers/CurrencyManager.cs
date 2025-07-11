@@ -1,7 +1,10 @@
+using TMPro;
 using UnityEngine;
 
 public class CurrencyManager : MonoBehaviour
 {
+    public string winAmount = "2000.00";
+    public TMP_Text walletAmountText;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {

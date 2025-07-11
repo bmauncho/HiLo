@@ -8073,6 +8073,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb765a424764e614bbdf2af83d221348, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  winAmount: 2000.00
+  walletAmountText: {fileID: 1050532569}
 --- !u!1 &1435642239
 GameObject:
   m_ObjectHideFlags: 0
