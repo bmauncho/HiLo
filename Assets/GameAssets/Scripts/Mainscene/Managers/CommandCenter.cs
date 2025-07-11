@@ -13,15 +13,49 @@ public class CommandCenter : MonoBehaviour
     public SettingsManager settingsManager_;
     public SoundManager soundManager_;
     public TextManager textManager_;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public BetManager betManager_;
+
+    private void Awake ()
     {
-        
+        if (Instance != null && Instance != this)
+        {
+            Debug.Log("This is extra!");
+            //Destroy(gameObject); // Ensures only one instance exists
+        }
+        else
+        {
+            Instance = this;
+        }
+
+        if (GameManager.Instance)
+        {
+            SetUp();
+            CheckifGameIsReady();
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    void SetUp ()
     {
-        
+        gameMode = GameManager.Instance.IsDemo() ? GameMode.Demo : GameMode.Live;
+        bool isDemo = GameManager.Instance.IsDemo() ? true : false;
+    }
+
+    void CheckifGameIsReady ()
+    {
+        Debug.Log("IsReady!");
+    }
+
+
+    public void SetGameMode ( GameMode mode )
+    {
+        gameMode = mode;
+    }
+
+    private void OnDestroy ()
+    {
+        if (Instance == this)
+        {
+            Instance = null;
+        }
     }
 }

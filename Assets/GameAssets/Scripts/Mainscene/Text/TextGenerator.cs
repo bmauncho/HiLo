@@ -43,7 +43,7 @@ public static class TextGenerator
             }
         }
 
-        Debug.Log(input);
+        //Debug.Log(input);
 
         foreach (var (character, isUpperCase) in characters)
         {
@@ -57,15 +57,23 @@ public static class TextGenerator
                     continue;
                 }
 
-                foreach (var (actual, available) in charReferences)
+                bool wasCustomReplaced = false;
+
+                if (charReferences != null)
                 {
-                    if (actual == character)
+                    foreach (var (actual, available) in charReferences)
                     {
-                        spriteName = available;
-                        result += prefix + spriteName + suffix;
-                        continue;
+                        if (actual == character)
+                        {
+                            result += prefix + available + suffix;
+                            wasCustomReplaced = true;
+                            break;
+                        }
                     }
                 }
+
+                if (wasCustomReplaced)
+                    continue;
 
                 string finalPrefix = isUpperCase ? prefix + Prefix_UpperCase : prefix;
 
@@ -76,6 +84,7 @@ public static class TextGenerator
                 else
                 {
                     result += character;
+                    Debug.Log("result " + result);
                 }
             }
         }

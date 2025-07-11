@@ -6,23 +6,56 @@ public class TextManager : MonoBehaviour
 {
     public TMP_SpriteAsset mainText;
     public TMP_SpriteAsset coloredText;
-    public TMP_Text testText;
-    public string Input;
+
     public List<(string actual, string available)> charRefrences = new List<(string actual, string available)>
     {
         (".","fullstop"),
         (",", "comma")
     };
 
-    [ContextMenu("Test")]
-    public void Test ()
+    #region[example]
+
+    [HideInInspector] public TMP_Text testText;
+    [HideInInspector] public string Input;
+    private void Test ()
     {
         TextGenerator.CreateSpriteAssetText(
             Input ,
-            "Font_main_" ,
-            "Uc_" ,
+            GetColoredTextRef(),
+            GetUpperCaseTextRef() ,
             testText,
-            mainText,
+            GetColoredFont(),
             charRefrences);
+    }
+    #endregion
+
+    public TMP_SpriteAsset GetMainFont ()
+    {
+        return mainText;
+    }
+
+    public TMP_SpriteAsset GetColoredFont ()
+    {
+        return coloredText;
+    }
+
+    public string GetColoredTextRef ()
+    {
+        return "Font_Colored_";
+    }
+
+    public string GetMainTextRef ()
+    {
+        return "Font_main_";
+    }
+
+    public string GetUpperCaseTextRef ()
+    {
+        return "Uc_";
+    }
+
+    public List<(string actual, string available)> GetCharacterReferences ()
+    {
+        return charRefrences;
     }
 }
