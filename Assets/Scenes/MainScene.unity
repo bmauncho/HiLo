@@ -4464,6 +4464,127 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectedMultiplier: 0
+  multiplierDetailsList:
+  - Rank: 0
+    multipliers:
+    - multiplierType: 1
+      Multiplier: 1.04
+    - multiplierType: 2
+      Multiplier: 16.69
+    - multiplierType: 3
+      Multiplier: 
+  - Rank: 1
+    multipliers:
+    - multiplierType: 1
+      Multiplier: 1.07
+    - multiplierType: 2
+      Multiplier: 16.69
+    - multiplierType: 3
+      Multiplier: 7.15
+  - Rank: 2
+    multipliers:
+    - multiplierType: 1
+      Multiplier: 1.16
+    - multiplierType: 2
+      Multiplier: 16.69
+    - multiplierType: 3
+      Multiplier: 4.55
+  - Rank: 3
+    multipliers:
+    - multiplierType: 1
+      Multiplier: 1.28
+    - multiplierType: 2
+      Multiplier: 16.69
+    - multiplierType: 3
+      Multiplier: 3.34
+  - Rank: 4
+    multipliers:
+    - multiplierType: 1
+      Multiplier: 1.43
+    - multiplierType: 2
+      Multiplier: 16.69
+    - multiplierType: 3
+      Multiplier: 2.64
+  - Rank: 5
+    multipliers:
+    - multiplierType: 1
+      Multiplier: 1.62
+    - multiplierType: 2
+      Multiplier: 16.69
+    - multiplierType: 3
+      Multiplier: 2.18
+  - Rank: 5
+    multipliers:
+    - multiplierType: 1
+      Multiplier: 1.62
+    - multiplierType: 2
+      Multiplier: 16.69
+    - multiplierType: 3
+      Multiplier: 2.18
+  - Rank: 5
+    multipliers:
+    - multiplierType: 1
+      Multiplier: 1.85
+    - multiplierType: 2
+      Multiplier: 16.69
+    - multiplierType: 3
+      Multiplier: 1.84
+  - Rank: 6
+    multipliers:
+    - multiplierType: 1
+      Multiplier: 1.85
+    - multiplierType: 2
+      Multiplier: 16.69
+    - multiplierType: 3
+      Multiplier: 1.84
+  - Rank: 7
+    multipliers:
+    - multiplierType: 1
+      Multiplier: 2.18
+    - multiplierType: 2
+      Multiplier: 16.69
+    - multiplierType: 3
+      Multiplier: 1.62
+  - Rank: 8
+    multipliers:
+    - multiplierType: 1
+      Multiplier: 2.64
+    - multiplierType: 2
+      Multiplier: 16.69
+    - multiplierType: 3
+      Multiplier: 1.43
+  - Rank: 9
+    multipliers:
+    - multiplierType: 1
+      Multiplier: 3.34
+    - multiplierType: 2
+      Multiplier: 16.69
+    - multiplierType: 3
+      Multiplier: 1.28
+  - Rank: 10
+    multipliers:
+    - multiplierType: 1
+      Multiplier: 4.45
+    - multiplierType: 2
+      Multiplier: 16.69
+    - multiplierType: 3
+      Multiplier: 1.16
+  - Rank: 11
+    multipliers:
+    - multiplierType: 1
+      Multiplier: 7.15
+    - multiplierType: 2
+      Multiplier: 16.69
+    - multiplierType: 3
+      Multiplier: 1.07
+  - Rank: 12
+    multipliers:
+    - multiplierType: 1
+      Multiplier: 
+    - multiplierType: 2
+      Multiplier: 16.69
+    - multiplierType: 3
+      Multiplier: 1.04
 --- !u!1 &673023294
 GameObject:
   m_ObjectHideFlags: 0
@@ -9211,6 +9332,7 @@ Transform:
   - {fileID: 1396734551}
   - {fileID: 369005319}
   - {fileID: 668246606}
+  - {fileID: 1702990745}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1560421193
@@ -9780,6 +9902,146 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -17.93}
   m_SizeDelta: {x: 0, y: 28}
   m_Pivot: {x: 0.5, y: 1}
+--- !u!1 &1702990744
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1702990745}
+  - component: {fileID: 1702990746}
+  m_Layer: 0
+  m_Name: CardManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1702990745
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1702990744}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1555592333}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1702990746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1702990744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 317cc745777bf3545bb9c309ece6f892, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  suitesList:
+  - suite: 0
+    suitesConfigs:
+    - color: 0
+      sprite: {fileID: 21300000, guid: 95e785692557817469035ea20d1c7724, type: 3}
+  - suite: 1
+    suitesConfigs:
+    - color: 1
+      sprite: {fileID: 21300000, guid: b245eabcb6fcde642b80e437a3562609, type: 3}
+  - suite: 2
+    suitesConfigs:
+    - color: 1
+      sprite: {fileID: 21300000, guid: 1d1d3bf8c84bc8b46b6b909ce40af54e, type: 3}
+  - suite: 3
+    suitesConfigs:
+    - color: 0
+      sprite: {fileID: 21300000, guid: 1deac568a0ffa464eb47bf19cde18a96, type: 3}
+  ranksList:
+  - rank: 0
+    ranksConfigs:
+    - color: 0
+      sprite: {fileID: 21300000, guid: cf9fe5f47e1e1c047be1ce6460a26b16, type: 3}
+    - color: 1
+      sprite: {fileID: 21300000, guid: 6328f8d9b8c3657448e8eb660cc09dc5, type: 3}
+  - rank: 1
+    ranksConfigs:
+    - color: 0
+      sprite: {fileID: 21300000, guid: 9c2be6827d5cc55459962c90295d3136, type: 3}
+    - color: 1
+      sprite: {fileID: 21300000, guid: e74be487135b13949aa21c144b3fc0c8, type: 3}
+  - rank: 2
+    ranksConfigs:
+    - color: 0
+      sprite: {fileID: 21300000, guid: 9051b8d147f7cba47b3834ec6632fd4d, type: 3}
+    - color: 1
+      sprite: {fileID: 21300000, guid: 0aec6ade356e60b4fbbac863818e9565, type: 3}
+  - rank: 3
+    ranksConfigs:
+    - color: 0
+      sprite: {fileID: 21300000, guid: 328bccebc19c49548acab03aba2fe815, type: 3}
+    - color: 1
+      sprite: {fileID: 21300000, guid: 20a52a2c5d0e28746a1d104b2913cc35, type: 3}
+  - rank: 4
+    ranksConfigs:
+    - color: 0
+      sprite: {fileID: 21300000, guid: abdd131df33e7754ba8186eb6a264971, type: 3}
+    - color: 1
+      sprite: {fileID: 21300000, guid: a7fe95eae277b5248b0861ac008624fa, type: 3}
+  - rank: 5
+    ranksConfigs:
+    - color: 0
+      sprite: {fileID: 21300000, guid: f0394c0c4858b9d4eb6057ba5c82e922, type: 3}
+    - color: 1
+      sprite: {fileID: 21300000, guid: 0460cc598f3539b4baf3a1ef517a72f5, type: 3}
+  - rank: 6
+    ranksConfigs:
+    - color: 0
+      sprite: {fileID: 21300000, guid: 7030325df948e9441bce7548f22ab3e1, type: 3}
+    - color: 1
+      sprite: {fileID: 21300000, guid: e0c7473eb62f49940bfd1b7f135efff7, type: 3}
+  - rank: 7
+    ranksConfigs:
+    - color: 0
+      sprite: {fileID: 21300000, guid: c3b4ccb874291b14f949ba6010be986c, type: 3}
+    - color: 1
+      sprite: {fileID: 21300000, guid: a19d8426a12acde4a8021f2265daaa03, type: 3}
+  - rank: 8
+    ranksConfigs:
+    - color: 0
+      sprite: {fileID: 21300000, guid: 1dc3517f060189b4b8cd822304df7510, type: 3}
+    - color: 1
+      sprite: {fileID: 21300000, guid: f05f18d236c2a604ab188d0195caff83, type: 3}
+  - rank: 9
+    ranksConfigs:
+    - color: 0
+      sprite: {fileID: 21300000, guid: 56d376c8603a0ce49a8802635ead0e75, type: 3}
+    - color: 1
+      sprite: {fileID: 21300000, guid: 57d64400450bce847ba82008911ceb10, type: 3}
+  - rank: 10
+    ranksConfigs:
+    - color: 0
+      sprite: {fileID: 21300000, guid: ff4fc7fd8e98eaa4fb1c7b28a3e72db7, type: 3}
+    - color: 1
+      sprite: {fileID: 21300000, guid: f68ac36c30e228745bd569d98f306ae1, type: 3}
+  - rank: 11
+    ranksConfigs:
+    - color: 0
+      sprite: {fileID: 21300000, guid: 3af5cdb66e372d34391d597a0ed4381c, type: 3}
+    - color: 1
+      sprite: {fileID: 21300000, guid: 01fff70bb5743c94eb6e9933141a3e0c, type: 3}
+  - rank: 12
+    ranksConfigs:
+    - color: 0
+      sprite: {fileID: 21300000, guid: 3106836de8d30ac46b7481818bd8f4db, type: 3}
+    - color: 1
+      sprite: {fileID: 21300000, guid: 5b686751e0c11a7448edc803d6802fe1, type: 3}
 --- !u!1 &1710727005
 GameObject:
   m_ObjectHideFlags: 0
