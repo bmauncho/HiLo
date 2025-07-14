@@ -8,8 +8,8 @@ public class SoundToggle : MonoBehaviour
     private Image toggle;
     [SerializeField] private Sprite on_;
     [SerializeField] private Sprite off_;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    private void OnEnable ()
+
+    private void Start ()
     {
         soundToggle = GetComponent<Toggle>();
         toggle = GetComponent<Image>();

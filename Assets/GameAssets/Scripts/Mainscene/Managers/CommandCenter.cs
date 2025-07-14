@@ -14,6 +14,7 @@ public class CommandCenter : MonoBehaviour
     public SoundManager soundManager_;
     public TextManager textManager_;
     public BetManager betManager_;
+    public MainMenuManager mainMenuManager_;
 
     private void Awake ()
     {
