@@ -73,4 +73,52 @@ public class CardManager : MonoBehaviour
     {
         
     }
+
+    public Sprite GetCardSuiteSprite ( CardSuites suite , CardColor color )
+    {
+        foreach (var s in suitesList)
+        {
+            if (s.suite == suite)
+            {
+                foreach (var config in s.suitesConfigs)
+                {
+                    if (config.color == color)
+                    {
+                        return config.sprite;
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
+    public Sprite GetCardRankSprite ( CardRanks rank , CardColor color )
+    {
+        foreach (var r in ranksList)
+        {
+            if (r.rank == rank)
+            {
+                foreach (var config in r.ranksConfigs)
+                {
+                    if (config.color == color)
+                    {
+                        return config.sprite;
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
+    public CardColor GetCardColor ( CardSuites suite )
+    {
+        foreach (var s in suitesList)
+        {
+            if (s.suite == suite)
+            {
+                return s.suitesConfigs [0].color; // Assuming all configs for a suite have the same color
+            }
+        }
+        return CardColor.BLACK; // Default color if not found
+    }
 }

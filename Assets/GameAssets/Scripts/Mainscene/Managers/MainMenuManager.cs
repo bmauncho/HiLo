@@ -26,4 +26,9 @@ public class MainMenuManager : MonoBehaviour
     {
         gameRules_.ToggleGameRules();
     }
+
+    public void ToggleGamePlay ()
+    {
+        CommandCenter.Instance.gamePlayManager_.ToggleGamePlay();
+    }
 }
