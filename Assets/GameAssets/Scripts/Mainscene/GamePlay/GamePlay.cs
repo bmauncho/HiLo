@@ -43,6 +43,7 @@ public class GamePlay : MonoBehaviour
             showStart();
             hideCashOut();
             isGamePlayActive = false;
+
         }
     }
 
@@ -51,5 +52,6 @@ public class GamePlay : MonoBehaviour
         cashOutAmount.text = amount;
         GetComponentInChildren<TextHelper>().ManualRefresh(amount);
     }
+
 }
 

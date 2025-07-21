@@ -1,18 +1,24 @@
+using TMPro;
 using UnityEngine;
 
 public class Multiplier : MonoBehaviour
 {
     public MultiplierType multiplier;
+    public TMP_Text multiplierText;
+    public GameObject Mask;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public void SetText(string text )
     {
-        
+        multiplierText.text = text;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void EnableMask ()
     {
-        
+        Mask.SetActive( true );
+    }
+
+    public void DisableMask ()
+    {
+        Mask.SetActive ( false );
     }
 }

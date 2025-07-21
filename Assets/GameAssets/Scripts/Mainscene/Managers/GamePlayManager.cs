@@ -6,6 +6,7 @@ public class GamePlayManager : MonoBehaviour
 {
     CardManager cardManager;
     PoolManager poolManager;
+    MultiplierManager multiplierManager;
     public GamePlay gamePlay;
     public Skips Skips;
     public Deck deck;
@@ -16,6 +17,7 @@ public class GamePlayManager : MonoBehaviour
     {
         poolManager = CommandCenter.Instance.poolManager_;
         cardManager = CommandCenter.Instance.cardManager_;
+        multiplierManager = CommandCenter.Instance.multiplierManager_;
         Invoke(nameof(SetActiveCard),.25f);
     }
 
@@ -28,6 +30,14 @@ public class GamePlayManager : MonoBehaviour
         Card cardComponent = card.GetComponent<Card>();
         if (cardComponent != null)
         {
+            CardData cardData = cardManager.GetCardData();
+            cardComponent.SetCard(
+               cardData.cardSuite ,
+               cardData.cardRank ,
+               cardData.cardColor);
+
+            multiplierManager.RefreshMultipliers();
+
             cardComponent.ShowCard();
             cardComponent.hideCardBg();
             cardComponent.HideCardOutline();
@@ -36,6 +46,12 @@ public class GamePlayManager : MonoBehaviour
     public void ToggleGamePlay ()
     {
         gamePlay.ToggleGamePlay();
+        ToggleGamePlaySkips();
+    }
+
+    public bool IsGameStarted ()
+    {
+        return gamePlay.isGamePlayActive;
     }
 
     public void SetCashOutAmount ( string amount )
@@ -50,6 +66,8 @@ public class GamePlayManager : MonoBehaviour
 
     IEnumerator SkipCoroutine ()
     {
+        if(!Skips.AllowSkip()) yield break;
+        Debug.Log($" allow skips : {Skips.AllowSkip()}");
         StartCoroutine(removeCard.removeCurrentCard(deck,poolManager));
         yield return new WaitForSeconds(0.1f);
         yield return StartCoroutine(addCard.addNewCard(deck , poolManager , () =>
@@ -61,9 +79,24 @@ public class GamePlayManager : MonoBehaviour
                 cardData.cardRank,
                 cardData.cardColor);
 
+            multiplierManager.RefreshMultipliers();
+
             Debug.Log("New card added!");
         }));
+       
         Skips.SkipCard();
         yield return null;
+    }
+
+    public void ToggleGamePlaySkips ()
+    {
+        if (IsGameStarted())
+        {
+            Skips.ActivateGameplaySpins ();
+        }
+        else
+        {
+            Skips.DeactivateGameplaySpins ();
+        }
     }
 }

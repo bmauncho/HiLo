@@ -1,14 +1,16 @@
+using DG.Tweening;
 using UnityEngine;
 
 public class Skips : MonoBehaviour
 {
-    public GameObject skipsHolder;
+    public RectTransform skipsHolder;
     public GameObject [] availableSkips;
 
     [SerializeField] private bool canSkip = true;
     [SerializeField] private bool isGamePlaySkipsActive = false;
     [SerializeField] private int currentSkipIndex;
-
+    private Tween showSkips;
+    private Tween hideSkips;
     private void OnEnable ()
     {
         currentSkipIndex = availableSkips.Length;
@@ -50,13 +52,38 @@ public class Skips : MonoBehaviour
 
     public void ActivateGameplaySpins ()
     {
-        skipsHolder.SetActive(true);
+        hideSkips.Kill();
+        skipsHolder.gameObject.SetActive(true);
+        showSkips = skipsHolder.DOAnchorPosY(-13f , .25f);
         isGamePlaySkipsActive = true;
     }
 
     public void DeactivateGameplaySpins ()
     {
-        skipsHolder.SetActive(false);
+        showSkips.Kill();
+        skipsHolder.gameObject.SetActive(false);
+        hideSkips = skipsHolder.DOAnchorPosY(0f , .25f);
         isGamePlaySkipsActive = false;
+    }
+
+    public bool AllowSkip ()
+    {
+        if (isGamePlaySkipsActive)
+        {
+            if(currentSkipIndex > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }  
+        }
+        else
+        {
+
+            return true;
+
+        }
     }
 }

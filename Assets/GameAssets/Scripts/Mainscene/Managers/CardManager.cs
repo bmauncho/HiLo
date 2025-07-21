@@ -129,6 +129,8 @@ public class CardManager : MonoBehaviour
     [SerializeField] private List<ColorWeight> colorWeights = new List<ColorWeight>();
     [SerializeField] private List<SuiteWeight> suiteWeights = new List<SuiteWeight>();
     [SerializeField] private List<CardWeight> cardWeights = new List<CardWeight>();
+
+    [SerializeField] private CardData currentCard;
     private void Awake ()
     {
         InitializeDefaultSuiteWeights();
@@ -333,6 +335,14 @@ public class CardManager : MonoBehaviour
         }
 
         Debug.Log($"Generated Card Data: Suite={data.cardSuite}, Color={data.cardColor}, Rank={data.cardRank}");
+        currentCard = data;
+        return data;
+    }
+
+    public CardData GetCurrentCardData ()
+    {
+        CardData data = new CardData();
+        data = currentCard;
         return data;
     }
 

@@ -223,7 +223,7 @@ GameObject:
   - component: {fileID: 55049068}
   - component: {fileID: 55049069}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: multiplier_text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -513,7 +513,7 @@ GameObject:
   - component: {fileID: 110174618}
   - component: {fileID: 110174617}
   m_Layer: 5
-  m_Name: Bets
+  m_Name: MultipliersBets
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1194,7 +1194,7 @@ GameObject:
   - component: {fileID: 232107648}
   - component: {fileID: 232107647}
   m_Layer: 5
-  m_Name: BetType_High
+  m_Name: MultiplierType_High
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2033,7 +2033,7 @@ GameObject:
   - component: {fileID: 355993813}
   - component: {fileID: 355993814}
   m_Layer: 5
-  m_Name: BetContent
+  m_Name: MultiplierContent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4617,6 +4617,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectedMultiplier: 0
+  Multipliers: {fileID: 2142972625}
   multiplierDetailsList:
   - Rank: 0
     multipliers:
@@ -5687,7 +5688,7 @@ GameObject:
   - component: {fileID: 822606822}
   - component: {fileID: 822606824}
   m_Layer: 5
-  m_Name: BetSameBtn
+  m_Name: MultiplierSameBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5764,6 +5765,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   multiplier: 2
+  multiplierText: {fileID: 2140174577}
+  Mask: {fileID: 1236241211}
 --- !u!1 &830943547
 GameObject:
   m_ObjectHideFlags: 0
@@ -5776,7 +5779,7 @@ GameObject:
   - component: {fileID: 830943550}
   - component: {fileID: 830943549}
   m_Layer: 5
-  m_Name: BetType_Low
+  m_Name: MultiplierType_Low
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10055,7 +10058,7 @@ GameObject:
   - component: {fileID: 1598588373}
   - component: {fileID: 1598588374}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: multiplier_text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10626,6 +10629,10 @@ MonoBehaviour:
   colorWeights: []
   suiteWeights: []
   cardWeights: []
+  currentCard:
+    cardSuite: 0
+    cardColor: 0
+    cardRank: 0
 --- !u!1 &1710727005
 GameObject:
   m_ObjectHideFlags: 0
@@ -11568,7 +11575,7 @@ GameObject:
   - component: {fileID: 1865195694}
   - component: {fileID: 1865195696}
   m_Layer: 5
-  m_Name: BetHighBtn
+  m_Name: MultiplierHighBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11645,6 +11652,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   multiplier: 1
+  multiplierText: {fileID: 55049066}
+  Mask: {fileID: 1873421979}
 --- !u!1 &1873421979
 GameObject:
   m_ObjectHideFlags: 0
@@ -12167,7 +12176,7 @@ GameObject:
   - component: {fileID: 2015517044}
   - component: {fileID: 2015517046}
   m_Layer: 5
-  m_Name: BetLowBtn
+  m_Name: MultiplierLowBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12244,6 +12253,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   multiplier: 3
+  multiplierText: {fileID: 1598588371}
+  Mask: {fileID: 299676158}
 --- !u!1 &2022573175
 GameObject:
   m_ObjectHideFlags: 0
@@ -12294,7 +12305,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18deee4e97aa2d7419c16cb3c3472cef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skipsHolder: {fileID: 1873883304}
+  skipsHolder: {fileID: 1873883305}
   availableSkips:
   - {fileID: 1007144442}
   - {fileID: 236139166}
@@ -12784,7 +12795,7 @@ GameObject:
   - component: {fileID: 2140174579}
   - component: {fileID: 2140174580}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: multiplier_text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12945,8 +12956,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2142972624}
+  - component: {fileID: 2142972625}
   m_Layer: 5
-  m_Name: Bets
+  m_Name: Multipliers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12972,6 +12984,22 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2142972625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2142972623}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c6ac3f1e3392434d87846f1582cd74b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  multipliers:
+  - {fileID: 1865195696}
+  - {fileID: 822606824}
+  - {fileID: 2015517046}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

@@ -26,11 +26,6 @@ public class TextHelper : MonoBehaviour
         if (IsManual) { return; }
         RefreshIfChanged();
     }
-
-    private void Update ()
-    {
-        
-    }
   
     // Public method to call when the text might have changed
     public void RefreshIfChanged ()
@@ -93,7 +88,7 @@ public class TextHelper : MonoBehaviour
         TMP_SpriteAsset spriteAsset = IsColored ? textManager.GetColoredFont() : textManager.GetMainFont();
         List<(string actual, string available)> charRefrences = new List<(string actual, string available)>(textManager.GetCharacterReferences());
 
-        Debug.Log(Input);
+        //Debug.Log(Input);
         //call
         TextGenerator.CreateSpriteAssetText(
             Input ,
