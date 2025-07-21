@@ -15,6 +15,7 @@ public class Card : MonoBehaviour
     public GameObject CardData;
     public GameObject CardBg;
     public GameObject CardOutline;
+    public GameObject CardMask;
 
     public void SetCard( CardSuites suite , CardRanks rank , CardColor color )
     {
@@ -25,7 +26,10 @@ public class Card : MonoBehaviour
         // Set the card rank image
         cardRank.sprite = CommandCenter.Instance.cardManager_.GetCardRankSprite(rank , color);
         cardSuite_Icon.sprite = CommandCenter.Instance.cardManager_.GetCardSuiteSprite(suite , color);
-        cardSuite_Bg.sprite = CommandCenter.Instance.cardManager_.GetCardSuiteSprite(suite , color);
+        cardSuite_Bg.sprite = 
+            IsFaceCard() ? 
+            CommandCenter.Instance.cardManager_.GetCardFaceRankSprite(rank , color): 
+            CommandCenter.Instance.cardManager_.GetCardSuiteSprite(suite , color);
     }
 
     public void ShowCard ()
@@ -58,4 +62,18 @@ public class Card : MonoBehaviour
         CardOutline.SetActive(false);
     }
 
+    public void ShowMask ()
+    {
+        CardMask.SetActive(true);
+    }
+
+    public void HideMask ()
+    {
+        CardMask.SetActive(false);
+    }
+
+    public bool IsFaceCard ()
+    {
+        return cardRankType == CardRanks.JACK || cardRankType == CardRanks.QUEEN || cardRankType == CardRanks.KING;
+    }
 }

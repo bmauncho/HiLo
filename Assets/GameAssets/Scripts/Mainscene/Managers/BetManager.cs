@@ -1,5 +1,5 @@
 using UnityEngine;
-
+public enum BetType { Increase, Decrease }
 public class BetManager : MonoBehaviour
 {
     private string [] BetAmounts = { "1" , "2" , "3" , "5" , "10" , "20" , "30" , "50" , "100" , "200" , "300" , "500" };
@@ -69,4 +69,16 @@ public class BetManager : MonoBehaviour
     {
         return betAmount;
     }
+
+    public bool IsHighestBetAmount ()
+    {
+        return betIndex >= BetAmounts.Length-1;
+    }
+
+    public bool IsLowestBetAmount ()
+    {
+        return betIndex <= 0;
+    }
 }
+
+

@@ -21,4 +21,13 @@ public class Slot : MonoBehaviour
             TheOwner = null;
         }
     }
+
+    public GameObject GetTheOwner ()
+    {
+        if(TheOwner != null)
+        {
+            return TheOwner;
+        }
+        return null;
+    }
 }
