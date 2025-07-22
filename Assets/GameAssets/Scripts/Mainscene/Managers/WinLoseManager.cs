@@ -1,0 +1,183 @@
+using System.Collections;
+using UnityEngine;
+public enum OutCome
+{
+    None,
+    Win,
+    Lose,
+}
+public class WinLoseManager : MonoBehaviour
+{
+    GamePlayManager gamePlayManager;
+    PoolManager poolManager;
+    CardManager cardManager;
+    MultiplierManager multiplierManager;
+    public OutCome TheOutCome;
+    private bool IsAddNewCardComplete = false;
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+        gamePlayManager = CommandCenter.Instance.gamePlayManager_;
+        poolManager = CommandCenter.Instance.poolManager_;
+        cardManager = CommandCenter.Instance.cardManager_;
+        multiplierManager = CommandCenter.Instance.multiplierManager_;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+
+    private void SetOutCome(OutCome outCome )
+    {
+        TheOutCome = outCome;
+    }
+
+    public void outCome (
+        CardData prevCard , 
+        CardData currCard,
+        MultiplierType selectedMultiplier )
+    {
+        bool isWin = IsWin(
+            prevCard.cardRank ,
+            currCard.cardRank ,
+            selectedMultiplier);
+
+        if (isWin)
+        {
+            SetOutCome(OutCome.Win);
+        }
+        else
+        {
+            SetOutCome (OutCome.Lose);
+        }
+    }
+
+    public OutCome GetTheOutCome ()
+    {
+        return TheOutCome;
+    }
+
+    private bool IsWin ( CardRanks currentCard , CardRanks nextCard , MultiplierType selectedMultiplier )
+    {
+        if (selectedMultiplier == MultiplierType.High)
+        {
+            return nextCard > currentCard;
+        }
+        else if (selectedMultiplier == MultiplierType.Low)
+        {
+            return nextCard < currentCard;
+        }
+        else if (selectedMultiplier == MultiplierType.Same)
+        {
+            return nextCard == currentCard;
+        }
+        return false;
+    }
+
+    public IEnumerator WinSequence ()
+    {
+        if(TheOutCome == OutCome.Win)
+        {
+            yield return StartCoroutine(win());
+
+        }
+        else
+        {
+            yield return StartCoroutine(lose());
+        }
+
+        yield return null;
+    }
+
+    IEnumerator win ()
+    {
+        IsAddNewCardComplete = false;
+        Debug.Log("win");
+        //update card history
+        Debug.Log("Update card History!");
+
+        //show next card
+        Deck deck = gamePlayManager.deck;
+        AddCard addCard = gamePlayManager.addCard;
+        RemoveCard removeCard = gamePlayManager.removeCard;
+
+        addCard.OnComplete += OnAddCardComplete;
+
+        StartCoroutine(removeCard.removeCurrentCard(deck , poolManager));
+        yield return new WaitForSeconds(.1f);
+        yield return StartCoroutine(addCard.addNewCard(deck , poolManager , () =>
+        {
+            Card cardComponenet = deck.newCard.GetTheOwner().GetComponent<Card>();
+            CardData cardData = cardManager.GetCurrentCardData();
+            cardComponenet.SetCard(
+                cardData.cardSuite ,
+                cardData.cardRank ,
+                cardData.cardColor);
+
+            multiplierManager.RefreshMultipliers();
+
+            Debug.Log("New card added-win!");
+        }));
+        yield return new WaitUntil(()=>IsAddNewCardComplete);
+        //update multilier 
+
+        Debug.Log("Update Multiplier");
+
+        addCard.OnComplete -= OnAddCardComplete;
+
+        yield return null;
+    }
+
+    IEnumerator lose ()
+    {
+        IsAddNewCardComplete = false;
+        Debug.Log("lose");
+        //update card history
+        Debug.Log("Update card History!");
+        //show next card
+        Deck deck = gamePlayManager.deck;
+        AddCard addCard = gamePlayManager.addCard;
+        RemoveCard removeCard = gamePlayManager.removeCard;
+
+        addCard.OnComplete += OnAddCardComplete;
+
+        StartCoroutine(removeCard.removeCurrentCard(deck , poolManager));
+        yield return new WaitForSeconds(.1f);
+        yield return StartCoroutine(addCard.addNewCard(deck , poolManager , () =>
+        {
+            Card cardComponenet = deck.newCard.GetTheOwner().GetComponent<Card>();
+            CardData cardData = cardManager.GetCurrentCardData();
+            cardComponenet.SetCard(
+                cardData.cardSuite ,
+                cardData.cardRank ,
+                cardData.cardColor);
+
+            Debug.Log("New card added-win!");
+        }));
+        yield return new WaitUntil(() => IsAddNewCardComplete);
+        yield return new WaitForSeconds(.25f);
+        //lose anim on prev card
+
+        Debug.Log("lose anim");
+        RetainCard retainCard = gamePlayManager.retainCard;
+        yield return StartCoroutine(retainCard.loseAnim(deck));
+        addCard.OnComplete -= OnAddCardComplete;
+        //update multilier 
+        Debug.Log("retain Multiplier");
+        //prev card is set as the current card
+        cardManager.ResetCardData();
+
+        yield return null;
+    }
+
+    public void resetOutCome ()
+    {
+        TheOutCome = OutCome.None;
+    }
+    private void OnAddCardComplete ()
+    {
+        IsAddNewCardComplete = true;
+    }
+}

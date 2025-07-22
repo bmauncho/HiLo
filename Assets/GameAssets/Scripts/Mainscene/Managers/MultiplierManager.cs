@@ -22,6 +22,7 @@ public class MultiplierConfig
 }
 public class MultiplierManager : MonoBehaviour
 {
+    GamePlayManager gamePlayManager;    
     CardManager cardManager;
     public MultiplierType selectedMultiplier;
     public Multipliers Multipliers;
@@ -30,6 +31,7 @@ public class MultiplierManager : MonoBehaviour
     void Start()
     {
         cardManager = CommandCenter.Instance.cardManager_;
+        gamePlayManager = CommandCenter.Instance.gamePlayManager_;
     }
 
     // Update is called once per frame
@@ -43,12 +45,49 @@ public class MultiplierManager : MonoBehaviour
         selectedMultiplier = MultiplierType.None;
     }
 
+    public void SetSelectedMultiplier(MultiplierType multiplierType )
+    {
+        selectedMultiplier = multiplierType;
+    }
+
+    public void enableGuessMask ()
+    {
+        foreach( Multiplier multiplier in Multipliers.multipliers )
+        {
+            multiplier.EnableMask ();
+        }
+    }
+
+    public void disableGuessMask ()
+    {
+        foreach (Multiplier multiplier in Multipliers.multipliers)
+        {
+            multiplier.DisableMask ();
+        }
+    }
+
+    public void enableGuessBtns ()
+    {
+        foreach (Multiplier multiplier in Multipliers.multipliers)
+        {
+            multiplier.enableBtn ();
+        }
+    }
+
+    public void disableGuessBtns ()
+    {
+        foreach (Multiplier multiplier in Multipliers.multipliers)
+        {
+            multiplier.disableBtn ();
+        }
+    }
+
     public void RefreshMultipliers ()
     {
         var currentCard = cardManager.GetCurrentCardData();
         if (currentCard == null)
         {
-           // Debug.LogWarning("Current card data is null.");
+           Debug.LogWarning("Current card data is null.");
             return;
         }
 
@@ -57,7 +96,7 @@ public class MultiplierManager : MonoBehaviour
             if (multiDetails.Rank != currentCard.cardRank)
                 continue;
 
-           // Debug.Log($"Rank : {multiDetails.Rank}");
+            Debug.Log($"Rank : {multiDetails.Rank}");
 
             foreach (var multi in multiDetails.multipliers)
             {
@@ -68,7 +107,7 @@ public class MultiplierManager : MonoBehaviour
                 if (matchingMultiplier != null)
                 {
                     string multiplierValue = multi.Multiplier;
-                    //Debug.Log($"multiplier type - {multi.multiplierType} : multiplier value - {multiplierValue}");
+                    Debug.Log($"multiplier type - {multi.multiplierType} : multiplier value - {multiplierValue}");
 
                     matchingMultiplier.SetText(multiplierValue);
 
@@ -77,7 +116,22 @@ public class MultiplierManager : MonoBehaviour
                         TextHelper textHelper = matchingMultiplier.multiplierText.GetComponent<TextHelper>();
                         if (textHelper != null)
                         {
-                            textHelper.ManualRefresh(multiplierValue);
+                            if (!string.IsNullOrEmpty(multiplierValue))
+                            {
+                                textHelper.ManualRefresh(multiplierValue);
+                                if (gamePlayManager.IsGameStarted())
+                                {
+                                    matchingMultiplier.enableBtn();
+                                }
+                                else
+                                {
+                                    matchingMultiplier.disableBtn();
+                                }
+                            }
+                            else
+                            {
+                                matchingMultiplier.disableBtn();
+                            }
                         }
                         else
                         {

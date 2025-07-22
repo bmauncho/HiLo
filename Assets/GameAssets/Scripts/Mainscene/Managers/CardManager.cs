@@ -129,7 +129,9 @@ public class CardManager : MonoBehaviour
     [SerializeField] private List<ColorWeight> colorWeights = new List<ColorWeight>();
     [SerializeField] private List<SuiteWeight> suiteWeights = new List<SuiteWeight>();
     [SerializeField] private List<CardWeight> cardWeights = new List<CardWeight>();
-
+    [Header("Card Data")]
+    [SerializeField] private CardData tempPrevData;
+    [SerializeField] private CardData prevCard;
     [SerializeField] private CardData currentCard;
     private void Awake ()
     {
@@ -314,6 +316,8 @@ public class CardManager : MonoBehaviour
 
     public CardData GetCardData ()
     {
+        tempPrevData = prevCard;
+        prevCard = currentCard;
         CardData data = new CardData();
         data.cardSuite = GetRandomCardSuite();
         data.cardColor = GetRandomCardColor(data.cardSuite);
@@ -341,9 +345,14 @@ public class CardManager : MonoBehaviour
 
     public CardData GetCurrentCardData ()
     {
-        CardData data = new CardData();
-        data = currentCard;
-        return data;
+        //Debug.Log($"GetCurrentCardData: returning {currentCard.cardRank} of {currentCard.cardSuite} ({currentCard.cardColor})");
+        return currentCard;
+    }
+
+
+    public CardData GetPrevCardData ()
+    {
+        return prevCard;
     }
 
     public bool isColorAvailable(CardSuites cardSuites,CardColor color )
@@ -362,5 +371,12 @@ public class CardManager : MonoBehaviour
             }
         }
         return false; // Color not found for the given suite
+    }
+
+    public void ResetCardData ()
+    {
+        //when we lose
+        currentCard = prevCard;
+        prevCard = tempPrevData;
     }
 }

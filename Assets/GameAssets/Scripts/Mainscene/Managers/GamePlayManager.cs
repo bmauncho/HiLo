@@ -7,17 +7,21 @@ public class GamePlayManager : MonoBehaviour
     CardManager cardManager;
     PoolManager poolManager;
     MultiplierManager multiplierManager;
+    WinLoseManager winLoseManager;
     public GamePlay gamePlay;
     public Skips Skips;
     public Deck deck;
     public RemoveCard removeCard;
     public AddCard addCard;
+    public NextCard nextCard;
+    public RetainCard retainCard;
 
     public void Start ()
     {
         poolManager = CommandCenter.Instance.poolManager_;
         cardManager = CommandCenter.Instance.cardManager_;
         multiplierManager = CommandCenter.Instance.multiplierManager_;
+        winLoseManager = CommandCenter.Instance.winLoseManager_;
         Invoke(nameof(SetActiveCard),.25f);
     }
 
@@ -45,7 +49,7 @@ public class GamePlayManager : MonoBehaviour
     }
     public void ToggleGamePlay ()
     {
-        gamePlay.ToggleGamePlay();
+        gamePlay.ToggleGamePlay(this);
         ToggleGamePlaySkips();
     }
 
@@ -98,5 +102,39 @@ public class GamePlayManager : MonoBehaviour
         {
             Skips.DeactivateGameplaySpins ();
         }
+    }
+
+    public void Guess ()
+    {
+        if (multiplierManager.selectedMultiplier == MultiplierType.None)
+        {
+            Debug.LogWarning("no multiplier is selected");
+            return;
+        }
+
+        StartCoroutine(guessing());
+      
+    }
+
+    IEnumerator guessing ()
+    {
+        yield return StartCoroutine(nextCard.nextCard(deck,cardManager));
+        //next card
+
+        //winsequence
+        CardData prevCardData = cardManager.GetPrevCardData();
+        CardData currCardData = cardManager.GetCurrentCardData();
+        MultiplierType multiplierType = multiplierManager.selectedMultiplier;
+        winLoseManager.outCome(prevCardData , currCardData , multiplierType);
+        Debug.Log("win sequence setUp done!");
+        yield return StartCoroutine(winLoseManager.WinSequence());
+        //winsequence - card History
+
+        if (Skips.IsFirstTime())
+        {
+            Skips.ResetSkips();
+            Skips.setIsFirstTime(false);
+        }
+        yield return null;
     }
 }

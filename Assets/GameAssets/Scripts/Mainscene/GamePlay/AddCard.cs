@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class AddCard : MonoBehaviour
 {
+    public Action OnComplete;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -20,7 +21,7 @@ public class AddCard : MonoBehaviour
         deck.newCard.SetOwner(newCard);
         Card cardComponent = newCard.GetComponent<Card>();
         cardComponent.HideMask();
-
+       //Debug.Log(cardComponent.name);
         Sequence AddSequence = DOTween.Sequence();
         Sequence sequence = DOTween.Sequence();
 
@@ -35,6 +36,8 @@ public class AddCard : MonoBehaviour
                     Debug.Log("Set New Card!");
                     ChangeCard?.Invoke();
 
+                    Debug.Log(cardComponent.name);
+
                     if (cardComponent != null)
                     {
                         cardComponent.ShowCard();
@@ -46,6 +49,10 @@ public class AddCard : MonoBehaviour
 
         AddSequence.Join(newCard.transform.DOPunchPosition(punchPosition , .5f , 0 , 0).SetEase(Ease.InOutSine));
 
+        AddSequence.OnComplete(() =>
+        {
+            OnComplete?.Invoke();
+        });
         yield return null;
     }
 }

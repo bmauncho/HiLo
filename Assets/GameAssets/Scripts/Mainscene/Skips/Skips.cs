@@ -5,7 +5,7 @@ public class Skips : MonoBehaviour
 {
     public RectTransform skipsHolder;
     public GameObject [] availableSkips;
-
+    [SerializeField] private bool isFirstTime = true;
     [SerializeField] private bool canSkip = true;
     [SerializeField] private bool isGamePlaySkipsActive = false;
     [SerializeField] private int currentSkipIndex;
@@ -15,11 +15,6 @@ public class Skips : MonoBehaviour
     {
         currentSkipIndex = availableSkips.Length;
         ResetSkips();
-    }
-
-    public void SetSkip ( bool canSkip_ = true)
-    {
-        canSkip = canSkip_;
     }
 
     public void SkipCard ()
@@ -42,12 +37,24 @@ public class Skips : MonoBehaviour
 
     public void ResetSkips ()
     {
-        currentSkipIndex = availableSkips.Length;
-
-        foreach (GameObject skipIcon in availableSkips)
+        if(isFirstTime)
         {
-            skipIcon.SetActive(true);
+            currentSkipIndex = 0;
+
+            foreach (GameObject skipIcon in availableSkips)
+            {
+                skipIcon.SetActive(false);
+            }
         }
+        else
+        {
+            currentSkipIndex = availableSkips.Length;
+
+            foreach (GameObject skipIcon in availableSkips)
+            {
+                skipIcon.SetActive(true);
+            }
+        } 
     }
 
     public void ActivateGameplaySpins ()
@@ -85,5 +92,15 @@ public class Skips : MonoBehaviour
             return true;
 
         }
+    }
+
+    public void setIsFirstTime(bool value )
+    {
+        isFirstTime = value;
+    }
+
+    public bool IsFirstTime ()
+    {
+        return isFirstTime;
     }
 }
