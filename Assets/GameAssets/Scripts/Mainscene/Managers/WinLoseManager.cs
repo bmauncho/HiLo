@@ -61,15 +61,17 @@ public class WinLoseManager : MonoBehaviour
 
     private bool IsWin ( CardRanks currentCard , CardRanks nextCard , MultiplierType selectedMultiplier )
     {
-        if (selectedMultiplier == MultiplierType.High)
+        if (selectedMultiplier == MultiplierType.High ||
+            selectedMultiplier == MultiplierType.HighOrSame )
         {
             return nextCard > currentCard;
         }
-        else if (selectedMultiplier == MultiplierType.Low)
+        else if (selectedMultiplier == MultiplierType.Low || 
+            selectedMultiplier == MultiplierType.LowOrSame )
         {
             return nextCard < currentCard;
         }
-        else if (selectedMultiplier == MultiplierType.Same)
+        else if (selectedMultiplier == MultiplierType.Same )
         {
             return nextCard == currentCard;
         }
@@ -135,7 +137,6 @@ public class WinLoseManager : MonoBehaviour
         IsAddNewCardComplete = false;
         Debug.Log("lose");
         //update card history
-        Debug.Log("Update card History!");
         //show next card
         Deck deck = gamePlayManager.deck;
         AddCard addCard = gamePlayManager.addCard;
@@ -160,14 +161,12 @@ public class WinLoseManager : MonoBehaviour
         yield return new WaitForSeconds(.25f);
         //lose anim on prev card
 
-        Debug.Log("lose anim");
         RetainCard retainCard = gamePlayManager.retainCard;
         yield return StartCoroutine(retainCard.loseAnim(deck));
         addCard.OnComplete -= OnAddCardComplete;
         //update multilier 
-        Debug.Log("retain Multiplier");
         //prev card is set as the current card
-        cardManager.ResetCardData();
+        //cardManager.ResetCardData();
 
         yield return null;
     }

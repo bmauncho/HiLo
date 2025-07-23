@@ -5396,6 +5396,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HistoryDataIndex: -1
+  HistoryContent: {fileID: 1267133668}
+  skip: {fileID: 21300000, guid: 36df4ab7c7108174ea75e55b4f8fbd47, type: 3}
+  OutlineData:
+  - TheOutCome: 1
+    outline: {fileID: 21300000, guid: b28db9e4c66ad6c4bbfdffa93886515b, type: 3}
+  - TheOutCome: 2
+    outline: {fileID: 21300000, guid: a87fbcd070953ab4abfdab074d82b7e5, type: 3}
+  BetHistoryData:
+  - multiplierType: 1
+    betHistory: {fileID: 21300000, guid: 64fbff028d6342a4a8d78e1f2da749e5, type: 3}
+  - multiplierType: 2
+    betHistory: {fileID: 21300000, guid: 887af01d1754e3f4fadeba7db41ab1d7, type: 3}
+  - multiplierType: 3
+    betHistory: {fileID: 21300000, guid: 423863248dc438248ab5f4e821c81e73, type: 3}
+  - multiplierType: 4
+    betHistory: {fileID: 21300000, guid: ef336af14d7f2094c855d1edb4c38473, type: 3}
+  - multiplierType: 5
+    betHistory: {fileID: 21300000, guid: 6274aba7b94d51c4cbdf3601ec63c72a, type: 3}
   HistoryData: []
 --- !u!1 &732961034
 GameObject:
@@ -5930,7 +5948,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64e0aa9e5761cf74a9c364ba5ca5a949, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  multiplier: 2
+  multiplier: 3
   multiplierText: {fileID: 2140174577}
   Mask: {fileID: 1236241211}
   guessBtn: {fileID: 545698832}
@@ -8542,7 +8560,7 @@ GameObject:
   - component: {fileID: 1267133669}
   - component: {fileID: 1267133670}
   m_Layer: 5
-  m_Name: Content
+  m_Name: HistoryContent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8580,10 +8598,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 0
-    m_Right: 0
-    m_Top: 0
-    m_Bottom: 0
+    m_Left: 5
+    m_Right: 5
+    m_Top: 5
+    m_Bottom: 5
   m_ChildAlignment: 3
   m_StartCorner: 0
   m_StartAxis: 0
@@ -10944,10 +10962,6 @@ MonoBehaviour:
   colorWeights: []
   suiteWeights: []
   cardWeights: []
-  tempPrevData:
-    cardSuite: 0
-    cardColor: 0
-    cardRank: 0
   prevCard:
     cardSuite: 0
     cardColor: 0
@@ -12576,7 +12590,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64e0aa9e5761cf74a9c364ba5ca5a949, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  multiplier: 3
+  multiplier: 4
   multiplierText: {fileID: 1598588371}
   Mask: {fileID: 299676158}
   guessBtn: {fileID: 1455625330}
@@ -12630,6 +12644,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18deee4e97aa2d7419c16cb3c3472cef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  skipMode: 0
   skipsHolder: {fileID: 1873883305}
   availableSkips:
   - {fileID: 1007144442}

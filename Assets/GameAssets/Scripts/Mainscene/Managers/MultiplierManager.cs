@@ -4,8 +4,10 @@ public enum MultiplierType
 {
     None = 0,
     High,
+    HighOrSame,
     Same,
     Low,
+    LowOrSame,
 }
 [System.Serializable]
 public class multiplierDetails
@@ -38,6 +40,11 @@ public class MultiplierManager : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public MultiplierType GetSelectedMultiplierType ()
+    {
+        return selectedMultiplier;
     }
 
     public void resetMultiplier ()
@@ -96,7 +103,7 @@ public class MultiplierManager : MonoBehaviour
             if (multiDetails.Rank != currentCard.cardRank)
                 continue;
 
-            Debug.Log($"Rank : {multiDetails.Rank}");
+            //Debug.Log($"Rank : {multiDetails.Rank}");
 
             foreach (var multi in multiDetails.multipliers)
             {
@@ -107,7 +114,7 @@ public class MultiplierManager : MonoBehaviour
                 if (matchingMultiplier != null)
                 {
                     string multiplierValue = multi.Multiplier;
-                    Debug.Log($"multiplier type - {multi.multiplierType} : multiplier value - {multiplierValue}");
+                    //Debug.Log($"multiplier type - {multi.multiplierType} : multiplier value - {multiplierValue}");
 
                     matchingMultiplier.SetText(multiplierValue);
 

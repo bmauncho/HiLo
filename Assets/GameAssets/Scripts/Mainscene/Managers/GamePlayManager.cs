@@ -1,4 +1,5 @@
 using DG.Tweening;
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -132,11 +133,56 @@ public class GamePlayManager : MonoBehaviour
         CardData prevCardData = cardManager.GetPrevCardData();
         CardData currCardData = cardManager.GetCurrentCardData();
         MultiplierType multiplierType = multiplierManager.selectedMultiplier;
-        winLoseManager.outCome(prevCardData , currCardData , multiplierType);
+        Debug.Log($"Selected multiplier : {multiplierType}");
+        MultiplierType newMultiplierType = whichSelectedMultiplier(prevCardData, currCardData,multiplierType);
+        Debug.Log($"multipler type : {newMultiplierType.ToString()}");
+        winLoseManager.outCome(prevCardData , currCardData , newMultiplierType);
         Debug.Log("win sequence setUp done!");
         yield return StartCoroutine(winLoseManager.WinSequence());
         //winsequence - card History
-
+        cardHistory.ShowHistory();
+        Skips.SetSkipMode(SkipMode.None);
         yield return null;
     }
+
+    public MultiplierType whichSelectedMultiplier (
+    CardData prevCard ,
+    CardData currCard ,
+    MultiplierType selectedMultiplier )
+    {
+        int prev = (int)prevCard.cardRank;
+        int curr = (int)currCard.cardRank;
+        int totalRanks = Enum.GetValues(typeof(CardRanks)).Length;
+        int ace = 0;
+        int king = totalRanks - 1;
+
+        switch (selectedMultiplier)
+        {
+            case MultiplierType.High:
+                if (prev == ace && curr > prev)
+                {
+                    return MultiplierType.High;
+                }
+                else 
+                {
+                    return MultiplierType.HighOrSame;
+                }
+
+            case MultiplierType.Low:
+                if (prev == king && curr < prev)
+                {
+                    return MultiplierType.Low;
+                }
+                else 
+                {
+                    return MultiplierType.LowOrSame;
+                }
+
+            case MultiplierType.Same:
+                return MultiplierType.Same;
+        }
+
+        return MultiplierType.None;
+    }
+
 }

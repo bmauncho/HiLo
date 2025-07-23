@@ -68,7 +68,6 @@ public class RanksConfig
     public Sprite sprite;
 }
 
-
 [System.Serializable]
 public class SuiteWeight
 {
@@ -130,7 +129,6 @@ public class CardManager : MonoBehaviour
     [SerializeField] private List<SuiteWeight> suiteWeights = new List<SuiteWeight>();
     [SerializeField] private List<CardWeight> cardWeights = new List<CardWeight>();
     [Header("Card Data")]
-    [SerializeField] private CardData tempPrevData;
     [SerializeField] private CardData prevCard;
     [SerializeField] private CardData currentCard;
     private void Awake ()
@@ -316,7 +314,6 @@ public class CardManager : MonoBehaviour
 
     public CardData GetCardData ()
     {
-        tempPrevData = prevCard;
         prevCard = currentCard;
         CardData data = new CardData();
         data.cardSuite = GetRandomCardSuite();
@@ -338,7 +335,7 @@ public class CardManager : MonoBehaviour
             }
         }
 
-        Debug.Log($"Generated Card Data: Suite={data.cardSuite}, Color={data.cardColor}, Rank={data.cardRank}");
+        //Debug.Log($"Generated Card Data: Suite={data.cardSuite}, Color={data.cardColor}, Rank={data.cardRank}");
         currentCard = data;
         return data;
     }
@@ -377,6 +374,5 @@ public class CardManager : MonoBehaviour
     {
         //when we lose
         currentCard = prevCard;
-        prevCard = tempPrevData;
     }
 }

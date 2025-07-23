@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3346397791817929892}
+  - component: {fileID: 2860494495669850303}
   m_Layer: 5
   m_Name: Card_history
   m_TagString: Untagged
@@ -38,6 +39,24 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 50, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2860494495669850303
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 185915915363386908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 877f8f58e5891ad4f971fca224081870, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Outline: {fileID: 2116531770343891949}
+  cardRank: {fileID: 1140343077149353731}
+  cardSuite_Icon: {fileID: 4933880093532291878}
+  cardSuite_Bg: {fileID: 5996650806606713151}
+  Bet_History: {fileID: 5366292464974369451}
+  BetHistory: {fileID: 3936966545104834285}
 --- !u!1 &408325224973527864
 GameObject:
   m_ObjectHideFlags: 0
@@ -128,7 +147,7 @@ GameObject:
   - component: {fileID: 2488223168974377987}
   - component: {fileID: 5366292464974369451}
   m_Layer: 5
-  m_Name: Image
+  m_Name: history
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -206,7 +225,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &9213653301343662882
 RectTransform:
   m_ObjectHideFlags: 0
@@ -275,7 +294,7 @@ GameObject:
   - component: {fileID: 7871668959113178285}
   - component: {fileID: 5996650806606713151}
   m_Layer: 5
-  m_Name: CardType_Visual
+  m_Name: CardSuite_Bg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -350,7 +369,7 @@ GameObject:
   - component: {fileID: 3416875929346112852}
   - component: {fileID: 1140343077149353731}
   m_Layer: 5
-  m_Name: CardName
+  m_Name: CardRank
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -425,7 +444,7 @@ GameObject:
   - component: {fileID: 1816646253882991848}
   - component: {fileID: 4933880093532291878}
   m_Layer: 5
-  m_Name: CardType
+  m_Name: CardSuite_Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

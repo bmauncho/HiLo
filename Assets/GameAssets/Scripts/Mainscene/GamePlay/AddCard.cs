@@ -36,7 +36,7 @@ public class AddCard : MonoBehaviour
                     Debug.Log("Set New Card!");
                     ChangeCard?.Invoke();
 
-                    Debug.Log(cardComponent.name);
+                    //Debug.Log(cardComponent.name);
 
                     if (cardComponent != null)
                     {

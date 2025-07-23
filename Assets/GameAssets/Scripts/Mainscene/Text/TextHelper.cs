@@ -67,7 +67,7 @@ public class TextHelper : MonoBehaviour
         TMP_SpriteAsset spriteAsset = IsColored ? textManager.GetColoredFont() : textManager.GetMainFont();
         List<(string actual, string available)> charRefrences = new List<(string actual, string available)>(textManager.GetCharacterReferences());
 
-        Debug.Log(Input);
+       // Debug.Log(Input);
         //call
         TextGenerator.CreateSpriteAssetText(
             Input ,
