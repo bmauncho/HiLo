@@ -15,6 +15,7 @@ public class GamePlayManager : MonoBehaviour
     public AddCard addCard;
     public NextCard nextCard;
     public RetainCard retainCard;
+    public CardHistory cardHistory;
 
     public void Start ()
     {
@@ -118,8 +119,14 @@ public class GamePlayManager : MonoBehaviour
 
     IEnumerator guessing ()
     {
-        yield return StartCoroutine(nextCard.nextCard(deck,cardManager));
         //next card
+        yield return StartCoroutine(nextCard.nextCard(deck,cardManager));
+        //enable skips
+        if (Skips.IsFirstTime())
+        {
+            Skips.setIsFirstTime(false);
+            Skips.ResetSkips();
+        }
 
         //winsequence
         CardData prevCardData = cardManager.GetPrevCardData();
@@ -130,11 +137,6 @@ public class GamePlayManager : MonoBehaviour
         yield return StartCoroutine(winLoseManager.WinSequence());
         //winsequence - card History
 
-        if (Skips.IsFirstTime())
-        {
-            Skips.ResetSkips();
-            Skips.setIsFirstTime(false);
-        }
         yield return null;
     }
 }

@@ -5,6 +5,7 @@ public class GamePlay : MonoBehaviour
 {
     MultiplierManager multipliersManager;
     WinLoseManager winLoseManager;
+    CardManager cardManager;
     public bool isGamePlayActive = false;
     public GameObject start;
     public GameObject cashOut;
@@ -14,6 +15,7 @@ public class GamePlay : MonoBehaviour
     {
         multipliersManager = CommandCenter.Instance.multiplierManager_;
         winLoseManager = CommandCenter.Instance.winLoseManager_;
+        cardManager = CommandCenter.Instance.cardManager_;
     }
 
     public void showStart ()
@@ -46,6 +48,11 @@ public class GamePlay : MonoBehaviour
             SetCashOutAmount("0.00");
             multipliersManager.disableGuessMask();
             multipliersManager.enableGuessBtns();
+            gamePlayManager.cardHistory.AddHistoryData(
+                cardManager.GetCurrentCardData() , 
+                MultiplierType.None , 
+                OutCome.None);
+            gamePlayManager.cardHistory.ShowHistory();
         }
         else
         {
@@ -56,6 +63,7 @@ public class GamePlay : MonoBehaviour
             multipliersManager.disableGuessBtns();
             gamePlayManager.Skips.setIsFirstTime(true);
             winLoseManager.resetOutCome();
+            gamePlayManager.cardHistory.ResetHistoryData();
         }
     }
 
