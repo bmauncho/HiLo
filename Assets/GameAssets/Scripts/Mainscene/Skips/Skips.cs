@@ -1,15 +1,8 @@
 using DG.Tweening;
 using UnityEngine;
-[System.Serializable]
-public enum SkipMode
-{
-    None,
-    Skip,
-}
 
 public class Skips : MonoBehaviour
 {
-    public SkipMode skipMode;
     public RectTransform skipsHolder;
     public GameObject [] availableSkips;
     [SerializeField] private bool isFirstTime = true;
@@ -33,7 +26,7 @@ public class Skips : MonoBehaviour
                 Debug.Log("Gameplay skip : Card skipped.");
                 currentSkipIndex--;
                 availableSkips [currentSkipIndex].SetActive(false);
-                CommandCenter.Instance.gamePlayManager_.cardHistory.ShowHistory();
+                CommandCenter.Instance.gamePlayManager_.cardHistory.ShowHistory(true);
             }
             else
             {
@@ -110,15 +103,5 @@ public class Skips : MonoBehaviour
     public bool IsFirstTime ()
     {
         return isFirstTime;
-    }
-
-    public void SetSkipMode (SkipMode mode)
-    {
-        skipMode = mode;
-    }
-
-    public SkipMode GetSkipMode ()
-    {
-        return skipMode;
     }
 }

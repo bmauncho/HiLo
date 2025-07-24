@@ -4743,121 +4743,121 @@ MonoBehaviour:
     multipliers:
     - multiplierType: 1
       Multiplier: 1.04
-    - multiplierType: 2
-      Multiplier: 16.69
     - multiplierType: 3
+      Multiplier: 16.69
+    - multiplierType: 4
       Multiplier: 
   - Rank: 1
     multipliers:
     - multiplierType: 1
       Multiplier: 1.07
-    - multiplierType: 2
-      Multiplier: 16.69
     - multiplierType: 3
+      Multiplier: 16.69
+    - multiplierType: 4
       Multiplier: 7.15
   - Rank: 2
     multipliers:
     - multiplierType: 1
       Multiplier: 1.16
-    - multiplierType: 2
-      Multiplier: 16.69
     - multiplierType: 3
+      Multiplier: 16.69
+    - multiplierType: 4
       Multiplier: 4.55
   - Rank: 3
     multipliers:
     - multiplierType: 1
       Multiplier: 1.28
-    - multiplierType: 2
-      Multiplier: 16.69
     - multiplierType: 3
+      Multiplier: 16.69
+    - multiplierType: 4
       Multiplier: 3.34
   - Rank: 4
     multipliers:
     - multiplierType: 1
       Multiplier: 1.43
-    - multiplierType: 2
-      Multiplier: 16.69
     - multiplierType: 3
+      Multiplier: 16.69
+    - multiplierType: 4
       Multiplier: 2.64
   - Rank: 5
     multipliers:
     - multiplierType: 1
       Multiplier: 1.62
-    - multiplierType: 2
-      Multiplier: 16.69
     - multiplierType: 3
+      Multiplier: 16.69
+    - multiplierType: 4
       Multiplier: 2.18
   - Rank: 5
     multipliers:
     - multiplierType: 1
       Multiplier: 1.62
-    - multiplierType: 2
-      Multiplier: 16.69
     - multiplierType: 3
+      Multiplier: 16.69
+    - multiplierType: 4
       Multiplier: 2.18
   - Rank: 5
     multipliers:
     - multiplierType: 1
       Multiplier: 1.85
-    - multiplierType: 2
-      Multiplier: 16.69
     - multiplierType: 3
+      Multiplier: 16.69
+    - multiplierType: 4
       Multiplier: 1.84
   - Rank: 6
     multipliers:
     - multiplierType: 1
       Multiplier: 1.85
-    - multiplierType: 2
-      Multiplier: 16.69
     - multiplierType: 3
+      Multiplier: 16.69
+    - multiplierType: 4
       Multiplier: 1.84
   - Rank: 7
     multipliers:
     - multiplierType: 1
       Multiplier: 2.18
-    - multiplierType: 2
-      Multiplier: 16.69
     - multiplierType: 3
+      Multiplier: 16.69
+    - multiplierType: 4
       Multiplier: 1.62
   - Rank: 8
     multipliers:
     - multiplierType: 1
       Multiplier: 2.64
-    - multiplierType: 2
-      Multiplier: 16.69
     - multiplierType: 3
+      Multiplier: 16.69
+    - multiplierType: 4
       Multiplier: 1.43
   - Rank: 9
     multipliers:
     - multiplierType: 1
       Multiplier: 3.34
-    - multiplierType: 2
-      Multiplier: 16.69
     - multiplierType: 3
+      Multiplier: 16.69
+    - multiplierType: 4
       Multiplier: 1.28
   - Rank: 10
     multipliers:
     - multiplierType: 1
       Multiplier: 4.45
-    - multiplierType: 2
-      Multiplier: 16.69
     - multiplierType: 3
+      Multiplier: 16.69
+    - multiplierType: 4
       Multiplier: 1.16
   - Rank: 11
     multipliers:
     - multiplierType: 1
       Multiplier: 7.15
-    - multiplierType: 2
-      Multiplier: 16.69
     - multiplierType: 3
+      Multiplier: 16.69
+    - multiplierType: 4
       Multiplier: 1.07
   - Rank: 12
     multipliers:
     - multiplierType: 1
       Multiplier: 
-    - multiplierType: 2
-      Multiplier: 16.69
     - multiplierType: 3
+      Multiplier: 16.69
+    - multiplierType: 4
       Multiplier: 1.04
 --- !u!1 &673023294
 GameObject:

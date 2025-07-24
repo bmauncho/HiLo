@@ -21,6 +21,7 @@ public class BetButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, 
     void Update ()
     {
         if (CommandCenter.Instance == null) return;
+        if (CommandCenter.Instance.gamePlayManager_.IsGameStarted()) return;
 
         switch (betType)
         {
@@ -73,7 +74,7 @@ public class BetButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, 
     public void OnPointerDown ( PointerEventData eventData )
     {
         if (!interactable) return;
-
+        if (CommandCenter.Instance.gamePlayManager_.IsGameStarted()) return;
         isPointerDown = true;
         hasStartedHold = false;
         pointerDownTime = Time.unscaledTime;
@@ -81,6 +82,7 @@ public class BetButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, 
 
     public void OnPointerUp ( PointerEventData eventData )
     {
+        if (CommandCenter.Instance.gamePlayManager_.IsGameStarted()) return;
         if (!interactable)
         {
             interactable = true;
@@ -102,6 +104,7 @@ public class BetButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, 
 
     public void OnPointerExit ( PointerEventData eventData )
     {
+        if (CommandCenter.Instance.gamePlayManager_.IsGameStarted()) return;
         if (!interactable)
         {
             interactable = true;
@@ -120,5 +123,15 @@ public class BetButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, 
     public bool IsInteractable ()
     {
         return interactable;
+    }
+
+    public void ActivateMask ()
+    {
+        Mask.SetActive( true );
+    }
+
+    public void DeactivateMask ()
+    {
+        Mask.SetActive ( false );
     }
 }

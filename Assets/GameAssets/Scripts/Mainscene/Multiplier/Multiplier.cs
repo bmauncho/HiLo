@@ -45,4 +45,17 @@ public class Multiplier : MonoBehaviour
         CommandCenter.Instance.multiplierManager_.SetSelectedMultiplier( multiplier );
         CommandCenter.Instance.gamePlayManager_.Guess();
     }
+
+    public void SetInteractable ( bool isEnabled )
+    {
+        if (isEnabled)
+        {
+            enableBtn();
+        }
+        else
+        {
+            disableBtn();
+        }
+    }
+
 }

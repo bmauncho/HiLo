@@ -48,6 +48,7 @@ public class GamePlayManager : MonoBehaviour
             cardComponent.hideCardBg();
             cardComponent.HideCardOutline();
         }
+        multiplierManager.Multipliers.ToggleMultiplier(cardManager.GetCurrentCardData());
     }
     public void ToggleGamePlay ()
     {
@@ -141,7 +142,7 @@ public class GamePlayManager : MonoBehaviour
         yield return StartCoroutine(winLoseManager.WinSequence());
         //winsequence - card History
         cardHistory.ShowHistory();
-        Skips.SetSkipMode(SkipMode.None);
+        multiplierManager.Multipliers.ToggleMultiplier(cardManager.GetCurrentCardData());
         yield return null;
     }
 

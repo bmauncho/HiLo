@@ -155,9 +155,10 @@ public class CardHistory : MonoBehaviour
     }
 
 
-    public void ShowHistory ()
+    public void ShowHistory (bool isSkipped = false)
     {
         //Debug.Log(HistoryDataIndex);
+        if (HistoryData == null || HistoryData.Count <= 0) return;
         Debug.Log($"{HistoryData [HistoryDataIndex].cardData.cardSuite} \n" +
             $"{HistoryData [HistoryDataIndex].cardData.cardColor} \n" +
             $"{HistoryData [HistoryDataIndex].cardData.cardRank} \n" +
@@ -166,7 +167,7 @@ public class CardHistory : MonoBehaviour
 
         bool canshowHistory = !gamePlayManager.Skips.IsFirstTime();
         bool IsSkip = gamePlayManager.Skips.IsFirstTime() ? 
-            false : isSkipMode(gamePlayManager.Skips.GetSkipMode());
+            false : isSkipped;
 
         OutCome theOutcome = winloseManager.GetTheOutCome();
         CardData prevCardData = cardManager.GetPrevCardData();
@@ -244,10 +245,5 @@ public class CardHistory : MonoBehaviour
         historyCards.Clear();
         yield return null;
 
-    }
-
-    public bool isSkipMode (SkipMode mode)
-    {
-        return mode == SkipMode.Skip;
     }
 }
