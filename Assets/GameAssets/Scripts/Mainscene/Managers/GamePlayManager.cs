@@ -94,7 +94,16 @@ public class GamePlayManager : MonoBehaviour
                 cardData.cardRank,
                 cardData.cardColor);
 
-            multiplierManager.RefreshMultipliers();
+            if(IsGameStarted())
+            {
+
+            }
+            else
+            {
+
+                multiplierManager.RefreshMultipliers();
+            }
+
 
             Debug.Log("New card added!");
         }));

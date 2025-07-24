@@ -121,7 +121,15 @@ public class WinLoseManager : MonoBehaviour
                 cardData.cardRank ,
                 cardData.cardColor);
 
-            multiplierManager.RefreshMultipliers();
+            if (gamePlayManager.IsGameStarted())
+            {
+                multiplierManager.refreshMultplierValues(multiplierManager.GetCurrentMultipliers());
+            }
+            else
+            {
+                multiplierManager.RefreshMultipliers();
+            }
+
 
             Debug.Log("New card added-win!");
         }));

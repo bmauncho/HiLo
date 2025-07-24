@@ -1,3 +1,5 @@
+using NUnit.Framework;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 public enum MultiplierType
@@ -154,6 +156,66 @@ public class MultiplierManager : MonoBehaviour
 
             // Break after match since Rank is unique
             break;
+        }
+    }
+
+
+    public List<MultiplierConfig> GetCurrentMultipliers (bool isSkip =false)
+    {
+        CardRanks currentCard = cardManager.GetCurrentCardData().cardRank;
+        MultiplierType mutiplierType = selectedMultiplier;
+        int favourable = ProbabilityCalculator.GetFavorableCardCount(currentCard , mutiplierType);
+        List<MultiplierConfig> temp = new List<MultiplierConfig>();
+
+        if (isSkip)
+        {
+            
+        }
+        else
+        {
+            
+        }
+
+        return null;
+    }
+
+    public void refreshMultplierValues ( List<MultiplierConfig> config )
+    {
+        foreach (var multiplier in Multipliers.multipliers)
+        {
+            foreach (MultiplierConfig configItem in config)
+            {
+                if (multiplier.multiplier == configItem.multiplierType)
+                {
+                    string multiplierValue = configItem.Multiplier;
+                    TextHelper textHelper = multiplier.multiplierText.GetComponent<TextHelper>();
+                    if (textHelper != null)
+                    {
+                        if (!string.IsNullOrEmpty(multiplierValue))
+                        {
+                            textHelper.ManualRefresh(multiplierValue);
+                            if (gamePlayManager.IsGameStarted())
+                            {
+                                multiplier.enableBtn();
+                            }
+                            else
+                            {
+                                multiplier.disableBtn();
+                            }
+                        }
+                        else
+                        {
+                            multiplier.disableBtn();
+                        }
+                    }
+                    else
+                    {
+                        Debug.LogWarning("TextHelper component not found.");
+                    }
+
+                    break; // break only if a match was found
+                }
+            }
         }
     }
 
