@@ -9,6 +9,7 @@ public class GamePlayManager : MonoBehaviour
     PoolManager poolManager;
     MultiplierManager multiplierManager;
     WinLoseManager winLoseManager;
+    BetManager betManager;
     public GamePlay gamePlay;
     public Skips Skips;
     public Deck deck;
@@ -17,6 +18,7 @@ public class GamePlayManager : MonoBehaviour
     public NextCard nextCard;
     public RetainCard retainCard;
     public CardHistory cardHistory;
+    public GameObject ActiveCard;
 
     public void Start ()
     {
@@ -24,6 +26,7 @@ public class GamePlayManager : MonoBehaviour
         cardManager = CommandCenter.Instance.cardManager_;
         multiplierManager = CommandCenter.Instance.multiplierManager_;
         winLoseManager = CommandCenter.Instance.winLoseManager_;
+        betManager = CommandCenter.Instance.betManager_;
         Invoke(nameof(SetActiveCard),.25f);
     }
 
@@ -34,6 +37,7 @@ public class GamePlayManager : MonoBehaviour
         card.transform.localPosition = Vector3.zero;
         deck.newCard.SetOwner(card);
         Card cardComponent = card.GetComponent<Card>();
+        SetActiveCard(card);
         if (cardComponent != null)
         {
             CardData cardData = cardManager.GetCardData();
@@ -49,10 +53,12 @@ public class GamePlayManager : MonoBehaviour
             cardComponent.HideCardOutline();
         }
         multiplierManager.Multipliers.ToggleMultiplier(cardManager.GetCurrentCardData());
+        multiplierManager.disableGuessBtns();
     }
+
     public void ToggleGamePlay ()
     {
-        gamePlay.ToggleGamePlay(this);
+        StartCoroutine( gamePlay.ToggleGamePlay(this));
         ToggleGamePlaySkips();
     }
 
@@ -79,7 +85,9 @@ public class GamePlayManager : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         yield return StartCoroutine(addCard.addNewCard(deck , poolManager , () =>
         {
-            Card cardComponenet = deck.newCard.GetTheOwner().GetComponent<Card>();
+            GameObject card = deck.newCard.GetTheOwner();
+            SetActiveCard(card);
+            Card cardComponenet = card.GetComponent<Card>();
             CardData cardData = cardManager.GetCardData();
             cardComponenet.SetCard(
                 cardData.cardSuite,
@@ -143,6 +151,9 @@ public class GamePlayManager : MonoBehaviour
         //winsequence - card History
         cardHistory.ShowHistory();
         multiplierManager.Multipliers.ToggleMultiplier(cardManager.GetCurrentCardData());
+        yield return new WaitForSeconds(.1f);
+
+        onlose();
         yield return null;
     }
 
@@ -185,5 +196,33 @@ public class GamePlayManager : MonoBehaviour
 
         return MultiplierType.None;
     }
+
+    void onlose ()
+    {
+        if(winLoseManager.GetTheOutCome() == OutCome.None ||
+            winLoseManager.GetTheOutCome()== OutCome.Win)
+        {
+            return;
+        }
+
+        gamePlay.showStart();
+        gamePlay.hideCashOut();
+        gamePlay.isGamePlayActive = false;
+        multiplierManager.enableGuessMask();
+        multiplierManager.disableGuessBtns();
+        Skips.setIsFirstTime(true);
+        Skips.DeactivateGameplaySpins();
+        Skips.ResetSkips();
+        winLoseManager.resetOutCome();
+        betManager.Bet.IncreaseBtn.DeactivateMask();
+        betManager.Bet.DecreaseBtn.DeactivateMask();
+    }
+
+    public void SetActiveCard(GameObject card )
+    {
+        ActiveCard = card;
+    }
+
+    public GameObject GetActiveCard() { return ActiveCard; }
 
 }

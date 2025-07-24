@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 
@@ -40,7 +41,7 @@ public class GamePlay : MonoBehaviour
         cashOut.SetActive(false);
     }
 
-    public void ToggleGamePlay (GamePlayManager gamePlayManager)
+    public IEnumerator ToggleGamePlay (GamePlayManager gamePlayManager)
     {
         if (!isGamePlayActive)
         {
@@ -50,6 +51,8 @@ public class GamePlay : MonoBehaviour
             SetCashOutAmount("0.00");
             multipliersManager.disableGuessMask();
             multipliersManager.enableGuessBtns();
+            yield return StartCoroutine(gamePlayManager.cardHistory.ResetHistoryData());
+            gamePlayManager.GetActiveCard().GetComponent<Card>().resetCardforGamePlay();
             gamePlayManager.cardHistory.AddHistoryData(
                 cardManager.GetCurrentCardData() , 
                 MultiplierType.None , 
@@ -68,7 +71,7 @@ public class GamePlay : MonoBehaviour
             multipliersManager.disableGuessBtns();
             gamePlayManager.Skips.setIsFirstTime(true);
             winLoseManager.resetOutCome();
-            gamePlayManager.cardHistory.ResetHistoryData();
+            yield return StartCoroutine(gamePlayManager.cardHistory.ResetHistoryData());
             betManager.Bet.IncreaseBtn.DeactivateMask();
             betManager.Bet.DecreaseBtn.DeactivateMask();
         }

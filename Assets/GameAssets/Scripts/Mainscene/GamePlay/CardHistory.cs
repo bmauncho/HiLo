@@ -69,9 +69,9 @@ public class CardHistory : MonoBehaviour
         
     }
 
-    public void ResetHistoryData ()
+    public IEnumerator ResetHistoryData ()
     {
-        ClearHistory();
+        yield return StartCoroutine(returnToPool());
     }
 
     public void AddHistoryData (
@@ -224,15 +224,10 @@ public class CardHistory : MonoBehaviour
     }
 
 
-    public void ClearHistory ()
-    {
-        HistoryData.Clear();
-        StartCoroutine(returnToPool());
-        Debug.Log("Return history cards to pool!");
-    }
-
     IEnumerator returnToPool ()
     {
+        HistoryData.Clear();
+        Debug.Log("Return history cards to pool!");
         if (historyCards.Count <= 0) yield break;
         int cardsToReturn = historyCards.Count;
         foreach(var card in historyCards)
@@ -243,6 +238,7 @@ public class CardHistory : MonoBehaviour
 
         yield return new WaitUntil(() => cardsToReturn <= 0);
         historyCards.Clear();
+        HistoryDataIndex = -1;
         yield return null;
 
     }

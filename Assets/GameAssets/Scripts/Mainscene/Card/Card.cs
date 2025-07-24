@@ -55,6 +55,7 @@ public class Card : MonoBehaviour
 
     public void ShowCardOutline ()
     {
+        Debug.Log("Show card Outine!");
         CardOutline.SetActive(true);
     }
 
@@ -76,5 +77,11 @@ public class Card : MonoBehaviour
     public bool IsFaceCard ()
     {
         return cardRankType == CardRanks.JACK || cardRankType == CardRanks.QUEEN || cardRankType == CardRanks.KING;
+    }
+
+    public void resetCardforGamePlay ()
+    {
+        HideCardOutline();
+        Debug.Log("Hide card Outine!");
     }
 }

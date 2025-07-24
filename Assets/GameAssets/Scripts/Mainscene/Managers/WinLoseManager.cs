@@ -12,6 +12,7 @@ public class WinLoseManager : MonoBehaviour
     PoolManager poolManager;
     CardManager cardManager;
     MultiplierManager multiplierManager;
+    BetManager betManager;
     public OutCome TheOutCome;
     private bool IsAddNewCardComplete = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -111,7 +112,9 @@ public class WinLoseManager : MonoBehaviour
         yield return new WaitForSeconds(.1f);
         yield return StartCoroutine(addCard.addNewCard(deck , poolManager , () =>
         {
-            Card cardComponenet = deck.newCard.GetTheOwner().GetComponent<Card>();
+            GameObject card = deck.newCard.GetTheOwner();
+            gamePlayManager.SetActiveCard(card);
+            Card cardComponenet = card.GetComponent<Card>();
             CardData cardData = cardManager.GetCurrentCardData();
             cardComponenet.SetCard(
                 cardData.cardSuite ,
@@ -148,8 +151,10 @@ public class WinLoseManager : MonoBehaviour
         yield return new WaitForSeconds(.1f);
         yield return StartCoroutine(addCard.addNewCard(deck , poolManager , () =>
         {
-            Card cardComponenet = deck.newCard.GetTheOwner().GetComponent<Card>();
+            GameObject card = deck.newCard.GetTheOwner();
+            Card cardComponenet = card.GetComponent<Card>();
             CardData cardData = cardManager.GetCurrentCardData();
+            gamePlayManager.SetActiveCard(card);
             cardComponenet.SetCard(
                 cardData.cardSuite ,
                 cardData.cardRank ,
@@ -167,7 +172,6 @@ public class WinLoseManager : MonoBehaviour
         //update multilier 
         //prev card is set as the current card
         //cardManager.ResetCardData();
-
         yield return null;
     }
 
