@@ -1284,12 +1284,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playScene:
-    m_AssetGUID: 
+    m_AssetGUID: fb603a1ccb043a944a22460443d9c72a
     m_SubObjectName: 
     m_SubObjectType: 
     m_SubObjectGUID: 
     m_EditorAssetChanged: 0
-  isAddressablesEnabled: 0
+  isAddressablesEnabled: 1
   loadingSlider: {fileID: 334828583}
   loadingText: {fileID: 197601751}
   startBtn: {fileID: 0}

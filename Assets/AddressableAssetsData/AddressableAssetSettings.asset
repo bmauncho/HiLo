@@ -15,9 +15,9 @@ MonoBehaviour:
   m_DefaultGroup: 4f1aed8b7200c83498bbb57cb7c0998b
   m_currentHash:
     serializedVersion: 2
-    Hash: 12e9db018ef06053a040c5fd6d01a963
+    Hash: 00000000000000000000000000000000
   m_OptimizeCatalogSize: 0
-  m_BuildRemoteCatalog: 0
+  m_BuildRemoteCatalog: 1
   m_CatalogRequestsTimeout: 0
   m_DisableCatalogUpdateOnStart: 0
   m_InternalIdNamingMode: 0
@@ -50,10 +50,10 @@ MonoBehaviour:
   m_CheckForContentUpdateRestrictionsOption: 0
   m_MonoScriptBundleCustomNaming: 
   m_RemoteCatalogBuildPath:
-    m_Id: 
+    m_Id: f3b9dd4f2e40bdb4a9c3e63a0a66f514
   m_RemoteCatalogLoadPath:
-    m_Id: 
-  m_ContentStateBuildPathProfileVariableName: 
+    m_Id: bb6f90e899d18cb40b485bd8fca2e2d5
+  m_ContentStateBuildPathProfileVariableName: <default settings path>
   m_CustomContentStateBuildPath: 
   m_ContentStateBuildPath: 
   m_BuildAddressablesWithPlayerBuild: 0
@@ -74,7 +74,7 @@ MonoBehaviour:
       - m_Id: 85e4150c5d9a9134382717ee88c96090
         m_Value: '[UnityEditor.EditorUserBuildSettings.activeBuildTarget]'
       - m_Id: bb6f90e899d18cb40b485bd8fca2e2d5
-        m_Value: <undefined>
+        m_Value: https://hilo-bucket.pages.dev/
       - m_Id: d2905cc9676af8346b6d734ef05f81d2
         m_Value: '[UnityEngine.AddressableAssets.Addressables.BuildPath]/[BuildTarget]'
       - m_Id: f3b9dd4f2e40bdb4a9c3e63a0a66f514
