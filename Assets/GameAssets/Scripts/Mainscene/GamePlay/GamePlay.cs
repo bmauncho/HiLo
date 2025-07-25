@@ -50,6 +50,7 @@ public class GamePlay : MonoBehaviour
         {
             hideStart();
             showCashOut();
+            ResetCashAmount();
             isGamePlayActive = true;
             SetCashOutAmount("0.00");
             multipliersManager.disableGuessMask();
@@ -61,6 +62,7 @@ public class GamePlay : MonoBehaviour
             betManager.Bet.IncreaseBtn.ActivateMask();
             betManager.Bet.DecreaseBtn.ActivateMask();
             multipliersManager.Multipliers.ToggleMultiplier(cardManager.GetCurrentCardData());
+
         }
         else
         {
@@ -86,6 +88,11 @@ public class GamePlay : MonoBehaviour
     {
         cashOutAmount.text = amount;
         GetComponentInChildren<TextHelper>().ManualRefresh(amount);
+    }
+
+    public void ResetCashAmount ()
+    {
+        SetCashOutAmount("0.00");
     }
 
     public void OnEffectComplete ()

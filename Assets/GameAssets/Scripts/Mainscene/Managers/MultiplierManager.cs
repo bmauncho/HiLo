@@ -44,6 +44,19 @@ public class MultiplierManager : MonoBehaviour
         
     }
 
+    public string GetMultiplier ()
+    {
+        foreach(var multiplier in Multipliers.multipliers)
+        {
+            if(multiplier.multiplier == selectedMultiplier)
+            {
+                return multiplier.TheMultiplier;
+            }
+        }
+
+        return string.Empty;
+    }
+
     public MultiplierType GetSelectedMultiplierType ()
     {
         return selectedMultiplier;
@@ -144,6 +157,7 @@ public class MultiplierManager : MonoBehaviour
                             }
                             else
                             {
+                                textHelper.ManualRefresh(multiplierValue);
                                 matchingMultiplier.disableBtn();
                             }
                         }
@@ -181,19 +195,34 @@ public class MultiplierManager : MonoBehaviour
                 if (isSkip && multi.multiplierType == MultiplierType.Same)
                     continue;
 
+                bool isKing = multiDetails.Rank == CardRanks.KING && multi.multiplierType == MultiplierType.High;
+                bool isAce = multiDetails.Rank == CardRanks.ACE && multi.multiplierType == MultiplierType.Low;
+
+                float multiplierValue = 0;
+
+                string multiplierValueString = string.Empty;
                 int favourable = ProbabilityCalculator.GetFavorableCardCount(currentCard , multi.multiplierType);
 
-                float parsedMultiplier;
-                if (!float.TryParse(multi.Multiplier , out parsedMultiplier))
+                if (isKing || isAce)
                 {
-                    Debug.LogWarning($"Invalid multiplier format: '{multi.Multiplier}'");
-                    parsedMultiplier = 0f; // or any default value you consider safe
+                    multiplierValueString = string.Empty;
+                }
+                else
+                {
+                    float parsedMultiplier;
+                    if (!float.TryParse(multi.Multiplier , out parsedMultiplier))
+                    {
+                        Debug.LogWarning($"Invalid multiplier format: '{multi.Multiplier}'");
+                        parsedMultiplier = 0f; // or any default value you consider safe
+                    }
+
+
+                    multiplierValue = ProbabilityCalculator.GetMultiplier(favourable , parsedMultiplier);
                 }
 
-
-                float multiplierValue = ProbabilityCalculator.GetMultiplier(favourable , parsedMultiplier);
-                string multiplierValueString = multiplierValue == 0 ?  string.Empty : multiplierValue.ToString("F2");
-
+                multiplierValueString = multiplierValue == 0 ? string.Empty : multiplierValue.ToString("F2");
+    
+                  
                 temp.Add(new MultiplierConfig
                 {
                     multiplierType = multi.multiplierType ,
@@ -236,6 +265,7 @@ public class MultiplierManager : MonoBehaviour
                         }
                         else
                         {
+                            textHelper.ManualRefresh(multiplierValue);
                             multiplier.disableBtn();
                         }
                     }

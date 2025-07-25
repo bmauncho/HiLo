@@ -10,6 +10,7 @@ public class GamePlayManager : MonoBehaviour
     MultiplierManager multiplierManager;
     WinLoseManager winLoseManager;
     BetManager betManager;
+    PayOutManager payOutManager;
     public GamePlay gamePlay;
     public Skips Skips;
     public Deck deck;
@@ -27,6 +28,7 @@ public class GamePlayManager : MonoBehaviour
         multiplierManager = CommandCenter.Instance.multiplierManager_;
         winLoseManager = CommandCenter.Instance.winLoseManager_;
         betManager = CommandCenter.Instance.betManager_;
+        payOutManager = CommandCenter.Instance.PayOutManager_ ;
         Invoke(nameof(SetActiveCard),.25f);
     }
 
@@ -81,7 +83,19 @@ public class GamePlayManager : MonoBehaviour
     {
         if(!Skips.AllowSkip()) yield break;
         Debug.Log($" allow skips : {Skips.AllowSkip()}");
+
+        if (!IsGameStarted())
+        {
+            if(winLoseManager.GetTheOutCome() == OutCome.None ||
+                winLoseManager.GetTheOutCome() == OutCome.Lose)
+            {
+                GetActiveCard().GetComponent<Card>().resetCardforGamePlay();
+                yield return StartCoroutine(cardHistory.ResetHistoryData());
+            }
+        }
+
         StartCoroutine(removeCard.removeCurrentCard(deck,poolManager));
+        
         yield return new WaitForSeconds(0.1f);
         yield return StartCoroutine(addCard.addNewCard(deck , poolManager , () =>
         {
@@ -161,7 +175,7 @@ public class GamePlayManager : MonoBehaviour
         cardHistory.ShowHistory();
         multiplierManager.Multipliers.ToggleMultiplier(cardManager.GetCurrentCardData());
         yield return new WaitForSeconds(.1f);
-
+        onWin();
         onlose();
         yield return null;
     }
@@ -214,17 +228,26 @@ public class GamePlayManager : MonoBehaviour
             return;
         }
 
-        gamePlay.showStart();
-        gamePlay.hideCashOut();
         gamePlay.isGamePlayActive = false;
         multiplierManager.enableGuessMask();
         multiplierManager.disableGuessBtns();
         Skips.setIsFirstTime(true);
-        Skips.DeactivateGameplaySpins();
         Skips.ResetSkips();
         winLoseManager.resetOutCome();
         betManager.Bet.IncreaseBtn.DeactivateMask();
         betManager.Bet.DecreaseBtn.DeactivateMask();
+        payOutManager.resetPayout();
+    }
+
+    void onWin ()
+    {
+        if (winLoseManager.GetTheOutCome() == OutCome.None ||
+           winLoseManager.GetTheOutCome() == OutCome.Lose)
+        {
+            return;
+        }
+
+        payOutManager.updatePayout();
     }
 
     public void SetActiveCard(GameObject card )

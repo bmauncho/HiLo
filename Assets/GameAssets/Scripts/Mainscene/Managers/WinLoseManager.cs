@@ -168,6 +168,8 @@ public class WinLoseManager : MonoBehaviour
                 cardData.cardRank ,
                 cardData.cardColor);
 
+            multiplierManager.refreshMultplierValues(multiplierManager.GetCurrentMultipliers());
+
             Debug.Log("New card added-win!");
         }));
         yield return new WaitUntil(() => IsAddNewCardComplete);
@@ -175,11 +177,15 @@ public class WinLoseManager : MonoBehaviour
         //lose anim on prev card
 
         RetainCard retainCard = gamePlayManager.retainCard;
+        gamePlayManager.Skips.DeactivateGameplaySpins();
+        gamePlayManager.gamePlay.showStart();
+        gamePlayManager.gamePlay.hideCashOut();
         yield return StartCoroutine(retainCard.loseAnim(deck));
         addCard.OnComplete -= OnAddCardComplete;
         //update multilier 
         //prev card is set as the current card
         //cardManager.ResetCardData();
+
         yield return null;
     }
 

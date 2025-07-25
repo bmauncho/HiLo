@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class Multiplier : MonoBehaviour
 {
     public MultiplierType multiplier;
+    public string TheMultiplier;
     public TMP_Text multiplierText;
     public GameObject Mask;
     public Button guessBtn;
@@ -18,6 +19,7 @@ public class Multiplier : MonoBehaviour
     public void SetText(string text )
     {
         multiplierText.text = text;
+        TheMultiplier = text;
     }
 
     public void EnableMask ()

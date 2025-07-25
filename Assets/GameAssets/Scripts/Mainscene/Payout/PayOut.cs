@@ -19,7 +19,7 @@ public class PayOut : MonoBehaviour
         winLoseManager = CommandCenter.Instance.winLoseManager_;
     }
 
-    public IEnumerator ShowPayOut ()
+    public IEnumerator ShowPayOut (PayOutManager payOutMan=null)
     {
         if(winLoseManager.GetTheOutCome() == OutCome.Lose || 
             winLoseManager.GetTheOutCome() == OutCome.None)
@@ -28,17 +28,25 @@ public class PayOut : MonoBehaviour
             PayoutEffectComplete?.Invoke();
             yield break;
         }
+        string cashout_ = payOutMan.GetWinMultiplier();
+        string amountwon_ = payOutMan.GetWinAmount().ToString("F2");
+        Debug.Log($"cashout {cashout_} ; amountwon {amountwon_}");
         EnableHolder();
         EnableEffectHolder();
+        UpdatePayoutUI(cashout_, amountwon_);
         Holder.transform.DOPunchScale(new Vector3(0.2f , 0.2f , 0.2f) , 1f , 0 , 1);
-        SetCashOut_Amount();
-        SetAmountWon_Amount();
         yield return new WaitForSeconds(3);
         PayoutEffectComplete?.Invoke();
         Debug.Log("Payout Done!");
         DisableHolder();
         DisableEffectHolder();
         yield return null;
+    }
+
+    public void UpdatePayoutUI(string cashOutAmount, string winAmount )
+    {   
+        SetAmountWon_Amount(winAmount);
+        SetCashOut_Amount(cashOutAmount);
     }
 
     public void EnableHolder ()
@@ -73,8 +81,8 @@ public class PayOut : MonoBehaviour
 
     public void SetCashOut_Amount (string Amount= "1.00")
     {
-        cashOut.text = Amount;
-        cashOut.GetComponent<TextHelper>().ManualRefresh(Amount);
+        cashOut.text = Amount + "x";
+        cashOut.GetComponent<TextHelper>().ManualRefresh(Amount + "x");
     }
 
     public void SetAmountWon_Amount (string Amount = "1.00")
