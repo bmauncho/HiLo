@@ -20,7 +20,7 @@ public class CommandCenter : MonoBehaviour
     public CardManager cardManager_;
     public GamePlayManager gamePlayManager_;
     public WinLoseManager winLoseManager_;
-    public PayOutManager PayOutManager;
+    public PayOutManager PayOutManager_;
     private void Awake ()
     {
         if (Instance != null && Instance != this)

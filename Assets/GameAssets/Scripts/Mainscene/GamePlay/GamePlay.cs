@@ -8,10 +8,12 @@ public class GamePlay : MonoBehaviour
     WinLoseManager winLoseManager;
     CardManager cardManager;
     BetManager betManager;
+    PayOutManager payOutManager;
     public bool isGamePlayActive = false;
     public GameObject start;
     public GameObject cashOut;
     public TMP_Text cashOutAmount;
+    bool isGameOver = false;
 
     private void Start ()
     {
@@ -19,6 +21,7 @@ public class GamePlay : MonoBehaviour
         winLoseManager = CommandCenter.Instance.winLoseManager_;
         cardManager = CommandCenter.Instance.cardManager_;
         betManager = CommandCenter.Instance.betManager_;
+        payOutManager = CommandCenter.Instance.PayOutManager_;
     }
 
     public void showStart ()
@@ -51,6 +54,7 @@ public class GamePlay : MonoBehaviour
             SetCashOutAmount("0.00");
             multipliersManager.disableGuessMask();
             multipliersManager.enableGuessBtns();
+            multipliersManager.RefreshMultipliers();
             yield return StartCoroutine(gamePlayManager.cardHistory.ResetHistoryData());
             gamePlayManager.GetActiveCard().GetComponent<Card>().resetCardforGamePlay();
             gamePlayManager.cardHistory.ShowHistory();
@@ -60,17 +64,21 @@ public class GamePlay : MonoBehaviour
         }
         else
         {
+            isGameOver = false;
+            payOutManager.payout.PayoutEffectComplete +=OnEffectComplete;
             showStart();
             hideCashOut();
             isGamePlayActive = false;
             multipliersManager.enableGuessMask();
             multipliersManager.disableGuessBtns();
             gamePlayManager.Skips.setIsFirstTime(true);
+            payOutManager.ShowPayOut();
+            yield return new WaitUntil(() => isGameOver);
             winLoseManager.resetOutCome();
             yield return StartCoroutine(gamePlayManager.cardHistory.ResetHistoryData());
             betManager.Bet.IncreaseBtn.DeactivateMask();
             betManager.Bet.DecreaseBtn.DeactivateMask();
-            CommandCenter.Instance.PayOutManager.ShowPayOut();
+            payOutManager.payout.PayoutEffectComplete -= OnEffectComplete;
         }
     }
 
@@ -78,6 +86,11 @@ public class GamePlay : MonoBehaviour
     {
         cashOutAmount.text = amount;
         GetComponentInChildren<TextHelper>().ManualRefresh(amount);
+    }
+
+    public void OnEffectComplete ()
+    {
+        isGameOver = true;
     }
 
 }

@@ -91,6 +91,7 @@ public class MultiplierManager : MonoBehaviour
         }
     }
 
+
     public void RefreshMultipliers ()
     {
         var currentCard = cardManager.GetCurrentCardData();

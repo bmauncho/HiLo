@@ -25,15 +25,19 @@ public class PayOut : MonoBehaviour
             winLoseManager.GetTheOutCome() == OutCome.None)
         {
             Debug.Log("Lost or None");
+            PayoutEffectComplete?.Invoke();
             yield break;
         }
         EnableHolder();
-        EffectHolder.SetActive(true);
+        EnableEffectHolder();
         Holder.transform.DOPunchScale(new Vector3(0.2f , 0.2f , 0.2f) , 1f , 0 , 1);
         SetCashOut_Amount();
         SetAmountWon_Amount();
         yield return new WaitForSeconds(3);
         PayoutEffectComplete?.Invoke();
+        Debug.Log("Payout Done!");
+        DisableHolder();
+        DisableEffectHolder();
         yield return null;
     }
 
