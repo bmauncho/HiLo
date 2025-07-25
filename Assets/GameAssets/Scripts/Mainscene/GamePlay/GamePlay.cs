@@ -53,10 +53,6 @@ public class GamePlay : MonoBehaviour
             multipliersManager.enableGuessBtns();
             yield return StartCoroutine(gamePlayManager.cardHistory.ResetHistoryData());
             gamePlayManager.GetActiveCard().GetComponent<Card>().resetCardforGamePlay();
-            gamePlayManager.cardHistory.AddHistoryData(
-                cardManager.GetCurrentCardData() , 
-                MultiplierType.None , 
-                OutCome.None);
             gamePlayManager.cardHistory.ShowHistory();
             betManager.Bet.IncreaseBtn.ActivateMask();
             betManager.Bet.DecreaseBtn.ActivateMask();
@@ -74,6 +70,7 @@ public class GamePlay : MonoBehaviour
             yield return StartCoroutine(gamePlayManager.cardHistory.ResetHistoryData());
             betManager.Bet.IncreaseBtn.DeactivateMask();
             betManager.Bet.DecreaseBtn.DeactivateMask();
+            CommandCenter.Instance.PayOutManager.ShowPayOut();
         }
     }
 

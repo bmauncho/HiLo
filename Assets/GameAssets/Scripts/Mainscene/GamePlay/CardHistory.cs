@@ -51,7 +51,7 @@ public class CardHistory : MonoBehaviour
     public Outline [] OutlineData;
     public BetHistory [] BetHistoryData;
     public List<CardHistoryData> HistoryData = new List<CardHistoryData>();
-    List<GameObject> historyCards = new List<GameObject>();
+    public List<GameObject> historyCards = new List<GameObject>();
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -158,12 +158,12 @@ public class CardHistory : MonoBehaviour
     public void ShowHistory (bool isSkipped = false)
     {
         //Debug.Log(HistoryDataIndex);
-        if (HistoryData == null || HistoryData.Count <= 0) return;
-        Debug.Log($"{HistoryData [HistoryDataIndex].cardData.cardSuite} \n" +
-            $"{HistoryData [HistoryDataIndex].cardData.cardColor} \n" +
-            $"{HistoryData [HistoryDataIndex].cardData.cardRank} \n" +
-            $"{HistoryData [HistoryDataIndex].multiplierType} \n" +
-            $"{HistoryData [HistoryDataIndex].outCome} \n");
+        //if (HistoryData == null || HistoryData.Count <= 0) return;
+        //Debug.Log($"{HistoryData [HistoryDataIndex].cardData.cardSuite} \n" +
+        //    $"{HistoryData [HistoryDataIndex].cardData.cardColor} \n" +
+        //    $"{HistoryData [HistoryDataIndex].cardData.cardRank} \n" +
+        //    $"{HistoryData [HistoryDataIndex].multiplierType} \n" +
+        //    $"{HistoryData [HistoryDataIndex].outCome} \n");
 
         bool canshowHistory = !gamePlayManager.Skips.IsFirstTime();
         bool IsSkip = gamePlayManager.Skips.IsFirstTime() ? 
@@ -211,9 +211,19 @@ public class CardHistory : MonoBehaviour
                     GetBetHistoryConfig(newMultiplierType , IsSkip),
                     canshowHistory);
             }
-        }
 
-        historyCards.Add( historyCard );
+            AddHistoryData(cardData, newMultiplierType,winloseManager.GetTheOutCome());
+            historyCards.Add(historyCard);
+            Debug.Log("card Added!");
+            if (historyCards.Count - 2 >= 0)
+            {
+                historyCards [historyCards.Count - 2].GetComponent<History>().HideOutLine();
+                if (isSkipped)
+                {
+                    historyCards [historyCards.Count - 2].GetComponent<History>().ShowMask();
+                }
+            }
+        }
     }
 
     public bool IsFaceCard ( CardRanks cardRank )

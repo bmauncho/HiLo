@@ -127,6 +127,10 @@ public class MultiplierManager : MonoBehaviour
                         {
                             if (!string.IsNullOrEmpty(multiplierValue))
                             {
+                                if(multiplierValue != "")
+                                {
+                                    multiplierValue = multiplierValue + "x";
+                                }
                                 textHelper.ManualRefresh(multiplierValue);
                                 if (gamePlayManager.IsGameStarted())
                                 {
@@ -164,19 +168,40 @@ public class MultiplierManager : MonoBehaviour
     {
         CardRanks currentCard = cardManager.GetCurrentCardData().cardRank;
         MultiplierType mutiplierType = selectedMultiplier;
-        int favourable = ProbabilityCalculator.GetFavorableCardCount(currentCard , mutiplierType);
         List<MultiplierConfig> temp = new List<MultiplierConfig>();
-
-        if (isSkip)
+        foreach (var multiDetails in multiplierDetailsList)
         {
-            
-        }
-        else
-        {
-            
+            if (multiDetails.Rank != currentCard)
+                continue;
+
+            foreach (var multi in multiDetails.multipliers)
+            {
+                // Skip 'Same' type multipliers if skipping is enabled
+                if (isSkip && multi.multiplierType == MultiplierType.Same)
+                    continue;
+
+                int favourable = ProbabilityCalculator.GetFavorableCardCount(currentCard , multi.multiplierType);
+
+                float parsedMultiplier;
+                if (!float.TryParse(multi.Multiplier , out parsedMultiplier))
+                {
+                    Debug.LogWarning($"Invalid multiplier format: '{multi.Multiplier}'");
+                    parsedMultiplier = 0f; // or any default value you consider safe
+                }
+
+
+                float multiplierValue = ProbabilityCalculator.GetMultiplier(favourable , parsedMultiplier);
+                string multiplierValueString = multiplierValue == 0 ?  string.Empty : multiplierValue.ToString("F2");
+
+                temp.Add(new MultiplierConfig
+                {
+                    multiplierType = multi.multiplierType ,
+                    Multiplier = multiplierValueString ,
+                });
+            }
         }
 
-        return null;
+        return temp;
     }
 
     public void refreshMultplierValues ( List<MultiplierConfig> config )
@@ -191,6 +216,11 @@ public class MultiplierManager : MonoBehaviour
                     TextHelper textHelper = multiplier.multiplierText.GetComponent<TextHelper>();
                     if (textHelper != null)
                     {
+                        if(multiplierValue != "")
+                        {
+                            multiplierValue = multiplierValue + "x";
+                        }
+
                         if (!string.IsNullOrEmpty(multiplierValue))
                         {
                             textHelper.ManualRefresh(multiplierValue);

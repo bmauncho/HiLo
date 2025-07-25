@@ -96,7 +96,7 @@ public class GamePlayManager : MonoBehaviour
 
             if(IsGameStarted())
             {
-
+                multiplierManager.refreshMultplierValues(multiplierManager.GetCurrentMultipliers(true));
             }
             else
             {

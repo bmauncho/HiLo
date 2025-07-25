@@ -31,8 +31,8 @@ RectTransform:
   m_Children:
   - {fileID: 7280436373893359358}
   - {fileID: 5134315309733032412}
-  - {fileID: 9213653301343662882}
   - {fileID: 1288522835412546486}
+  - {fileID: 9213653301343662882}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -58,6 +58,7 @@ MonoBehaviour:
   cardSuite_Bg: {fileID: 5996650806606713151}
   Bet_History: {fileID: 5366292464974369451}
   BetHistory: {fileID: 3936966545104834285}
+  Mask: {fileID: 944358545911854767}
 --- !u!1 &408325224973527864
 GameObject:
   m_ObjectHideFlags: 0
@@ -280,7 +281,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: -13.7, y: 0}
+  m_AnchoredPosition: {x: -10, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!1 &5350499936688076483

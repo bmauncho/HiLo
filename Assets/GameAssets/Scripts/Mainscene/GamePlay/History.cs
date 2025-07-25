@@ -10,6 +10,7 @@ public class History : MonoBehaviour
     public Image Bet_History;
 
     public GameObject BetHistory;
+    public GameObject Mask;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -25,6 +26,8 @@ public class History : MonoBehaviour
        Sprite bet_History=null,
        bool canShowHistory = true )
     {
+        ShowOutLine();
+        HideMask();
         Outline.sprite = outline;
         cardRank.sprite = rank;
         cardSuite_Icon.sprite = suite;
@@ -38,5 +41,25 @@ public class History : MonoBehaviour
             BetHistory.SetActive(true);
             Bet_History.sprite = bet_History;
         }
+    }
+
+    public void HideOutLine ()
+    {
+        Outline.gameObject.SetActive(false);
+    }
+
+    public void ShowOutLine ()
+    {
+        Outline.gameObject.SetActive(true) ;
+    }
+
+    public void ShowMask ()
+    {
+        Mask.SetActive(true);
+    }
+
+    public void HideMask ()
+    {
+        Mask.SetActive(false);
     }
 }
