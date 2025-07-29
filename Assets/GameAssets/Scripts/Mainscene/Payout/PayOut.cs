@@ -34,6 +34,7 @@ public class PayOut : MonoBehaviour
         EnableHolder();
         EnableEffectHolder();
         UpdatePayoutUI(cashout_, amountwon_);
+        CommandCenter.Instance.soundManager_.PlaySound("Win");
         Holder.transform.DOPunchScale(new Vector3(0.2f , 0.2f , 0.2f) , 1f , 0 , 1);
         yield return new WaitForSeconds(3);
         PayoutEffectComplete?.Invoke();
