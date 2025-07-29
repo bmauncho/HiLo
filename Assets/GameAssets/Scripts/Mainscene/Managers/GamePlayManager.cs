@@ -1,4 +1,5 @@
 using DG.Tweening;
+using NUnit.Framework.Constraints;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -20,6 +21,7 @@ public class GamePlayManager : MonoBehaviour
     public RetainCard retainCard;
     public CardHistory cardHistory;
     public GameObject ActiveCard;
+    bool IsSkips = false;
 
     public void Start ()
     {
@@ -83,7 +85,7 @@ public class GamePlayManager : MonoBehaviour
     {
         if(!Skips.AllowSkip()) yield break;
         Debug.Log($" allow skips : {Skips.AllowSkip()}");
-
+        IsSkips =false;
         if (!IsGameStarted())
         {
             if(winLoseManager.GetTheOutCome() == OutCome.None ||
@@ -97,6 +99,7 @@ public class GamePlayManager : MonoBehaviour
         StartCoroutine(removeCard.removeCurrentCard(deck,poolManager));
         
         yield return new WaitForSeconds(0.1f);
+        addCard.OnComplete += canSkip;
         yield return StartCoroutine(addCard.addNewCard(deck , poolManager , () =>
         {
             GameObject card = deck.newCard.GetTheOwner();
@@ -121,9 +124,15 @@ public class GamePlayManager : MonoBehaviour
 
             Debug.Log("New card added!");
         }));
-       
+        yield return new WaitUntil(() => IsSkips);
+        addCard.OnComplete -= canSkip;
         Skips.SkipCard();
         yield return null;
+    }
+
+    void canSkip ()
+    {
+        IsSkips = true;
     }
 
     public void ToggleGamePlaySkips ()

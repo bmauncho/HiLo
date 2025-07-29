@@ -220,7 +220,7 @@ public class CardHistory : MonoBehaviour
                 historyCards [historyCards.Count - 2].GetComponent<History>().HideOutLine();
                 if (isSkipped)
                 {
-                    historyCards [historyCards.Count - 2].GetComponent<History>().ShowMask();
+                    historyCards [historyCards.Count - 1].GetComponent<History>().ShowMask();
                 }
             }
         }
