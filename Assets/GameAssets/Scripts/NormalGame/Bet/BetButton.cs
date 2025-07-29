@@ -60,6 +60,7 @@ public class BetButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, 
                     hasStartedHold = true;
                     nextHoldTime = Time.unscaledTime + holdThreshold;
                     onHold?.Invoke();
+                    CommandCenter.Instance.soundManager_.PlaySound("BetButton");
                     transform.DOScale(0.8f , 0.25f);
                 }
             }
@@ -67,6 +68,7 @@ public class BetButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, 
             {
                 onHold?.Invoke();
                 nextHoldTime = Time.unscaledTime + holdThreshold;
+                CommandCenter.Instance.soundManager_.PlaySound("BetButton");
             }
         }
     }

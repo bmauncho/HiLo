@@ -109,6 +109,7 @@ public class WinLoseManager : MonoBehaviour
         addCard.OnComplete += OnAddCardComplete;
 
         StartCoroutine(removeCard.removeCurrentCard(deck , poolManager));
+        CommandCenter.Instance.soundManager_.PlaySound("CorrectGuess");
         yield return new WaitForSeconds(.1f);
         yield return StartCoroutine(addCard.addNewCard(deck , poolManager , () =>
         {

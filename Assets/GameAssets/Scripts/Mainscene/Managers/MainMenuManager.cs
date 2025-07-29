@@ -20,15 +20,18 @@ public class MainMenuManager : MonoBehaviour
     public void ToggleSettings ()
     {
         settings_.ToggleSettings();
+        CommandCenter.Instance.soundManager_.PlaySound("SkipButton");
     }
 
     public void ToggleHelp ()
     {
         gameRules_.ToggleGameRules();
+        CommandCenter.Instance.soundManager_.PlaySound("SkipButton");
     }
 
     public void ToggleGamePlay ()
     {
         CommandCenter.Instance.gamePlayManager_.ToggleGamePlay();
+        CommandCenter.Instance.soundManager_.PlaySound("SkipButton");
     }
 }

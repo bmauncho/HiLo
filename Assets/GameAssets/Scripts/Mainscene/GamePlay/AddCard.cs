@@ -28,7 +28,7 @@ public class AddCard : MonoBehaviour
         Vector3 midRotation = new Vector3(0 , -90f , 0);
         Vector3 endRoatation = new Vector3(0 , 0 , 0);
         Vector3 punchPosition = new Vector3(0 , -25f , 0);
-
+        CommandCenter.Instance.soundManager_.PlaySound("Flip");
         AddSequence.Join(sequence.Append(newCard.transform.DOLocalRotate(midRotation , .25f).SetEase(Ease.InOutSine))
                 .AppendCallback(() =>
                 {

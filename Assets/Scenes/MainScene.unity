@@ -6384,6 +6384,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   multiplier: 3
+  TheMultiplier: 
   multiplierText: {fileID: 2140174577}
   Mask: {fileID: 1236241211}
   guessBtn: {fileID: 545698832}
@@ -7483,6 +7484,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: SoundManager
       objectReference: {fileID: 0}
+    - target: {fileID: 3978956896460976228, guid: cc88e9f66b5649d48bf9a4781eceb713, type: 3}
+      propertyPath: m_Resource
+      value: 
+      objectReference: {fileID: 8300000, guid: 43818d81eb50dc7499525eb9ec26d11d, type: 3}
+    - target: {fileID: 3978956896460976228, guid: cc88e9f66b5649d48bf9a4781eceb713, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 43818d81eb50dc7499525eb9ec26d11d, type: 3}
     - target: {fileID: 6346521899692844994, guid: cc88e9f66b5649d48bf9a4781eceb713, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -13248,6 +13257,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   multiplier: 1
+  TheMultiplier: 
   multiplierText: {fileID: 55049066}
   Mask: {fileID: 1873421979}
   guessBtn: {fileID: 344608510}
@@ -13850,6 +13860,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   multiplier: 4
+  TheMultiplier: 
   multiplierText: {fileID: 1598588371}
   Mask: {fileID: 299676158}
   guessBtn: {fileID: 1455625330}

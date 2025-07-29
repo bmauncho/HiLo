@@ -84,6 +84,7 @@ public class GamePlayManager : MonoBehaviour
     IEnumerator SkipCoroutine ()
     {
         if(!Skips.AllowSkip()) yield break;
+        CommandCenter.Instance.soundManager_.PlaySound("SkipButton");
         Debug.Log($" allow skips : {Skips.AllowSkip()}");
         IsSkips =false;
         if (!IsGameStarted())
