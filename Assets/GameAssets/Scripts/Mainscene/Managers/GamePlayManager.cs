@@ -12,6 +12,7 @@ public class GamePlayManager : MonoBehaviour
     WinLoseManager winLoseManager;
     BetManager betManager;
     PayOutManager payOutManager;
+    public GameObject ActiveCard;
     public GamePlay gamePlay;
     public Skips Skips;
     public Deck deck;
@@ -20,8 +21,8 @@ public class GamePlayManager : MonoBehaviour
     public NextCard nextCard;
     public RetainCard retainCard;
     public CardHistory cardHistory;
-    public GameObject ActiveCard;
     bool IsSkips = false;
+    public CashOutUI cashOutUI;
 
     public void Start ()
     {
@@ -94,6 +95,7 @@ public class GamePlayManager : MonoBehaviour
             {
                 GetActiveCard().GetComponent<Card>().resetCardforGamePlay();
                 yield return StartCoroutine(cardHistory.ResetHistoryData());
+                cashOutUI.Refresh();
             }
         }
 
@@ -155,9 +157,8 @@ public class GamePlayManager : MonoBehaviour
             Debug.LogWarning("no multiplier is selected");
             return;
         }
-
+        cashOutUI.Refresh();
         StartCoroutine(guessing());
-      
     }
 
     IEnumerator guessing ()

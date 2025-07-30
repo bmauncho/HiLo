@@ -21,12 +21,12 @@ public class Settings : MonoBehaviour
     public void openSettings ()
     {
         isSettingsOpen = true;
-        settingsUI.DOAnchorPosY(32f , .25f);
+        settingsUI.DOAnchorPosY(70f , .25f);
     }
 
     public void closeSettings ()
     {
         isSettingsOpen = false;
-        settingsUI.DOAnchorPosY(144f , .25f);
+        settingsUI.DOAnchorPosY(160f , .25f);
     }
 }

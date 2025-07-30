@@ -13,6 +13,7 @@ public class PayOut : MonoBehaviour
     public TMP_Text amountWon;
     public Action PayoutEffectComplete;
 
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {

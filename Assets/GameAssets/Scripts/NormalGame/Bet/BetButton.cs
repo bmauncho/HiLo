@@ -93,6 +93,7 @@ public class BetButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, 
 
         if (!hasStartedHold)
         {
+            CommandCenter.Instance.soundManager_.PlaySound("BetButton");
             transform.DOPunchScale(new Vector3(-0.2f , -0.2f , -0.2f) , 0.25f , 0 , 1);
             onClick?.Invoke();
         }

@@ -3,7 +3,7 @@ using UnityEngine;
 public class PayOutEffect : MonoBehaviour
 {
     public bool CanSpin = false;
-    float degreesPerSecond = 20;
+    public float degreesPerSecond = 20;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -15,7 +15,7 @@ public class PayOutEffect : MonoBehaviour
     {
         if (CanSpin)
         {
-            transform.Rotate(new Vector3(0 , degreesPerSecond , 0) * Time.deltaTime);
+            transform.Rotate(new Vector3(0 , 0 , degreesPerSecond) * Time.deltaTime);
         }
     }
 

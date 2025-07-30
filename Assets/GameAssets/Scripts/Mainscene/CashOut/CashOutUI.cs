@@ -19,8 +19,10 @@ public class CashOutUI : MonoBehaviour
         
     }
 
-    void Refresh ()
+    public void Refresh ()
     {
+        winMultiplier = "0.00x";
+        winAmount = "0.00";
         SetWinMultiplier(winMultiplier);    
         SetWinAmount(winAmount);
     }
