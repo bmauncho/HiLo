@@ -31,7 +31,7 @@ public class PayOutManager : MonoBehaviour
         string winAmount = GetWinAmount().ToString("F2");
         string winMultiplier = GetWinMultiplier();
         CashOutUI.SetWinAmount(winAmount);
-        CashOutUI.SetWinMultiplier(winMultiplier);
+        CashOutUI.SetWinMultiplier(winMultiplier+"x");
         gamePlayManager.gamePlay.SetCashOutAmount(winAmount);
     }
 
