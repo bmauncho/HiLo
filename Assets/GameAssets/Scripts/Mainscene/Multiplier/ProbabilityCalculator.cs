@@ -15,21 +15,40 @@ public static class ProbabilityCalculator
         switch (guessType)
         {
             case MultiplierType.Low:
-                favorableRanks = currentRank; // e.g., for NINE (8), ranks 0–7
+                // Cards strictly lower than current
+                favorableRanks = currentRank;
                 break;
 
             case MultiplierType.High:
+                // Cards strictly higher than current
                 favorableRanks = TotalRanks - currentRank - 1;
                 break;
 
             case MultiplierType.Same:
+                // Cards with the same rank
                 favorableRanks = 1;
+                break;
+
+            case MultiplierType.LowOrSame:
+                // Cards lower or same
+                favorableRanks = currentRank + 1;
+                break;
+
+            case MultiplierType.HighOrSame:
+                // Cards higher or same
+                favorableRanks = TotalRanks - currentRank;
+                break;
+
+            case MultiplierType.None:
+            default:
+                favorableRanks = 0;
                 break;
         }
 
         int favorableCards = favorableRanks * SuitsPerRank;
         return favorableCards;
     }
+
 
     public static float GetProbability(int favorable )
     {
@@ -48,6 +67,6 @@ public static class ProbabilityCalculator
         if (probability <= 0f) return 0f;
 
         float fairMultiplier = 1f / probability;
-        return fairMultiplier * baseMultiplier *( 1f - houseEdge );
+        return fairMultiplier * baseMultiplier * ( 1f - houseEdge );
     }
 }

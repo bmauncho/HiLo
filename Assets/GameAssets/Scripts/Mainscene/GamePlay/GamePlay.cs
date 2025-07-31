@@ -1,6 +1,7 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GamePlay : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class GamePlay : MonoBehaviour
     public GameObject cashOut;
     public TMP_Text cashOutAmount;
     bool isGameOver = false;
+    public Button cashOutButton;
 
     private void Start ()
     {
@@ -34,8 +36,17 @@ public class GamePlay : MonoBehaviour
         start.SetActive(false);
     }
 
-    public void showCashOut ()
+    public void showCashOut (bool isFirstTime =false)
     {
+        if (isFirstTime)
+        {
+            cashOutButton.GetComponent<Button>().interactable = false;
+        }
+        else
+        {
+            cashOutButton.GetComponent<Button>().interactable = true;
+        }
+
         cashOut.SetActive(true);
     }
 
@@ -49,7 +60,7 @@ public class GamePlay : MonoBehaviour
         if (!isGamePlayActive)
         {
             hideStart();
-            showCashOut();
+            showCashOut(true);
             ResetCashAmount();
             isGamePlayActive = true;
             SetCashOutAmount("0.00");
@@ -62,6 +73,8 @@ public class GamePlay : MonoBehaviour
             betManager.Bet.IncreaseBtn.ActivateMask();
             betManager.Bet.DecreaseBtn.ActivateMask();
             multipliersManager.Multipliers.ToggleMultiplier(cardManager.GetCurrentCardData());
+            multipliersManager.Multipliers.ToggleMultiplierType(cardManager.GetCurrentCardData());
+            multipliersManager.Multipliers.UpdateText();
 
         }
         else

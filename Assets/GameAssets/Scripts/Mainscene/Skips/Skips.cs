@@ -32,7 +32,7 @@ public class Skips : MonoBehaviour
             {
                 // TODO: Add logic to skip the card here.
                 Debug.Log("Normal skip : Card skipped.");
-                CommandCenter.Instance.gamePlayManager_.cardHistory.ShowHistory();
+                //CommandCenter.Instance.gamePlayManager_.cardHistory.ShowHistory();
             }
         }
     }
@@ -57,6 +57,18 @@ public class Skips : MonoBehaviour
                 skipIcon.SetActive(true);
             }
         } 
+    }
+
+    public void refreshSkips ()
+    {
+        if (currentSkipIndex == availableSkips.Length) return;
+
+        currentSkipIndex = availableSkips.Length;
+
+        foreach (GameObject skipIcon in availableSkips)
+        {
+            skipIcon.SetActive(true);
+        }
     }
 
     public void ActivateGameplaySpins ()

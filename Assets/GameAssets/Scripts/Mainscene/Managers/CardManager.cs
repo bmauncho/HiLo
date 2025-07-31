@@ -18,7 +18,7 @@ public enum CardColor
 
 public enum CardRanks
 {
-    ACE,
+    ACE = 0,
     TWO,
     THREE,
     FOUR,
@@ -139,8 +139,8 @@ public class CardManager : MonoBehaviour
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
-    {
-        
+    { 
+
     }
 
     // Update is called once per frame

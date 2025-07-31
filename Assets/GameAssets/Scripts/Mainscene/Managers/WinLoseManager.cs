@@ -45,6 +45,8 @@ public class WinLoseManager : MonoBehaviour
             currCard.cardRank ,
             selectedMultiplier);
 
+        Debug.Log($"Testing: {prevCard.cardRank} vs {currCard.cardRank}, Guess: {selectedMultiplier}, Result: {isWin}");
+
         if (isWin)
         {
             SetOutCome(OutCome.Win);
@@ -62,22 +64,17 @@ public class WinLoseManager : MonoBehaviour
 
     private bool IsWin ( CardRanks currentCard , CardRanks nextCard , MultiplierType selectedMultiplier )
     {
-        if (selectedMultiplier == MultiplierType.High ||
-            selectedMultiplier == MultiplierType.HighOrSame )
+        return selectedMultiplier switch
         {
-            return nextCard > currentCard;
-        }
-        else if (selectedMultiplier == MultiplierType.Low || 
-            selectedMultiplier == MultiplierType.LowOrSame )
-        {
-            return nextCard < currentCard;
-        }
-        else if (selectedMultiplier == MultiplierType.Same )
-        {
-            return nextCard == currentCard;
-        }
-        return false;
+            MultiplierType.High => nextCard > currentCard,
+            MultiplierType.HighOrSame => nextCard >= currentCard,
+            MultiplierType.Low => nextCard < currentCard,
+            MultiplierType.LowOrSame => nextCard <= currentCard,
+            MultiplierType.Same => nextCard == currentCard,
+            _ => false
+        };
     }
+
 
     public IEnumerator WinSequence ()
     {

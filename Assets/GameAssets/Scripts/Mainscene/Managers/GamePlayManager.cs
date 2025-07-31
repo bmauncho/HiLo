@@ -58,6 +58,8 @@ public class GamePlayManager : MonoBehaviour
             cardComponent.HideCardOutline();
         }
         multiplierManager.Multipliers.ToggleMultiplier(cardManager.GetCurrentCardData());
+        multiplierManager.Multipliers.ToggleMultiplierType(cardManager.GetCurrentCardData());
+        multiplierManager.Multipliers.UpdateText();
         multiplierManager.disableGuessBtns();
     }
 
@@ -114,13 +116,15 @@ public class GamePlayManager : MonoBehaviour
                 cardData.cardRank,
                 cardData.cardColor);
 
+            multiplierManager.Multipliers.ToggleMultiplierType(cardData);
+            multiplierManager.Multipliers.UpdateText();
+
             if(IsGameStarted())
             {
                 multiplierManager.refreshMultplierValues(multiplierManager.GetCurrentMultipliers(true));
             }
             else
             {
-
                 multiplierManager.RefreshMultipliers();
             }
 
@@ -170,21 +174,23 @@ public class GamePlayManager : MonoBehaviour
         {
             Skips.setIsFirstTime(false);
             Skips.ResetSkips();
+            gamePlay.showCashOut(false);
         }
 
-        //winsequence
+            //winsequence
         CardData prevCardData = cardManager.GetPrevCardData();
         CardData currCardData = cardManager.GetCurrentCardData();
         MultiplierType multiplierType = multiplierManager.selectedMultiplier;
-        Debug.Log($"Selected multiplier : {multiplierType}");
-        MultiplierType newMultiplierType = whichSelectedMultiplier(prevCardData, currCardData,multiplierType);
-        Debug.Log($"multipler type : {newMultiplierType.ToString()}");
-        winLoseManager.outCome(prevCardData , currCardData , newMultiplierType);
+        winLoseManager.outCome(prevCardData , currCardData , multiplierType);
+        Skips.refreshSkips();
         Debug.Log("win sequence setUp done!");
         yield return StartCoroutine(winLoseManager.WinSequence());
         //winsequence - card History
         cardHistory.ShowHistory();
         multiplierManager.Multipliers.ToggleMultiplier(cardManager.GetCurrentCardData());
+        multiplierManager.Multipliers.ToggleMultiplierType(cardManager.GetCurrentCardData());
+        multiplierManager.Multipliers.UpdateText();
+
         yield return new WaitForSeconds(.1f);
         onWin();
         onlose();

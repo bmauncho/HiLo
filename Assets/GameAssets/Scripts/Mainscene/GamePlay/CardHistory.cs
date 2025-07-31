@@ -174,13 +174,13 @@ public class CardHistory : MonoBehaviour
         CardData currCardData = cardManager.GetCurrentCardData();
 
         MultiplierType multiplierType = multiplierManager.selectedMultiplier;
-        MultiplierType newMultiplierType = 
-            gamePlayManager.whichSelectedMultiplier(
-                prevCardData , 
-                currCardData , 
-                multiplierType);
+        //MultiplierType newMultiplierType = 
+        //    gamePlayManager.whichSelectedMultiplier(
+        //        prevCardData , 
+        //        currCardData , 
+        //        multiplierType);
 
-        Debug.Log($"multipler type : {newMultiplierType.ToString()}");
+        Debug.Log($"multipler type : {multiplierType.ToString()}");
 
         BetHistoryCardData betHistoryCardData = new BetHistoryCardData();
         CardData cardData = cardManager.GetCurrentCardData();
@@ -208,11 +208,11 @@ public class CardHistory : MonoBehaviour
                     betHistoryCardData.cardRank,
                     betHistoryCardData.cardSuite_Icon,
                     betHistoryCardData.CardSuite_Bg,
-                    GetBetHistoryConfig(newMultiplierType , IsSkip),
+                    GetBetHistoryConfig(multiplierType , IsSkip),
                     canshowHistory);
             }
 
-            AddHistoryData(cardData, newMultiplierType,winloseManager.GetTheOutCome());
+            AddHistoryData(cardData, multiplierType,winloseManager.GetTheOutCome());
             historyCards.Add(historyCard);
             Debug.Log("card Added!");
             if (historyCards.Count - 2 >= 0)

@@ -3656,6 +3656,7 @@ MonoBehaviour:
   start: {fileID: 1988888470}
   cashOut: {fileID: 569828966}
   cashOutAmount: {fileID: 638148818}
+  cashOutButton: {fileID: 948996268}
 --- !u!1 &467743755
 GameObject:
   m_ObjectHideFlags: 0
@@ -5244,126 +5245,197 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectedMultiplier: 0
   Multipliers: {fileID: 2142972625}
+  buttonDetails:
+  - multiplierType: 1
+    Type: {fileID: 21300000, guid: f0f01c474b2f6dd449dae361a3c308c8, type: 3}
+  - multiplierType: 2
+    Type: {fileID: 21300000, guid: ed88c1d87b648dd45882c75e6c2808d1, type: 3}
+  - multiplierType: 3
+    Type: {fileID: 21300000, guid: 560bde4bdf4830a40993ea643771325c, type: 3}
+  - multiplierType: 4
+    Type: {fileID: 21300000, guid: 16c531b2f5932cf4b890b35e183d12ee, type: 3}
+  - multiplierType: 5
+    Type: {fileID: 21300000, guid: 0d35596967ede524281d8efe7e523366, type: 3}
   multiplierDetailsList:
   - Rank: 0
     multipliers:
     - multiplierType: 1
       Multiplier: 1.04
+    - multiplierType: 2
+      Multiplier: 1.04
     - multiplierType: 3
       Multiplier: 16.69
     - multiplierType: 4
+      Multiplier: 
+    - multiplierType: 5
       Multiplier: 
   - Rank: 1
     multipliers:
     - multiplierType: 1
       Multiplier: 1.07
+    - multiplierType: 2
+      Multiplier: 1.07
     - multiplierType: 3
       Multiplier: 16.69
     - multiplierType: 4
+      Multiplier: 7.15
+    - multiplierType: 5
       Multiplier: 7.15
   - Rank: 2
     multipliers:
     - multiplierType: 1
       Multiplier: 1.16
+    - multiplierType: 2
+      Multiplier: 1.16
     - multiplierType: 3
       Multiplier: 16.69
     - multiplierType: 4
+      Multiplier: 4.55
+    - multiplierType: 5
       Multiplier: 4.55
   - Rank: 3
     multipliers:
     - multiplierType: 1
       Multiplier: 1.28
+    - multiplierType: 2
+      Multiplier: 1.28
     - multiplierType: 3
       Multiplier: 16.69
     - multiplierType: 4
+      Multiplier: 3.34
+    - multiplierType: 2
       Multiplier: 3.34
   - Rank: 4
     multipliers:
     - multiplierType: 1
       Multiplier: 1.43
+    - multiplierType: 2
+      Multiplier: 1.43
     - multiplierType: 3
       Multiplier: 16.69
     - multiplierType: 4
+      Multiplier: 2.64
+    - multiplierType: 5
       Multiplier: 2.64
   - Rank: 5
     multipliers:
     - multiplierType: 1
       Multiplier: 1.62
-    - multiplierType: 3
-      Multiplier: 16.69
-    - multiplierType: 4
-      Multiplier: 2.18
-  - Rank: 5
-    multipliers:
-    - multiplierType: 1
+    - multiplierType: 2
       Multiplier: 1.62
     - multiplierType: 3
       Multiplier: 16.69
     - multiplierType: 4
       Multiplier: 2.18
+    - multiplierType: 5
+      Multiplier: 2.18
+  - Rank: 5
+    multipliers:
+    - multiplierType: 1
+      Multiplier: 1.62
+    - multiplierType: 2
+      Multiplier: 1.62
+    - multiplierType: 3
+      Multiplier: 16.69
+    - multiplierType: 4
+      Multiplier: 2.18
+    - multiplierType: 5
+      Multiplier: 2.18
   - Rank: 5
     multipliers:
     - multiplierType: 1
       Multiplier: 1.85
+    - multiplierType: 2
+      Multiplier: 1.85
     - multiplierType: 3
       Multiplier: 16.69
     - multiplierType: 4
+      Multiplier: 1.84
+    - multiplierType: 5
       Multiplier: 1.84
   - Rank: 6
     multipliers:
     - multiplierType: 1
       Multiplier: 1.85
+    - multiplierType: 2
+      Multiplier: 1.85
     - multiplierType: 3
       Multiplier: 16.69
     - multiplierType: 4
+      Multiplier: 1.84
+    - multiplierType: 5
       Multiplier: 1.84
   - Rank: 7
     multipliers:
     - multiplierType: 1
       Multiplier: 2.18
+    - multiplierType: 2
+      Multiplier: 2.18
     - multiplierType: 3
       Multiplier: 16.69
     - multiplierType: 4
+      Multiplier: 1.62
+    - multiplierType: 5
       Multiplier: 1.62
   - Rank: 8
     multipliers:
     - multiplierType: 1
       Multiplier: 2.64
+    - multiplierType: 2
+      Multiplier: 2.64
     - multiplierType: 3
       Multiplier: 16.69
     - multiplierType: 4
+      Multiplier: 1.43
+    - multiplierType: 5
       Multiplier: 1.43
   - Rank: 9
     multipliers:
     - multiplierType: 1
       Multiplier: 3.34
+    - multiplierType: 2
+      Multiplier: 3.34
     - multiplierType: 3
       Multiplier: 16.69
     - multiplierType: 4
+      Multiplier: 1.28
+    - multiplierType: 5
       Multiplier: 1.28
   - Rank: 10
     multipliers:
     - multiplierType: 1
       Multiplier: 4.45
+    - multiplierType: 2
+      Multiplier: 4.45
     - multiplierType: 3
       Multiplier: 16.69
     - multiplierType: 4
+      Multiplier: 1.16
+    - multiplierType: 5
       Multiplier: 1.16
   - Rank: 11
     multipliers:
     - multiplierType: 1
       Multiplier: 7.15
+    - multiplierType: 2
+      Multiplier: 7.15
     - multiplierType: 3
       Multiplier: 16.69
     - multiplierType: 4
+      Multiplier: 1.07
+    - multiplierType: 5
       Multiplier: 1.07
   - Rank: 12
     multipliers:
     - multiplierType: 1
       Multiplier: 
+    - multiplierType: 2
+      Multiplier: 
     - multiplierType: 3
       Multiplier: 16.69
     - multiplierType: 4
+      Multiplier: 1.04
+    - multiplierType: 5
       Multiplier: 1.04
 --- !u!1 &673023294
 GameObject:
@@ -6461,6 +6533,7 @@ MonoBehaviour:
   multiplierText: {fileID: 2140174577}
   Mask: {fileID: 1236241211}
   guessBtn: {fileID: 545698832}
+  Text: {fileID: 316475570}
 --- !u!1 &825339061
 GameObject:
   m_ObjectHideFlags: 0
@@ -13336,6 +13409,7 @@ MonoBehaviour:
   multiplierText: {fileID: 55049066}
   Mask: {fileID: 1873421979}
   guessBtn: {fileID: 344608510}
+  Text: {fileID: 772333252}
 --- !u!1 &1873421979
 GameObject:
   m_ObjectHideFlags: 0
@@ -13939,6 +14013,7 @@ MonoBehaviour:
   multiplierText: {fileID: 1598588371}
   Mask: {fileID: 299676158}
   guessBtn: {fileID: 1455625330}
+  Text: {fileID: 1840314620}
 --- !u!1 &2022573175
 GameObject:
   m_ObjectHideFlags: 0

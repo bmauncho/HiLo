@@ -9,6 +9,7 @@ public class Multiplier : MonoBehaviour
     public TMP_Text multiplierText;
     public GameObject Mask;
     public Button guessBtn;
+    public Image Text;
 
     private void Start ()
     {
@@ -58,6 +59,11 @@ public class Multiplier : MonoBehaviour
         {
             disableBtn();
         }
+    }
+
+    public void SetTypeText(Sprite Text_ )
+    {
+        Text.sprite = Text_;
     }
 
 }

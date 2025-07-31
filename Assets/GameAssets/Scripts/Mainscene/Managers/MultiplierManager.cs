@@ -24,12 +24,19 @@ public class MultiplierConfig
     public MultiplierType multiplierType;
     public string Multiplier = "";
 }
+[System.Serializable]
+public class MultiplierButtonDetails
+{
+    public MultiplierType multiplierType;
+    public Sprite Type;
+}
 public class MultiplierManager : MonoBehaviour
 {
     GamePlayManager gamePlayManager;    
     CardManager cardManager;
     public MultiplierType selectedMultiplier;
     public Multipliers Multipliers;
+    public MultiplierButtonDetails[] buttonDetails;
     public multiplierDetails [] multiplierDetailsList;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -278,6 +285,11 @@ public class MultiplierManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    public MultiplierButtonDetails [] ButtonDetails ()
+    {
+        return buttonDetails;
     }
 
 }
