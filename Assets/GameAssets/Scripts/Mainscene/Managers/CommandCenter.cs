@@ -21,6 +21,7 @@ public class CommandCenter : MonoBehaviour
     public GamePlayManager gamePlayManager_;
     public WinLoseManager winLoseManager_;
     public PayOutManager PayOutManager_;
+    public ApiManager apiManager_;
     private void Awake ()
     {
         if (Instance != null && Instance != this)

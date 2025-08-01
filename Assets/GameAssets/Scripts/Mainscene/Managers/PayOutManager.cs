@@ -5,6 +5,7 @@ public class PayOutManager : MonoBehaviour
     MultiplierManager multipliersManager;
     BetManager betManager;
     GamePlayManager gamePlayManager;
+    CurrencyManager currencyManager;
     public PayOut payout;
     public CashOutUI CashOutUI;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -13,6 +14,7 @@ public class PayOutManager : MonoBehaviour
         multipliersManager = CommandCenter.Instance.multiplierManager_;
         betManager = CommandCenter.Instance.betManager_;
         gamePlayManager = CommandCenter.Instance.gamePlayManager_;
+        currencyManager = CommandCenter.Instance.currencyMan_;
     }
 
     // Update is called once per frame
@@ -28,7 +30,7 @@ public class PayOutManager : MonoBehaviour
 
     public void updatePayout ()
     {
-        string winAmount = GetWinAmount().ToString("F2");
+        string winAmount = currencyManager.GetTotalWinAmount();
         string winMultiplier = GetWinMultiplier();
         CashOutUI.SetWinAmount(winAmount);
         CashOutUI.SetWinMultiplier(winMultiplier+"x");

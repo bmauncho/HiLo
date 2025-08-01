@@ -11,6 +11,7 @@ public class Bet : MonoBehaviour
     {
         BetAmount = amount;
         UpdateBetAmount(amount);
+        CommandCenter.Instance.apiManager_.GetBetAmount(amount);
     }
 
     void UpdateBetAmount (string input)

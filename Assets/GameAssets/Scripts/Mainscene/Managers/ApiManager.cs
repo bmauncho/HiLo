@@ -7,6 +7,14 @@ public class ApiManager : MonoBehaviour
     [SerializeField] private string Client_id = string.Empty;
     [SerializeField] private string CashAmount = string.Empty;
     [SerializeField] private string BetId = string.Empty;
+    [SerializeField] private string BetAmount = string.Empty;
+    public PlaceBet placeBet;
+    public UpdateBet updateBet;
+    public StartApi StartApi;
+    public GuessApi guessApi;
+    public SkipApi SkipApi;
+    public CashOutApi cashOutApi;
+
     private void Awake ()
     {
         SetUp();
@@ -32,10 +40,46 @@ public class ApiManager : MonoBehaviour
         Debug.Log("SetUpDone!");
     }
 
-    public string GetBetId ()
+    public string SetBetId ()
     {
         int id = Random.Range(1 , 1000000000);
         string betId = ConfigMan.Instance.GetBetId();
+        BetId = betId;
         return id.ToString();
+    }
+
+    public void GetBetAmount (string amount)
+    {
+        BetAmount = amount;
+    }
+
+    public string GetPlayerId ()
+    {
+        return Player_Id;
+    }
+
+    public string GetGameId ()
+    {
+        return Game_Id;
+    }
+
+    public string GetClientId ()
+    {
+        return Client_id;
+    }
+
+    public string GetBetAmountValue ()
+    {
+        return BetAmount;
+    }
+
+    public string GetBetId ()
+    {
+        return BetId;
+    }
+    [ContextMenu("Text Bet Id")]
+    public void TestBetId ()
+    {
+        BetId = SetBetId();
     }
 }
