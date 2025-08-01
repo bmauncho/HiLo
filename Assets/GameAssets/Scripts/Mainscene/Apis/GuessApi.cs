@@ -42,12 +42,14 @@ public class GuessApi : MonoBehaviour
 {
     ApiManager apiMan;
     MultiplierManager multipliersMan;
+    GamePlayManager gamePlayMan;
     public GuessResponse guessResponse;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         apiMan = CommandCenter.Instance.apiManager_;
         multipliersMan = CommandCenter.Instance.multiplierManager_;
+        gamePlayMan = CommandCenter.Instance.gamePlayManager_;
     }
 
     [ContextMenu("Guess")]
@@ -57,8 +59,8 @@ public class GuessApi : MonoBehaviour
         settings.Converters.Add(new FloatTrimConverter());
         settings.Formatting = Formatting.Indented;
 
-        bool IsFirstTime = true;//logic needed
-        bool IsSkip = false;//logic needed
+        bool IsFirstTime = gamePlayMan.Get_IsFirstTime();
+        bool IsSkip = gamePlayMan.Get_IsSkip();
 
         //if is firstTime or if is not first time && if skip or not
         GuessRequest request = new GuessRequest

@@ -23,6 +23,8 @@ public class GamePlayManager : MonoBehaviour
     public CardHistory cardHistory;
     bool IsSkips = false;
     public CashOutUI cashOutUI;
+    public bool IsFirstTime = false;
+    public bool IsSkip = false;
 
     public void Start ()
     {
@@ -89,7 +91,8 @@ public class GamePlayManager : MonoBehaviour
         if(!Skips.AllowSkip()) yield break;
         CommandCenter.Instance.soundManager_.PlaySound("SkipButton");
         Debug.Log($" allow skips : {Skips.AllowSkip()}");
-        IsSkips =false;
+        IsSkips = false;
+        SetIsSkip(true);
         if (!IsGameStarted())
         {
             if(winLoseManager.GetTheOutCome() == OutCome.None ||
@@ -162,6 +165,7 @@ public class GamePlayManager : MonoBehaviour
             return;
         }
         cashOutUI.Refresh();
+        SetIsSkip(false);
         StartCoroutine(guessing());
     }
 
@@ -175,8 +179,9 @@ public class GamePlayManager : MonoBehaviour
             Skips.setIsFirstTime(false);
             Skips.ResetSkips();
             gamePlay.showCashOut(false);
+            SetIsFirstTime(false);
         }
-
+        
             //winsequence
         CardData prevCardData = cardManager.GetPrevCardData();
         CardData currCardData = cardManager.GetCurrentCardData();
@@ -273,5 +278,18 @@ public class GamePlayManager : MonoBehaviour
     }
 
     public GameObject GetActiveCard() { return ActiveCard; }
+
+    public void SetIsFirstTime(bool value )
+    {
+        IsFirstTime = value;
+    }
+
+    public void SetIsSkip(bool value )
+    {
+        IsSkip = value;
+    }
+
+    public bool Get_IsSkip() { return IsSkip; }
+    public bool Get_IsFirstTime() { return IsFirstTime; }
 
 }

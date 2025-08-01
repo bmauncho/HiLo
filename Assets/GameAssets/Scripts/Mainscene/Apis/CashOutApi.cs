@@ -26,11 +26,13 @@ public class CashOutResponse
 public class CashOutApi : MonoBehaviour
 {
     ApiManager apiMan;
+    GamePlayManager gamePlayMan;
     public CashOutResponse cashOutResponse;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         apiMan = CommandCenter.Instance.apiManager_;
+        gamePlayMan =  CommandCenter.Instance.gamePlayManager_;
     }
 
     public void CashOut ()
@@ -39,8 +41,8 @@ public class CashOutApi : MonoBehaviour
         settings.Converters.Add(new FloatTrimConverter());
         settings.Formatting = Formatting.Indented;
 
-        bool IsFirstTime = true;//logic needed
-        bool IsSkip = false;//logic needed
+        bool IsFirstTime = gamePlayMan.Get_IsFirstTime();
+        bool IsSkip = gamePlayMan.Get_IsSkip();
 
         CashOutRequest request = new CashOutRequest
         {

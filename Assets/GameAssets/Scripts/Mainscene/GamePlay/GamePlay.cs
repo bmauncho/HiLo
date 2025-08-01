@@ -61,6 +61,7 @@ public class GamePlay : MonoBehaviour
         {
             hideStart();
             showCashOut(true);
+            gamePlayManager.SetIsFirstTime(true);
             ResetCashAmount();
             isGamePlayActive = true;
             SetCashOutAmount("0.00");
@@ -87,6 +88,7 @@ public class GamePlay : MonoBehaviour
             multipliersManager.enableGuessMask();
             multipliersManager.disableGuessBtns();
             gamePlayManager.Skips.setIsFirstTime(true);
+            gamePlayManager.SetIsFirstTime(false);
             payOutManager.ShowPayOut();
             yield return new WaitUntil(() => isGameOver);
             winLoseManager.resetOutCome();

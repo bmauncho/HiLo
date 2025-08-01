@@ -27,11 +27,13 @@ public class SkipResponse
 public class SkipApi : MonoBehaviour
 {
     ApiManager apiMan;
+    GamePlayManager gamePlayMan;
     public SkipResponse skipResponse;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         apiMan = CommandCenter.Instance.apiManager_;
+        gamePlayMan = CommandCenter.Instance.gamePlayManager_;
     }
 
     public void Skip ()
@@ -40,8 +42,8 @@ public class SkipApi : MonoBehaviour
         settings.Converters.Add(new FloatTrimConverter());
         settings.Formatting = Formatting.Indented;
 
-        bool IsFirstTime = true;//logic needed
-        bool IsSkip = false;//logic needed
+        bool IsFirstTime = gamePlayMan.Get_IsFirstTime();
+        bool IsSkip = gamePlayMan.Get_IsSkip();
 
         SkipRequest skipRequest = new SkipRequest
         {
