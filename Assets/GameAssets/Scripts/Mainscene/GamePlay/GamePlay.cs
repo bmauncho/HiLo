@@ -76,7 +76,7 @@ public class GamePlay : MonoBehaviour
             multipliersManager.Multipliers.ToggleMultiplier(cardManager.GetCurrentCardData());
             multipliersManager.Multipliers.ToggleMultiplierType(cardManager.GetCurrentCardData());
             multipliersManager.Multipliers.UpdateText();
-
+            payOutManager.resetPayout();
         }
         else
         {

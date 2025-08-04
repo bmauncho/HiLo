@@ -1,16 +1,40 @@
+using System.Collections;
+using System.Globalization;
 using TMPro;
 using UnityEngine;
 
 public class CurrencyManager : MonoBehaviour
 {
     PayOutManager payOutManager;
-    public string winAmount = "2000.00";
-    public string cumilativeWinAMount = "0";
+    ApiManager apiManager;
+    public double CashAmount;
+    public double winAmount;
+    public double cumilativeWinAMount;
     public TMP_Text walletAmountText;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         payOutManager = CommandCenter.Instance.PayOutManager_;
+        apiManager = CommandCenter.Instance.apiManager_;
+
+        if (CommandCenter.Instance)
+        {
+            if(CommandCenter.Instance.gameMode == GameMode.Demo)
+            {
+                CashAmount = 2000;
+                walletAmountText.text = CashAmount.ToString("N2" , CultureInfo.CurrentCulture); ;
+            }
+            else
+            {
+                string cashamount = apiManager.GetCashAmount();
+                if(double.TryParse(cashamount,out double amount))
+                {
+                    CashAmount += amount;
+                }
+                
+                walletAmountText.text = CashAmount.ToString("N2" , CultureInfo.CurrentCulture); ;
+            }   
+        }
     }
 
     // Update is called once per frame
@@ -21,8 +45,52 @@ public class CurrencyManager : MonoBehaviour
 
     public string GetTotalWinAmount ()
     {
-        winAmount = payOutManager.GetWinAmount().ToString("F2");
+        winAmount = payOutManager.GetWinAmount();
         cumilativeWinAMount += winAmount;
-        return cumilativeWinAMount;
+        return cumilativeWinAMount.ToString("N2" , CultureInfo.CurrentCulture); ;
+    }
+
+    public IEnumerator Bet ()
+    {
+        if (CommandCenter.Instance.IsDemo())
+        {
+            string betAmount = CommandCenter.Instance.betManager_.GetBetAmount();
+
+            if (double.TryParse(betAmount , out double bet))
+            {
+                CashAmount -= bet;
+            }
+            else
+            {
+                Debug.LogWarning($"Invalid bet amount: {betAmount}");
+            }
+        }
+        else
+        {
+            bool IsDone = apiManager.placeBet.IsBetPlaced;
+            apiManager.placeBet.Bet();
+            yield return new WaitUntil(() => IsDone);
+            CashAmount = (double)apiManager.placeBet.betResponse.new_wallet_balance;
+        }
+        walletAmountText.text = CashAmount.ToString("N2" , CultureInfo.CurrentCulture); ;
+    }
+
+
+    public void CollectWinnings ()
+    {
+        if (CommandCenter.Instance.IsDemo())
+        {
+            string totalWininings = GetTotalWinAmount();
+            if (double.TryParse(totalWininings , out double winnings))
+            {
+                CashAmount += winnings;
+            }
+        }
+        else
+        {
+
+        }
+
+        walletAmountText.text = CashAmount.ToString("N2" , CultureInfo.CurrentCulture);
     }
 }

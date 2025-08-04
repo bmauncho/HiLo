@@ -29,8 +29,19 @@ public class PayOut : MonoBehaviour
             PayoutEffectComplete?.Invoke();
             yield break;
         }
-        string cashout_ = payOutMan.GetWinMultiplier();
-        string amountwon_ = payOutMan.GetWinAmount().ToString("F2");
+        string cashout_ = "";
+        string amountwon_ = "";
+        if (CommandCenter.Instance.IsDemo())
+        {
+            cashout_ = payOutMan.GetWinMultiplier();
+            amountwon_ = payOutMan.GetWinAmount().ToString("F2");
+        }
+        else
+        {
+            cashout_ = payOutMan.GetWinMultiplier();
+            amountwon_ = payOutMan.GetWinAmount().ToString("F2");
+        }
+           
         Debug.Log($"cashout {cashout_} ; amountwon {amountwon_}");
         EnableHolder();
         EnableEffectHolder();

@@ -12,6 +12,8 @@ public class GamePlayManager : MonoBehaviour
     WinLoseManager winLoseManager;
     BetManager betManager;
     PayOutManager payOutManager;
+    CurrencyManager currencyManager;
+    ApiManager apiManager;
     public GameObject ActiveCard;
     public GamePlay gamePlay;
     public Skips Skips;
@@ -34,6 +36,8 @@ public class GamePlayManager : MonoBehaviour
         winLoseManager = CommandCenter.Instance.winLoseManager_;
         betManager = CommandCenter.Instance.betManager_;
         payOutManager = CommandCenter.Instance.PayOutManager_ ;
+        currencyManager = CommandCenter.Instance.currencyMan_ ;
+        apiManager = CommandCenter.Instance.apiManager_;
         Invoke(nameof(SetActiveCard),.25f);
     }
 
@@ -104,7 +108,14 @@ public class GamePlayManager : MonoBehaviour
             }
         }
 
-        StartCoroutine(removeCard.removeCurrentCard(deck,poolManager));
+        if(!CommandCenter.Instance.IsDemo())
+        {
+            bool IsDone = apiManager.SkipApi.IsSkiped;
+            apiManager.SkipApi.Skip();
+            yield return new WaitUntil(() => IsDone);
+        }
+
+        StartCoroutine(removeCard.removeCurrentCard(deck , poolManager));
         
         yield return new WaitForSeconds(0.1f);
         addCard.OnComplete += canSkip;
@@ -181,8 +192,9 @@ public class GamePlayManager : MonoBehaviour
             gamePlay.showCashOut(false);
             SetIsFirstTime(false);
         }
-        
-            //winsequence
+        //bet
+        StartCoroutine(currencyManager.Bet());
+        //winsequence
         CardData prevCardData = cardManager.GetPrevCardData();
         CardData currCardData = cardManager.GetCurrentCardData();
         MultiplierType multiplierType = multiplierManager.selectedMultiplier;
@@ -242,12 +254,12 @@ public class GamePlayManager : MonoBehaviour
         return MultiplierType.None;
     }
 
-    void onlose ()
+    IEnumerator onlose ()
     {
         if(winLoseManager.GetTheOutCome() == OutCome.None ||
             winLoseManager.GetTheOutCome()== OutCome.Win)
         {
-            return;
+            yield break;
         }
 
         gamePlay.isGamePlayActive = false;
@@ -261,15 +273,15 @@ public class GamePlayManager : MonoBehaviour
         payOutManager.resetPayout();
     }
 
-    void onWin ()
+    IEnumerator onWin ()
     {
         if (winLoseManager.GetTheOutCome() == OutCome.None ||
            winLoseManager.GetTheOutCome() == OutCome.Lose)
         {
-            return;
+           yield break;
         }
 
-        payOutManager.updatePayout();
+        StartCoroutine(payOutManager.updatePayout());
     }
 
     public void SetActiveCard(GameObject card )

@@ -29,6 +29,7 @@ public class SkipApi : MonoBehaviour
     ApiManager apiMan;
     GamePlayManager gamePlayMan;
     public SkipResponse skipResponse;
+    public bool IsSkiped;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -38,6 +39,7 @@ public class SkipApi : MonoBehaviour
 
     public void Skip ()
     {
+        IsSkiped = false;
         var settings = new JsonSerializerSettings();
         settings.Converters.Add(new FloatTrimConverter());
         settings.Formatting = Formatting.Indented;
@@ -74,6 +76,7 @@ public class SkipApi : MonoBehaviour
             if (webRequest.result == UnityWebRequest.Result.ConnectionError || webRequest.result == UnityWebRequest.Result.ProtocolError)
             {
                 Debug.LogError("Error: " + webRequest.error);
+                IsSkiped = true;
             }
             else
             {
@@ -82,6 +85,7 @@ public class SkipApi : MonoBehaviour
                 var parsedJson = JToken.Parse(responseText);
                 string formattedOutput = JsonConvert.SerializeObject(parsedJson , Formatting.Indented);
                 Debug.Log($"Guess api successfully:{formattedOutput}");
+                IsSkiped = true;
             }
         }
     }

@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Globalization;
 using UnityEngine;
 
 public class PayOutManager : MonoBehaviour
@@ -6,6 +8,7 @@ public class PayOutManager : MonoBehaviour
     BetManager betManager;
     GamePlayManager gamePlayManager;
     CurrencyManager currencyManager;
+    ApiManager apiManager;
     public PayOut payout;
     public CashOutUI CashOutUI;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -15,6 +18,7 @@ public class PayOutManager : MonoBehaviour
         betManager = CommandCenter.Instance.betManager_;
         gamePlayManager = CommandCenter.Instance.gamePlayManager_;
         currencyManager = CommandCenter.Instance.currencyMan_;
+        apiManager = CommandCenter.Instance.apiManager_;
     }
 
     // Update is called once per frame
@@ -28,13 +32,27 @@ public class PayOutManager : MonoBehaviour
        StartCoroutine(payout.ShowPayOut (this));
     }
 
-    public void updatePayout ()
+    public IEnumerator updatePayout ()
     {
-        string winAmount = currencyManager.GetTotalWinAmount();
-        string winMultiplier = GetWinMultiplier();
+        string winAmount = "";
+        string winMultiplier = "";
+        if (CommandCenter.Instance.IsDemo())
+        {
+            winAmount = currencyManager.GetTotalWinAmount();
+            winMultiplier = GetWinMultiplier();
+        }
+        else
+        {
+            bool isDone = apiManager.updateBet.isUpdated;
+            apiManager.updateBet.UpdateTheBet();
+            yield return new WaitUntil(() => isDone);
+            winAmount = apiManager.updateBet.new_wallet_balance.ToString("N2" , CultureInfo.CurrentCulture);
+        }
+           
         CashOutUI.SetWinAmount(winAmount);
         CashOutUI.SetWinMultiplier(winMultiplier+"x");
         gamePlayManager.gamePlay.SetCashOutAmount(winAmount);
+        CommandCenter.Instance.currencyMan_.CollectWinnings();
     }
 
     public void resetPayout ()

@@ -58,6 +58,11 @@ public class CommandCenter : MonoBehaviour
         gameMode = mode;
     }
 
+    public  bool IsDemo ()
+    {
+        return gameMode == GameMode.Demo;
+    }
+
     private void OnDestroy ()
     {
         if (Instance == this)

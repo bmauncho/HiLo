@@ -79,7 +79,7 @@ public class StartApi : MonoBehaviour
             client_id = apiMan.GetClientId() ,
             game_id = apiMan.GetGameId() ,
             player_id = apiMan.GetPlayerId() ,
-            bet_id = apiMan.GetBetId() ,
+            bet_id = apiMan.SetBetId(),
             bet_amount = GetBetAmount(),
         };
 

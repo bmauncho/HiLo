@@ -82,4 +82,9 @@ public class ApiManager : MonoBehaviour
     {
         BetId = SetBetId();
     }
+
+    public string GetCashAmount ()
+    {
+        return CashAmount;
+    }
 }
