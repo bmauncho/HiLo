@@ -14,7 +14,7 @@ public class ApiManager : MonoBehaviour
     public GuessApi guessApi;
     public SkipApi SkipApi;
     public CashOutApi cashOutApi;
-
+    public bool IsFirstPlayDone = false;
     private void Awake ()
     {
         SetUp();
@@ -37,7 +37,7 @@ public class ApiManager : MonoBehaviour
         Game_Id = GameManager.Instance.GetGameId();
         Client_id = GameManager.Instance.GetClientId();
         CashAmount = GameManager.Instance.GetCashAmount();
-        Debug.Log("SetUpDone!");
+        //Debug.Log("SetUpDone!");
     }
 
     public string SetBetId ()
@@ -86,5 +86,10 @@ public class ApiManager : MonoBehaviour
     public string GetCashAmount ()
     {
         return CashAmount;
+    }
+
+    public void SetIsFirstPlayDone(bool isFirstPlayDone )
+    {
+        IsFirstPlayDone = isFirstPlayDone;
     }
 }

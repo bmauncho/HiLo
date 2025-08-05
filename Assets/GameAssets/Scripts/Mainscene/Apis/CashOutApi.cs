@@ -4,7 +4,6 @@ using System.Collections;
 using System.Text;
 using UnityEngine;
 using UnityEngine.Networking;
-using static UnityEditor.AddressableAssets.Build.BuildPipelineTasks.GenerateLocationListsTask;
 [System.Serializable]
 public class CashOutRequest
 {
@@ -61,7 +60,7 @@ public class CashOutApi : MonoBehaviour
                 Debug.Log("Using SkipApi game_state & signature");
                 break;
             case false:
-                switch (init)
+                switch (apiMan.IsFirstPlayDone)
                 {
                     case true:
 
@@ -120,7 +119,7 @@ public class CashOutApi : MonoBehaviour
                 cashOutResponse = JsonConvert.DeserializeObject<CashOutResponse>(responseText);
                 var parsedJson = JToken.Parse(responseText);
                 string formattedOutput = JsonConvert.SerializeObject(parsedJson , Formatting.Indented);
-                Debug.Log($"Guess api successfully:{formattedOutput}");
+                Debug.Log($"cashout api successfully:{formattedOutput}");
                 IsCashOutDone = true ;
             }
         }

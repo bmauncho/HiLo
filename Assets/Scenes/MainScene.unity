@@ -13207,6 +13207,7 @@ MonoBehaviour:
   guessApi: {fileID: 972973306}
   SkipApi: {fileID: 1793535992}
   cashOutApi: {fileID: 774544716}
+  IsFirstPlayDone: 0
 --- !u!1 &1793535990
 GameObject:
   m_ObjectHideFlags: 0

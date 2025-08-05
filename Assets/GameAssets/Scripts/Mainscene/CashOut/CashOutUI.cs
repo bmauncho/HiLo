@@ -25,6 +25,7 @@ public class CashOutUI : MonoBehaviour
         winAmount = "0.00";
         SetWinMultiplier(winMultiplier);    
         SetWinAmount(winAmount);
+        UpdateWinAmount();
     }
 
     public void SetWinMultiplier(string winMultiplier_ )
@@ -33,7 +34,7 @@ public class CashOutUI : MonoBehaviour
         UpdateWinMultiplier();
     }
 
-    private void UpdateWinMultiplier ()
+    public void UpdateWinMultiplier ()
     {
         if ( winMultiplierText != null )
         {
@@ -44,10 +45,9 @@ public class CashOutUI : MonoBehaviour
     public void SetWinAmount(string winAmount_ )
     {
         winAmount = winAmount_;
-        UpdateWinAmount();
     }
 
-    private void UpdateWinAmount ()
+    public void UpdateWinAmount ()
     {
         if ( winAmountText != null )
         {

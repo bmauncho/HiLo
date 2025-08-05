@@ -1,6 +1,7 @@
 using DG.Tweening;
 using System;
 using System.Collections;
+using System.Globalization;
 using TMPro;
 using UnityEngine;
 
@@ -20,6 +21,8 @@ public class PayOut : MonoBehaviour
         winLoseManager = CommandCenter.Instance.winLoseManager_;
     }
 
+    
+
     public IEnumerator ShowPayOut (PayOutManager payOutMan=null)
     {
         if(winLoseManager.GetTheOutCome() == OutCome.Lose || 
@@ -29,19 +32,10 @@ public class PayOut : MonoBehaviour
             PayoutEffectComplete?.Invoke();
             yield break;
         }
-        string cashout_ = "";
-        string amountwon_ = "";
-        if (CommandCenter.Instance.IsDemo())
-        {
-            cashout_ = payOutMan.GetWinMultiplier();
-            amountwon_ = payOutMan.GetWinAmount().ToString("F2");
-        }
-        else
-        {
-            cashout_ = payOutMan.GetWinMultiplier();
-            amountwon_ = payOutMan.GetWinAmount().ToString("F2");
-        }
-           
+
+        string cashout_ = payOutMan.GetWinMultiplier();
+        string amountwon_ = payOutMan.GetWinAmount().ToString("N2" , CultureInfo.CurrentCulture);
+
         Debug.Log($"cashout {cashout_} ; amountwon {amountwon_}");
         EnableHolder();
         EnableEffectHolder();

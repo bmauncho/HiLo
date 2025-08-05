@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Globalization;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -52,6 +53,11 @@ public class GamePlay : MonoBehaviour
         cashOut.SetActive(true);
     }
 
+    public void SetCashOutButtonInteractivity(bool interactable )
+    {
+        cashOutButton.GetComponent<Button>().interactable = interactable;
+    }
+
     public void hideCashOut ()
     {
         cashOut.SetActive(false);
@@ -100,6 +106,7 @@ public class GamePlay : MonoBehaviour
             betManager.Bet.IncreaseBtn.DeactivateMask();
             betManager.Bet.DecreaseBtn.DeactivateMask();
             payOutManager.payout.PayoutEffectComplete -= OnEffectComplete;
+            gamePlayManager.resetPlayCounter();
         }
 
         gamePlayManager.ToggleGamePlaySkips();
@@ -135,12 +142,17 @@ public class GamePlay : MonoBehaviour
 
     IEnumerator endSession ()
     {
-        if(!CommandCenter.Instance.IsDemo())
+        if(!CommandCenter.Instance.IsDemo() && winLoseManager.GetTheOutCome() != OutCome.Lose)
         {
             apiManager.cashOutApi.CashOut();
-
             yield return new WaitUntil(() => apiManager.cashOutApi.IsCashOutDone);
+            double winAMount = apiManager.cashOutApi.cashOutResponse.game_state.final_win;
+            apiManager.updateBet.SetAmountWon(winAMount);
+            apiManager.updateBet.UpdateTheBet();
+            yield return new WaitUntil(() => apiManager.updateBet.isUpdated);
+            string winAmount = apiManager.updateBet.new_wallet_balance.ToString("N2" , CultureInfo.CurrentCulture);
             Debug.Log("session ended!");
+
         }
     }
 

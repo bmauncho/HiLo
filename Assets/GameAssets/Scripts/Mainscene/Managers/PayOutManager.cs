@@ -21,12 +21,6 @@ public class PayOutManager : MonoBehaviour
         apiManager = CommandCenter.Instance.apiManager_;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public  void ShowPayOut ()
     {
        StartCoroutine(payout.ShowPayOut (this));
@@ -34,25 +28,13 @@ public class PayOutManager : MonoBehaviour
 
     public IEnumerator updatePayout ()
     {
-        string winAmount = "";
-        string winMultiplier = "";
-        if (CommandCenter.Instance.IsDemo())
-        {
-            winAmount = currencyManager.GetTotalWinAmount();
-            winMultiplier = GetWinMultiplier();
-        }
-        else
-        {
-            bool isDone = apiManager.updateBet.isUpdated;
-            apiManager.updateBet.UpdateTheBet();
-            yield return new WaitUntil(() => isDone);
-            winAmount = apiManager.updateBet.new_wallet_balance.ToString("N2" , CultureInfo.CurrentCulture);
-        }
-           
+        string winAmount = currencyManager.GetTotalWinAmount();
+        string winMultiplier = GetWinMultiplier();
         CashOutUI.SetWinAmount(winAmount);
         CashOutUI.SetWinMultiplier(winMultiplier+"x");
         gamePlayManager.gamePlay.SetCashOutAmount(winAmount);
         CommandCenter.Instance.currencyMan_.CollectWinnings();
+        yield return null;
     }
 
     public void resetPayout ()
@@ -60,27 +42,69 @@ public class PayOutManager : MonoBehaviour
         string winAmount = "0.00";
         string winMultiplier = "0.00x";
         CashOutUI.SetWinAmount(winAmount);
+        CashOutUI.UpdateWinAmount();
         CashOutUI.SetWinMultiplier(winMultiplier);
     }
 
     public float GetWinAmount ()
     {
-        int cardValue = (int)multipliersManager.GetSelectedMultiplierType();
-        string betAmount = betManager.GetBetAmount();
-        float parsedbetAmount;
-        if (!float.TryParse(betAmount , out parsedbetAmount))
+        float winAmount = 0;
+        if (CommandCenter.Instance.IsDemo())
         {
-            Debug.LogWarning($"Invalid multiplier format: '{betAmount}'");
-            parsedbetAmount = 0f; // or any default value you consider safe
+            int cardValue = (int)multipliersManager.GetSelectedMultiplierType();
+            string betAmount = betManager.GetBetAmount();
+            float parsedbetAmount;
+            if (!float.TryParse(betAmount , out parsedbetAmount))
+            {
+                Debug.LogWarning($"Invalid multiplier format: '{betAmount}'");
+                parsedbetAmount = 0f; // or any default value you consider safe
+            }
+            winAmount = cardValue * parsedbetAmount * multiplier();
         }
-        float winAmount = cardValue * parsedbetAmount * multiplier();
+        else
+        {
+
+            winAmount = 0;
+        }
 
         return winAmount;
     }
 
     public string GetWinMultiplier ()
     {
-        return multipliersManager.GetMultiplier();
+        if(CommandCenter.Instance.IsDemo())
+        {
+            return multipliersManager.GetMultiplier();
+        }
+        else
+        {
+            bool IsFirstTime = gamePlayManager.Get_IsFirstTime();
+            bool IsSkip = gamePlayManager.Get_IsSkip();
+
+            //if is firstTime or if is not first time && if skip or not
+            GameState selectedGameState;
+            string selectedSignature;
+
+            if (IsFirstTime)
+            {
+                selectedGameState = apiManager.StartApi.gameResponse.game_state;
+                selectedSignature = apiManager.StartApi.gameResponse.signature;
+                Debug.Log("Using StartApi game_state & signature");
+            }
+            else if (IsSkip)
+            {
+                selectedGameState = apiManager.SkipApi.skipResponse.game_state;
+                selectedSignature = apiManager.SkipApi.skipResponse.signature;
+                Debug.Log("Using SkipApi game_state & signature");
+            }
+            else
+            {
+                selectedGameState = apiManager.guessApi.guessResponse.game_state;
+                selectedSignature = apiManager.guessApi.guessResponse.signature;
+                Debug.Log("Using guessResponse game_state & signature");
+            }
+            return selectedGameState.accumulated_win.ToString("N2");
+        }
     }
 
     public float multiplier ()

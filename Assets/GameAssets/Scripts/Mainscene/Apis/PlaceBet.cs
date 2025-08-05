@@ -57,7 +57,7 @@ public class PlaceBet : MonoBehaviour
     }
     private void configureIds ()
     {
-        Debug.Log("configure - " + GetType().Name);
+        //Debug.Log("configure - " + GetType().Name);
         Player_Id = GameManager.Instance.GetPlayerId();
         Game_Id = GameManager.Instance.GetGameId();
         Client_id = GameManager.Instance.GetClientId();

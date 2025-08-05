@@ -178,8 +178,10 @@ public class WinLoseManager : MonoBehaviour
         gamePlayManager.Skips.DeactivateGameplaySpins();
         gamePlayManager.gamePlay.showStart();
         gamePlayManager.gamePlay.hideCashOut();
+        gamePlayManager.ToggleGamePlay();
         yield return StartCoroutine(retainCard.loseAnim(deck));
         addCard.OnComplete -= OnAddCardComplete;
+
         //update multilier 
         //prev card is set as the current card
         //cardManager.ResetCardData();

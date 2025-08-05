@@ -27,7 +27,8 @@ public class GamePlayManager : MonoBehaviour
     public CashOutUI cashOutUI;
     public bool IsFirstTime = false;
     public bool IsSkip = false;
-
+    int playsCounter = 0;
+    bool isGuessing = false;
     public void Start ()
     {
         poolManager = CommandCenter.Instance.poolManager_;
@@ -51,7 +52,6 @@ public class GamePlayManager : MonoBehaviour
         SetActiveCard(card);
         if (cardComponent != null)
         {
-            Debug.Log("c");
             CardData cardData = cardManager.GetCardData();
             cardComponent.SetCard(
                cardData.cardSuite ,
@@ -169,11 +169,19 @@ public class GamePlayManager : MonoBehaviour
 
     public void Guess ()
     {
+        if (isGuessing)
+        {
+            return;
+        }
+
+        isGuessing = true;
+        gamePlay.SetCashOutButtonInteractivity (false);
         if (multiplierManager.selectedMultiplier == MultiplierType.None)
         {
             Debug.LogWarning("no multiplier is selected");
             return;
         }
+        playsCounter++;
         cashOutUI.Refresh();
         SetIsSkip(false);
         StartCoroutine(guessing());
@@ -190,8 +198,15 @@ public class GamePlayManager : MonoBehaviour
             Skips.ResetSkips();
             gamePlay.showCashOut(false);
         }
+
+        if(playsCounter > 1)
+        {
+            apiManager.SetIsFirstPlayDone(true);
+        }
+
         //bet
         SetIsFirstTime(false);
+
         //winsequence
         CardData prevCardData = cardManager.GetPrevCardData();
         CardData currCardData = cardManager.GetCurrentCardData();
@@ -200,6 +215,7 @@ public class GamePlayManager : MonoBehaviour
         Skips.refreshSkips();
         Debug.Log("win sequence setUp done!");
         yield return StartCoroutine(winLoseManager.WinSequence());
+
         //winsequence - card History
         cardHistory.ShowHistory();
         multiplierManager.Multipliers.ToggleMultiplier(cardManager.GetCurrentCardData());
@@ -207,8 +223,18 @@ public class GamePlayManager : MonoBehaviour
         multiplierManager.Multipliers.UpdateText();
 
         yield return new WaitForSeconds(.1f);
-        onWin();
-        onlose();
+
+        if(winLoseManager.GetTheOutCome() == OutCome.Win)
+        {
+            yield return StartCoroutine(onWin());
+        }
+        else
+        {
+            yield return StartCoroutine(onlose());
+
+        } 
+        isGuessing = false;
+        gamePlay.SetCashOutButtonInteractivity(true);
         yield return null;
     }
 
@@ -265,7 +291,6 @@ public class GamePlayManager : MonoBehaviour
         multiplierManager.disableGuessBtns();
         Skips.setIsFirstTime(true);
         Skips.ResetSkips();
-        winLoseManager.resetOutCome();
         betManager.Bet.IncreaseBtn.DeactivateMask();
         betManager.Bet.DecreaseBtn.DeactivateMask();
         payOutManager.resetPayout();
@@ -279,7 +304,7 @@ public class GamePlayManager : MonoBehaviour
            yield break;
         }
 
-        StartCoroutine(payOutManager.updatePayout());
+        yield return StartCoroutine(payOutManager.updatePayout());
     }
 
     public void SetActiveCard(GameObject card )
@@ -301,5 +326,11 @@ public class GamePlayManager : MonoBehaviour
 
     public bool Get_IsSkip() { return IsSkip; }
     public bool Get_IsFirstTime() { return IsFirstTime; }
+
+    public void resetPlayCounter ()
+    {
+        playsCounter = 0;
+        apiManager.SetIsFirstPlayDone( false );
+    }
 
 }

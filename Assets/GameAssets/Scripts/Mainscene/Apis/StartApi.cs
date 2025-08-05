@@ -68,7 +68,7 @@ public class StartApi : MonoBehaviour
     ApiManager apiMan;
     CardManager cardMan;
     public StartGameResponse gameResponse;
-    public bool IsStartDone =false; 
+    public bool IsStartDone =false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
