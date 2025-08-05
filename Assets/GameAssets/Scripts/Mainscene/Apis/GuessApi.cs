@@ -102,7 +102,7 @@ public class GuessApi : MonoBehaviour
         };
 
         string jsonData = JsonConvert.SerializeObject(request , settings);
-        Debug.Log(jsonData);
+        Debug.Log($"Guess api request:{jsonData}");
         StartCoroutine(GuessAction(jsonData));
     }
 
@@ -128,7 +128,7 @@ public class GuessApi : MonoBehaviour
                 guessResponse = JsonConvert.DeserializeObject<GuessResponse>(responseText);
                 var parsedJson = JToken.Parse(responseText);
                 string formattedOutput = JsonConvert.SerializeObject(parsedJson , Formatting.Indented);
-                Debug.Log($"Guess api successfully:{formattedOutput}");
+                Debug.Log($"Guess api response:{formattedOutput}");
                 IsGuessDone=true;
             }
         }

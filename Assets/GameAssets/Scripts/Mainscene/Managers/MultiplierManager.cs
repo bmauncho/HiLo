@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -32,30 +33,32 @@ public class MultiplierButtonDetails
 }
 public class MultiplierManager : MonoBehaviour
 {
-    GamePlayManager gamePlayManager;    
+    GamePlayManager gamePlayManager;
     CardManager cardManager;
+    ApiManager apiManager;
     public MultiplierType selectedMultiplier;
     public Multipliers Multipliers;
-    public MultiplierButtonDetails[] buttonDetails;
+    public MultiplierButtonDetails [] buttonDetails;
     public multiplierDetails [] multiplierDetailsList;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void Start ()
     {
         cardManager = CommandCenter.Instance.cardManager_;
         gamePlayManager = CommandCenter.Instance.gamePlayManager_;
+        apiManager = CommandCenter.Instance.apiManager_;
     }
 
     // Update is called once per frame
-    void Update()
+    void Update ()
     {
-        
+
     }
 
     public string GetMultiplier ()
     {
-        foreach(var multiplier in Multipliers.multipliers)
+        foreach (var multiplier in Multipliers.multipliers)
         {
-            if(multiplier.multiplier == selectedMultiplier)
+            if (multiplier.multiplier == selectedMultiplier)
             {
                 return multiplier.TheMultiplier;
             }
@@ -74,16 +77,16 @@ public class MultiplierManager : MonoBehaviour
         selectedMultiplier = MultiplierType.None;
     }
 
-    public void SetSelectedMultiplier(MultiplierType multiplierType )
+    public void SetSelectedMultiplier ( MultiplierType multiplierType )
     {
         selectedMultiplier = multiplierType;
     }
 
     public void enableGuessMask ()
     {
-        foreach( Multiplier multiplier in Multipliers.multipliers )
+        foreach (Multiplier multiplier in Multipliers.multipliers)
         {
-            multiplier.EnableMask ();
+            multiplier.EnableMask();
         }
     }
 
@@ -91,7 +94,7 @@ public class MultiplierManager : MonoBehaviour
     {
         foreach (Multiplier multiplier in Multipliers.multipliers)
         {
-            multiplier.DisableMask ();
+            multiplier.DisableMask();
         }
     }
 
@@ -99,7 +102,7 @@ public class MultiplierManager : MonoBehaviour
     {
         foreach (Multiplier multiplier in Multipliers.multipliers)
         {
-            multiplier.enableBtn ();
+            multiplier.enableBtn();
         }
     }
 
@@ -107,17 +110,30 @@ public class MultiplierManager : MonoBehaviour
     {
         foreach (Multiplier multiplier in Multipliers.multipliers)
         {
-            multiplier.disableBtn ();
+            multiplier.disableBtn();
         }
     }
 
 
     public void RefreshMultipliers ()
     {
+        if (CommandCenter.Instance.IsDemo())
+        {
+            DemoRefresh();
+        }
+        else
+        {
+            LiveRefresh();
+        }
+
+    }
+
+    void DemoRefresh ()
+    {
         var currentCard = cardManager.GetCurrentCardData();
         if (currentCard == null)
         {
-           Debug.LogWarning("Current card data is null.");
+            Debug.LogWarning("Current card data is null.");
             return;
         }
 
@@ -148,7 +164,7 @@ public class MultiplierManager : MonoBehaviour
                         {
                             if (!string.IsNullOrEmpty(multiplierValue))
                             {
-                                if(multiplierValue != "")
+                                if (multiplierValue != "")
                                 {
                                     multiplierValue = multiplierValue + "x";
                                 }
@@ -185,8 +201,90 @@ public class MultiplierManager : MonoBehaviour
         }
     }
 
+    void LiveRefresh ()
+    {
+        bool IsFirstTime = gamePlayManager.Get_IsFirstTime();
+        bool IsSkip = gamePlayManager.Get_IsSkip();
 
-    public List<MultiplierConfig> GetCurrentMultipliers (bool isSkip =false)
+        BetOptions [] betOptions; 
+
+        if (IsFirstTime)
+        {
+            betOptions = apiManager.StartApi.gameResponse.bet_options;
+        }
+        else if (IsSkip)
+        {
+            betOptions = apiManager.SkipApi.skipResponse.bet_options;
+        }
+        else
+        {
+            betOptions = apiManager.guessApi.guessResponse.bet_options;
+        }
+        
+        foreach(var multiplier in Multipliers.multipliers)
+        {
+            var matchingMultiplier = betOptions
+                    .FirstOrDefault(m => parsetoEnum(m.id) == multiplier.multiplier);
+
+            if (matchingMultiplier != null)
+            {
+                string multiplierValue = matchingMultiplier.multiplier.ToString();
+                Debug.Log(multiplierValue);
+                if (multiplier.multiplierText != null)
+                {
+                    TextHelper textHelper = multiplier.multiplierText.GetComponent<TextHelper>();
+                    if (textHelper != null)
+                    {
+                        if (!string.IsNullOrEmpty(multiplierValue))
+                        {
+                            if (multiplierValue != "")
+                            {
+                                multiplierValue = multiplierValue + "x";
+                            }
+                            textHelper.ManualRefresh(multiplierValue);
+                            if (gamePlayManager.IsGameStarted())
+                            {
+                                multiplier.enableBtn();
+                            }
+                            else
+                            {
+                                multiplier.disableBtn();
+                            }
+                        }
+                        else
+                        {
+                            textHelper.ManualRefresh(multiplierValue);
+                            multiplier.disableBtn();
+                        }
+                    }
+                    else
+                    {
+                        Debug.LogWarning("TextHelper component not found.");
+                    }
+                }
+                else
+                {
+                    Debug.LogWarning("multiplierText is null.");
+                }
+            }
+        }
+    }
+
+
+    public List<MultiplierConfig> GetCurrentMultipliers ( bool isSkip = false )
+    {
+        if (CommandCenter.Instance.IsDemo())
+        {
+            return GetDemoMultipliers(isSkip);
+        }
+        else
+        {
+            return GetLiveMultipliers(isSkip);
+        }
+
+    }
+
+    public List<MultiplierConfig> GetDemoMultipliers ( bool isSkip = false )
     {
         CardRanks currentCard = cardManager.GetCurrentCardData().cardRank;
         MultiplierType mutiplierType = selectedMultiplier;
@@ -228,12 +326,54 @@ public class MultiplierManager : MonoBehaviour
                 }
 
                 multiplierValueString = multiplierValue == 0 ? string.Empty : multiplierValue.ToString("F2");
-    
-                  
+
+
                 temp.Add(new MultiplierConfig
                 {
                     multiplierType = multi.multiplierType ,
                     Multiplier = multiplierValueString ,
+                });
+            }
+        }
+
+        return temp;
+    }
+
+    public List<MultiplierConfig> GetLiveMultipliers( bool isSkip = false )
+    {
+        CardRanks currentCard = cardManager.GetCurrentCardData().cardRank;
+        MultiplierType mutiplierType = selectedMultiplier;
+        List<MultiplierConfig> temp = new List<MultiplierConfig>();
+        bool IsFirstTime = gamePlayManager.Get_IsFirstTime();
+
+        BetOptions [] betOptions;
+
+        if (IsFirstTime)
+        {
+            betOptions = apiManager.StartApi.gameResponse.bet_options;
+        }
+        else if (isSkip)
+        {
+            betOptions = apiManager.SkipApi.skipResponse.bet_options;
+        }
+        else
+        {
+            betOptions = apiManager.guessApi.guessResponse.bet_options;
+        }
+
+        foreach (var multiplier in Multipliers.multipliers)
+        {
+            var matchingMultiplier = betOptions
+                    .FirstOrDefault(m => parsetoEnum(m.id) == multiplier.multiplier);
+
+            if (matchingMultiplier != null)
+            {
+                string multiplierValue = matchingMultiplier.multiplier.ToString();
+                Debug.Log(multiplierValue);
+                temp.Add(new MultiplierConfig
+                {
+                    multiplierType = parsetoEnum(matchingMultiplier.id) ,
+                    Multiplier = matchingMultiplier.multiplier.ToString(),
                 });
             }
         }
@@ -290,6 +430,22 @@ public class MultiplierManager : MonoBehaviour
     public MultiplierButtonDetails [] ButtonDetails ()
     {
         return buttonDetails;
+    }
+
+    public MultiplierType parsetoEnum ( string multiplier )
+    {
+        // Replace spaces with underscores
+        multiplier = multiplier.Replace(" " , "_");
+
+        if (Enum.TryParse(multiplier , true , out MultiplierType result))
+        {
+            return result;
+        }
+        else
+        {
+            Debug.LogWarning($"Failed to parse {multiplier}, returning default value");
+            return MultiplierType.None;
+        }
     }
 
 }

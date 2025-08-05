@@ -1,4 +1,7 @@
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
 using System.Collections;
+using System.Text;
 using System.Transactions;
 using TMPro;
 using UnityEngine;
@@ -29,6 +32,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] private PlayerInfo playerInfo;
     [SerializeField] private TMP_Text [] TransactionsText;
     string transaction = string.Empty;
+    private void Awake ()
+    {
+        Application.targetFrameRate = 144;
+    }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start ()
     {

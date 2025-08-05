@@ -4,7 +4,6 @@ using System.Collections;
 using System.Text;
 using UnityEngine;
 using UnityEngine.Networking;
-using static UnityEditor.AddressableAssets.Build.BuildPipelineTasks.GenerateLocationListsTask;
 [System.Serializable]
 public class SkipRequest
 {
@@ -31,6 +30,7 @@ public class SkipApi : MonoBehaviour
     GamePlayManager gamePlayMan;
     public SkipResponse skipResponse;
     public bool IsSkiped;
+    bool skipInit = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -50,20 +50,14 @@ public class SkipApi : MonoBehaviour
         bool IsSkip = gamePlayMan.Get_IsSkip();
 
         //if is firstTime or if is not first time && if skip or not
-        GameState selectedGameState;
-        string selectedSignature;
+        GameState selectedGameState = null;
+        string selectedSignature = "";
 
         if (IsFirstTime)
         {
             selectedGameState = apiMan.StartApi.gameResponse.game_state;
             selectedSignature = apiMan.StartApi.gameResponse.signature;
             Debug.Log("Using StartApi game_state & signature");
-        }
-        else if (IsSkip)
-        {
-            selectedGameState = skipResponse.game_state;
-            selectedSignature = skipResponse.signature;
-            Debug.Log("Using SkipApi game_state & signature");
         }
         else
         {
@@ -86,7 +80,7 @@ public class SkipApi : MonoBehaviour
         };
 
         string jsonData = JsonConvert.SerializeObject(skipRequest , settings);
-        Debug.Log(jsonData);
+        Debug.Log($"skip api request:{jsonData}");
         StartCoroutine(skipAction(jsonData));
     }
 
@@ -112,10 +106,15 @@ public class SkipApi : MonoBehaviour
                 skipResponse = JsonConvert.DeserializeObject<SkipResponse>(responseText);
                 var parsedJson = JToken.Parse(responseText);
                 string formattedOutput = JsonConvert.SerializeObject(parsedJson , Formatting.Indented);
-                Debug.Log($"Guess api successfully:{formattedOutput}");
+                Debug.Log($"skip api response:{formattedOutput}");
                 IsSkiped = true;
             }
         }
+    }
+
+    public void ResetSkipInit ()
+    {
+        IsSkiped = false;
     }
 
 }

@@ -119,6 +119,10 @@ public class WinLoseManager : MonoBehaviour
                 cardData.cardRank ,
                 cardData.cardColor);
 
+            multiplierManager.Multipliers.ToggleMultiplier(cardManager.GetCurrentCardData());
+            multiplierManager.Multipliers.ToggleMultiplierType(cardManager.GetCurrentCardData());
+            multiplierManager.Multipliers.UpdateText();
+
             if (gamePlayManager.IsGameStarted())
             {
                 multiplierManager.refreshMultplierValues(multiplierManager.GetCurrentMultipliers());
@@ -137,7 +141,7 @@ public class WinLoseManager : MonoBehaviour
         Debug.Log("Update Multiplier");
 
         addCard.OnComplete -= OnAddCardComplete;
-
+        gamePlayManager.cardHistory.ShowHistory();
         yield return null;
     }
 
@@ -176,12 +180,10 @@ public class WinLoseManager : MonoBehaviour
 
         RetainCard retainCard = gamePlayManager.retainCard;
         gamePlayManager.Skips.DeactivateGameplaySpins();
-        gamePlayManager.gamePlay.showStart();
-        gamePlayManager.gamePlay.hideCashOut();
-        gamePlayManager.ToggleGamePlay();
         yield return StartCoroutine(retainCard.loseAnim(deck));
         addCard.OnComplete -= OnAddCardComplete;
-
+        gamePlayManager.cardHistory.ShowHistory();
+        gamePlayManager.ToggleGamePlay();
         //update multilier 
         //prev card is set as the current card
         //cardManager.ResetCardData();

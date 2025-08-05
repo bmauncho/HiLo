@@ -58,7 +58,7 @@ public class GamePlayManager : MonoBehaviour
                cardData.cardRank ,
                cardData.cardColor);
 
-            multiplierManager.RefreshMultipliers();
+            
 
             cardComponent.ShowCard();
             cardComponent.hideCardBg();
@@ -66,6 +66,7 @@ public class GamePlayManager : MonoBehaviour
         }
         multiplierManager.Multipliers.ToggleMultiplier(cardManager.GetCurrentCardData());
         multiplierManager.Multipliers.ToggleMultiplierType(cardManager.GetCurrentCardData());
+        multiplierManager.RefreshMultipliers();
         multiplierManager.Multipliers.UpdateText();
         multiplierManager.disableGuessBtns();
     }
@@ -215,13 +216,6 @@ public class GamePlayManager : MonoBehaviour
         Skips.refreshSkips();
         Debug.Log("win sequence setUp done!");
         yield return StartCoroutine(winLoseManager.WinSequence());
-
-        //winsequence - card History
-        cardHistory.ShowHistory();
-        multiplierManager.Multipliers.ToggleMultiplier(cardManager.GetCurrentCardData());
-        multiplierManager.Multipliers.ToggleMultiplierType(cardManager.GetCurrentCardData());
-        multiplierManager.Multipliers.UpdateText();
-
         yield return new WaitForSeconds(.1f);
 
         if(winLoseManager.GetTheOutCome() == OutCome.Win)

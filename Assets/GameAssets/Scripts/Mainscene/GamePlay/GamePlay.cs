@@ -69,21 +69,21 @@ public class GamePlay : MonoBehaviour
         {
             hideStart();
             showCashOut(true);
+            isGamePlayActive = true;
+            betManager.Bet.IncreaseBtn.ActivateMask();
+            betManager.Bet.DecreaseBtn.ActivateMask();
             yield return StartCoroutine(startSession());
             gamePlayManager.SetIsFirstTime(true);
             ResetCashAmount();
-            isGamePlayActive = true;
             SetCashOutAmount("0.00");
             multipliersManager.disableGuessMask();
             multipliersManager.enableGuessBtns();
-            multipliersManager.RefreshMultipliers();
             yield return StartCoroutine(gamePlayManager.cardHistory.ResetHistoryData());
             gamePlayManager.GetActiveCard().GetComponent<Card>().resetCardforGamePlay();
             gamePlayManager.cardHistory.ShowHistory();
-            betManager.Bet.IncreaseBtn.ActivateMask();
-            betManager.Bet.DecreaseBtn.ActivateMask();
             multipliersManager.Multipliers.ToggleMultiplier(cardManager.GetCurrentCardData());
             multipliersManager.Multipliers.ToggleMultiplierType(cardManager.GetCurrentCardData());
+            multipliersManager.RefreshMultipliers();
             multipliersManager.Multipliers.UpdateText();
             payOutManager.resetPayout();
         }
@@ -101,12 +101,14 @@ public class GamePlay : MonoBehaviour
             gamePlayManager.SetIsFirstTime(false);
             payOutManager.ShowPayOut();
             yield return new WaitUntil(() => isGameOver);
-            winLoseManager.resetOutCome();
-            yield return StartCoroutine(gamePlayManager.cardHistory.ResetHistoryData());
+            //yield return StartCoroutine(gamePlayManager.cardHistory.ResetHistoryData());
             betManager.Bet.IncreaseBtn.DeactivateMask();
             betManager.Bet.DecreaseBtn.DeactivateMask();
             payOutManager.payout.PayoutEffectComplete -= OnEffectComplete;
             gamePlayManager.resetPlayCounter();
+            apiManager.SkipApi.ResetSkipInit();
+
+            winLoseManager.resetOutCome();
         }
 
         gamePlayManager.ToggleGamePlaySkips();

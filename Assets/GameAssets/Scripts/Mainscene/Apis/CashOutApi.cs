@@ -93,7 +93,7 @@ public class CashOutApi : MonoBehaviour
         };
 
         string jsonData = JsonConvert.SerializeObject(request , settings);
-        Debug.Log(jsonData);
+        Debug.Log($"cashOut api request:{jsonData}");
         StartCoroutine(CashOutAction(jsonData));
     }
 
@@ -119,7 +119,7 @@ public class CashOutApi : MonoBehaviour
                 cashOutResponse = JsonConvert.DeserializeObject<CashOutResponse>(responseText);
                 var parsedJson = JToken.Parse(responseText);
                 string formattedOutput = JsonConvert.SerializeObject(parsedJson , Formatting.Indented);
-                Debug.Log($"cashout api successfully:{formattedOutput}");
+                Debug.Log($"cashout api response:{formattedOutput}");
                 IsCashOutDone = true ;
             }
         }

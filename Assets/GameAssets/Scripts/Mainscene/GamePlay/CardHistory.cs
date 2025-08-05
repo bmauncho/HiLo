@@ -157,13 +157,6 @@ public class CardHistory : MonoBehaviour
 
     public void ShowHistory (bool isSkipped = false)
     {
-        //Debug.Log(HistoryDataIndex);
-        //if (HistoryData == null || HistoryData.Count <= 0) return;
-        //Debug.Log($"{HistoryData [HistoryDataIndex].cardData.cardSuite} \n" +
-        //    $"{HistoryData [HistoryDataIndex].cardData.cardColor} \n" +
-        //    $"{HistoryData [HistoryDataIndex].cardData.cardRank} \n" +
-        //    $"{HistoryData [HistoryDataIndex].multiplierType} \n" +
-        //    $"{HistoryData [HistoryDataIndex].outCome} \n");
 
         bool canshowHistory = !gamePlayManager.Skips.IsFirstTime();
         bool IsSkip = gamePlayManager.Skips.IsFirstTime() ? 
@@ -174,11 +167,6 @@ public class CardHistory : MonoBehaviour
         CardData currCardData = cardManager.GetCurrentCardData();
 
         MultiplierType multiplierType = multiplierManager.selectedMultiplier;
-        //MultiplierType newMultiplierType = 
-        //    gamePlayManager.whichSelectedMultiplier(
-        //        prevCardData , 
-        //        currCardData , 
-        //        multiplierType);
 
         Debug.Log($"multipler type : {multiplierType.ToString()}");
 
