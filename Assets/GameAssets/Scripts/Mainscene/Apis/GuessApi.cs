@@ -62,29 +62,34 @@ public class GuessApi : MonoBehaviour
         settings.Formatting = Formatting.Indented;
 
         bool IsFirstTime = gamePlayMan.Get_IsFirstTime();
-        bool IsSkip = gamePlayMan.Get_IsSkip();
+        bool IsFromSkip = gamePlayMan.GetIsFromSkipping();
 
         //if is firstTime or if is not first time && if skip or not
         GameState selectedGameState;
         string selectedSignature;
 
-        if (IsFirstTime)
+        switch (IsFirstTime)
         {
-            selectedGameState = apiMan.StartApi.gameResponse.game_state;
-            selectedSignature = apiMan.StartApi.gameResponse.signature;
-            Debug.Log("Using StartApi game_state & signature");
-        }
-        else if (IsSkip)
-        {
-            selectedGameState = apiMan.SkipApi.skipResponse.game_state;
-            selectedSignature = apiMan.SkipApi.skipResponse.signature;
-            Debug.Log("Using SkipApi game_state & signature");
-        }
-        else
-        {
-            selectedGameState = guessResponse.game_state;
-            selectedSignature = guessResponse.signature;
-            Debug.Log("Using guessResponse game_state & signature");
+            case true:
+                selectedGameState = apiMan.StartApi.gameResponse.game_state;
+                selectedSignature = apiMan.StartApi.gameResponse.signature;
+                Debug.Log("Using StartApi game_state & signature");
+                break;
+            case false:
+                switch (IsFromSkip)
+                {
+                    case true:
+                        selectedGameState = apiMan.SkipApi.skipResponse.game_state;
+                        selectedSignature = apiMan.SkipApi.skipResponse.signature;
+                        Debug.Log("Using guessResponse game_state & signature");
+                        break;
+                    case false:
+                        selectedGameState = guessResponse.game_state;
+                        selectedSignature = guessResponse.signature;
+                        Debug.Log("Using guessResponse game_state & signature");
+                        break;
+                }
+                break;
         }
 
         Debug.Log($"Selected GameState: {selectedGameState}");

@@ -47,17 +47,37 @@ public class SkipApi : MonoBehaviour
 
 
         bool IsFirstTime = gamePlayMan.Get_IsFirstTime();
-        bool IsSkip = gamePlayMan.Get_IsSkip();
+        bool IsFromSkip = gamePlayMan.GetIsFromSkipping();
 
         //if is firstTime or if is not first time && if skip or not
         GameState selectedGameState = null;
         string selectedSignature = "";
-
+        switch (IsFirstTime)
+        {
+            case true:
+                selectedGameState = apiMan.StartApi.gameResponse.game_state;
+                selectedSignature = apiMan.StartApi.gameResponse.signature;
+                Debug.Log("Using StartApi game_state & signature");
+                break;
+            case false:
+                switch (IsFromSkip)
+                {
+                    case true:
+                        selectedGameState = skipResponse.game_state;
+                        selectedSignature = skipResponse.signature;
+                        Debug.Log("Using skipresponse game_state & signature");
+                        break;
+                    case false:
+                        selectedGameState = apiMan.guessApi.guessResponse.game_state;
+                        selectedSignature = apiMan.guessApi.guessResponse.signature;
+                        Debug.Log("Using guessResponse game_state & signature");
+                        break;
+                }
+                break;
+        }
         if (IsFirstTime)
         {
-            selectedGameState = apiMan.StartApi.gameResponse.game_state;
-            selectedSignature = apiMan.StartApi.gameResponse.signature;
-            Debug.Log("Using StartApi game_state & signature");
+            
         }
         else
         {

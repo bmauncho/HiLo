@@ -365,15 +365,18 @@ public class MultiplierManager : MonoBehaviour
         {
             var matchingMultiplier = betOptions
                     .FirstOrDefault(m => parsetoEnum(m.id) == multiplier.multiplier);
-
+            string multiplierValueString = string.Empty;
             if (matchingMultiplier != null)
             {
                 string multiplierValue = matchingMultiplier.multiplier.ToString();
-                Debug.Log(multiplierValue);
+                CardData cardData = cardManager.GetCurrentCardData();
+
+                multiplierValueString = multiplierValue;
+
                 temp.Add(new MultiplierConfig
                 {
                     multiplierType = parsetoEnum(matchingMultiplier.id) ,
-                    Multiplier = matchingMultiplier.multiplier.ToString(),
+                    Multiplier = multiplierValueString ,
                 });
             }
         }

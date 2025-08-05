@@ -29,6 +29,7 @@ public class GamePlayManager : MonoBehaviour
     public bool IsSkip = false;
     int playsCounter = 0;
     bool isGuessing = false;
+    bool isFromSkipping = false;
     public void Start ()
     {
         poolManager = CommandCenter.Instance.poolManager_;
@@ -229,6 +230,7 @@ public class GamePlayManager : MonoBehaviour
         } 
         isGuessing = false;
         gamePlay.SetCashOutButtonInteractivity(true);
+        setisfromskiping(false);
         yield return null;
     }
 
@@ -316,10 +318,18 @@ public class GamePlayManager : MonoBehaviour
     public void SetIsSkip(bool value )
     {
         IsSkip = value;
+        setisfromskiping(!value);
+    }
+
+    public void setisfromskiping(bool value )
+    {
+        isFromSkipping = value;
     }
 
     public bool Get_IsSkip() { return IsSkip; }
     public bool Get_IsFirstTime() { return IsFirstTime; }
+
+    public bool GetIsFromSkipping () { return isFromSkipping; }
 
     public void resetPlayCounter ()
     {
