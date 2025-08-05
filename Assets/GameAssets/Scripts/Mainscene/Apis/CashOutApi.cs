@@ -4,6 +4,7 @@ using System.Collections;
 using System.Text;
 using UnityEngine;
 using UnityEngine.Networking;
+using static UnityEditor.AddressableAssets.Build.BuildPipelineTasks.GenerateLocationListsTask;
 [System.Serializable]
 public class CashOutRequest
 {
@@ -28,6 +29,8 @@ public class CashOutApi : MonoBehaviour
     ApiManager apiMan;
     GamePlayManager gamePlayMan;
     public CashOutResponse cashOutResponse;
+    public bool IsCashOutDone = false;
+    public bool init;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -37,6 +40,8 @@ public class CashOutApi : MonoBehaviour
 
     public void CashOut ()
     {
+        IsCashOutDone = false;
+
         var settings = new JsonSerializerSettings();
         settings.Converters.Add(new FloatTrimConverter());
         settings.Formatting = Formatting.Indented;
@@ -44,14 +49,48 @@ public class CashOutApi : MonoBehaviour
         bool IsFirstTime = gamePlayMan.Get_IsFirstTime();
         bool IsSkip = gamePlayMan.Get_IsSkip();
 
+        //if is firstTime or if is not first time && if skip or not
+        GameState selectedGameState;
+        string selectedSignature;
+
+        switch (IsSkip)
+        {
+            case true:
+                selectedGameState = apiMan.SkipApi.skipResponse.game_state;
+                selectedSignature = apiMan.SkipApi.skipResponse.signature;
+                Debug.Log("Using SkipApi game_state & signature");
+                break;
+            case false:
+                switch (init)
+                {
+                    case true:
+
+                        selectedGameState = apiMan.guessApi.guessResponse.game_state;
+                        selectedSignature = apiMan.guessApi.guessResponse.signature;
+                        Debug.Log("Using guessResponse game_state & signature");
+                        break;
+                    case false:
+                        selectedGameState = apiMan.StartApi.gameResponse.game_state;
+                        selectedSignature = apiMan.StartApi.gameResponse.signature;
+                        Debug.Log("Using StartApi game_state & signature");
+                        init = true;
+                        break;
+                }
+
+                break;
+        }
+
+        Debug.Log($"Selected GameState: {selectedGameState}");
+        Debug.Log($"Selected Signature: {selectedSignature}");
+
         CashOutRequest request = new CashOutRequest
         {
             client_id = apiMan.GetClientId() ,
             game_id = apiMan.GetGameId() ,
             player_id = apiMan.GetPlayerId() ,
             bet_id = apiMan.GetBetId() ,
-            game_state = IsFirstTime ? apiMan.StartApi.gameResponse.game_state : IsSkip ? apiMan.SkipApi.skipResponse.game_state : apiMan.guessApi.guessResponse.game_state ,
-            signature = IsFirstTime ? apiMan.StartApi.gameResponse.signature : IsSkip ? apiMan.SkipApi.skipResponse.signature : apiMan.guessApi.guessResponse.signature ,
+            game_state = selectedGameState,
+            signature = selectedSignature,
         };
 
         string jsonData = JsonConvert.SerializeObject(request , settings);
@@ -73,14 +112,16 @@ public class CashOutApi : MonoBehaviour
             if (webRequest.result == UnityWebRequest.Result.ConnectionError || webRequest.result == UnityWebRequest.Result.ProtocolError)
             {
                 Debug.LogError("Error: " + webRequest.error);
+                IsCashOutDone = true;
             }
             else
             {
                 string responseText = webRequest.downloadHandler.text;
-                cashOutResponse = JsonUtility.FromJson<CashOutResponse>(responseText);
+                cashOutResponse = JsonConvert.DeserializeObject<CashOutResponse>(responseText);
                 var parsedJson = JToken.Parse(responseText);
                 string formattedOutput = JsonConvert.SerializeObject(parsedJson , Formatting.Indented);
                 Debug.Log($"Guess api successfully:{formattedOutput}");
+                IsCashOutDone = true ;
             }
         }
     }

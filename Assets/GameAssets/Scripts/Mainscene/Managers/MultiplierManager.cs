@@ -5,11 +5,11 @@ using UnityEngine;
 public enum MultiplierType
 {
     None = 0,
-    High,
-    HighOrSame,
-    Same,
-    Low,
-    LowOrSame,
+    higher,
+    higher_or_same,
+    same,
+    lower,
+    lower_or_same,
 }
 [System.Serializable]
 public class multiplierDetails
@@ -198,12 +198,12 @@ public class MultiplierManager : MonoBehaviour
 
             foreach (var multi in multiDetails.multipliers)
             {
-                // Skip 'Same' type multipliers if skipping is enabled
-                if (isSkip && multi.multiplierType == MultiplierType.Same)
+                // Skip 'same' type multipliers if skipping is enabled
+                if (isSkip && multi.multiplierType == MultiplierType.same)
                     continue;
 
-                bool isKing = multiDetails.Rank == CardRanks.KING && multi.multiplierType == MultiplierType.High;
-                bool isAce = multiDetails.Rank == CardRanks.ACE && multi.multiplierType == MultiplierType.Low;
+                bool isKing = multiDetails.Rank == CardRanks.KING && multi.multiplierType == MultiplierType.higher;
+                bool isAce = multiDetails.Rank == CardRanks.ACE && multi.multiplierType == MultiplierType.lower;
 
                 float multiplierValue = 0;
 

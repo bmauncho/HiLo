@@ -4,6 +4,7 @@ using System.Collections;
 using System.Text;
 using UnityEngine;
 using UnityEngine.Networking;
+using static UnityEditor.AddressableAssets.Build.BuildPipelineTasks.GenerateLocationListsTask;
 [System.Serializable]
 public class SkipRequest
 {
@@ -44,8 +45,35 @@ public class SkipApi : MonoBehaviour
         settings.Converters.Add(new FloatTrimConverter());
         settings.Formatting = Formatting.Indented;
 
+
         bool IsFirstTime = gamePlayMan.Get_IsFirstTime();
         bool IsSkip = gamePlayMan.Get_IsSkip();
+
+        //if is firstTime or if is not first time && if skip or not
+        GameState selectedGameState;
+        string selectedSignature;
+
+        if (IsFirstTime)
+        {
+            selectedGameState = apiMan.StartApi.gameResponse.game_state;
+            selectedSignature = apiMan.StartApi.gameResponse.signature;
+            Debug.Log("Using StartApi game_state & signature");
+        }
+        else if (IsSkip)
+        {
+            selectedGameState = skipResponse.game_state;
+            selectedSignature = skipResponse.signature;
+            Debug.Log("Using SkipApi game_state & signature");
+        }
+        else
+        {
+            selectedGameState = apiMan.guessApi.guessResponse.game_state;
+            selectedSignature = apiMan.guessApi.guessResponse.signature;
+            Debug.Log("Using guessResponse game_state & signature");
+        }
+
+        Debug.Log($"Selected GameState: {selectedGameState}");
+        Debug.Log($"Selected Signature: {selectedSignature}");
 
         SkipRequest skipRequest = new SkipRequest
         {
@@ -53,8 +81,8 @@ public class SkipApi : MonoBehaviour
             game_id = apiMan.GetGameId() ,
             player_id = apiMan.GetPlayerId() ,
             bet_id = apiMan.GetBetId() ,
-            game_state = IsFirstTime ? apiMan.StartApi.gameResponse.game_state : IsSkip ? skipResponse.game_state : apiMan.guessApi.guessResponse.game_state ,
-            signature = IsFirstTime ? apiMan.StartApi.gameResponse.signature : IsSkip ? skipResponse.signature : apiMan.guessApi.guessResponse.signature ,
+            game_state = selectedGameState,
+            signature = selectedSignature ,
         };
 
         string jsonData = JsonConvert.SerializeObject(skipRequest , settings);
@@ -81,7 +109,7 @@ public class SkipApi : MonoBehaviour
             else
             {
                 string responseText = webRequest.downloadHandler.text;
-                skipResponse = JsonUtility.FromJson<SkipResponse>(responseText);
+                skipResponse = JsonConvert.DeserializeObject<SkipResponse>(responseText);
                 var parsedJson = JToken.Parse(responseText);
                 string formattedOutput = JsonConvert.SerializeObject(parsedJson , Formatting.Indented);
                 Debug.Log($"Guess api successfully:{formattedOutput}");

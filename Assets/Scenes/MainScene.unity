@@ -5449,7 +5449,6 @@ GameObject:
   m_Component:
   - component: {fileID: 673023297}
   - component: {fileID: 673023296}
-  - component: {fileID: 673023295}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -5457,14 +5456,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &673023295
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 673023294}
-  m_Enabled: 1
 --- !u!20 &673023296
 Camera:
   m_ObjectHideFlags: 0
@@ -6129,17 +6120,30 @@ MonoBehaviour:
     message: 
     game_state:
       seed: 
+      deck_hash: 
       current_card: 
+      unity_card: 
       position: 0
       accumulated_win: 0
       bet_amount: 0
+      skips_used: 0
       skips_remaining: 0
+      max_skips: 0
       game_history:
-        card: 
+      - card: 
+        value: 0
+        position: 0
+      - card: 
+        value: 0
+        position: 0
+      - card: 
         value: 0
         position: 0
       is_game_over: 0
+      final_win: 0
     signature: 
+  IsCashOutDone: 0
+  init: 0
 --- !u!1 &790012897
 GameObject:
   m_ObjectHideFlags: 0
@@ -7958,16 +7962,27 @@ MonoBehaviour:
     message: 
     game_state:
       seed: 
+      deck_hash: 
       current_card: 
+      unity_card: 
       position: 0
       accumulated_win: 0
       bet_amount: 0
+      skips_used: 0
       skips_remaining: 0
+      max_skips: 0
       game_history:
-        card: 
+      - card: 
+        value: 0
+        position: 0
+      - card: 
+        value: 0
+        position: 0
+      - card: 
         value: 0
         position: 0
       is_game_over: 0
+      final_win: 0
     guess_result:
       success: 
       next_card: 
@@ -7977,6 +7992,7 @@ MonoBehaviour:
       forced: 0
     bet_options: []
     signature: 
+  IsGuessDone: 0
 --- !u!1 &990325880
 GameObject:
   m_ObjectHideFlags: 0
@@ -13240,16 +13256,27 @@ MonoBehaviour:
     message: 
     game_state:
       seed: 
+      deck_hash: 
       current_card: 
+      unity_card: 
       position: 0
       accumulated_win: 0
       bet_amount: 0
+      skips_used: 0
       skips_remaining: 0
+      max_skips: 0
       game_history:
-        card: 
+      - card: 
+        value: 0
+        position: 0
+      - card: 
+        value: 0
+        position: 0
+      - card: 
         value: 0
         position: 0
       is_game_over: 0
+      final_win: 0
     guess_result:
       success: 
       next_card: 
@@ -13259,6 +13286,7 @@ MonoBehaviour:
       forced: 0
     bet_options: []
     signature: 
+  IsSkiped: 0
 --- !u!1 &1800679249
 GameObject:
   m_ObjectHideFlags: 0
@@ -14103,18 +14131,30 @@ MonoBehaviour:
     message: 
     game_state:
       seed: 
+      deck_hash: 
       current_card: 
+      unity_card: 
       position: 0
       accumulated_win: 0
       bet_amount: 0
+      skips_used: 0
       skips_remaining: 0
+      max_skips: 0
       game_history:
-        card: 
+      - card: 
+        value: 0
+        position: 0
+      - card: 
+        value: 0
+        position: 0
+      - card: 
         value: 0
         position: 0
       is_game_over: 0
+      final_win: 0
     bet_options: []
     signature: 
+  IsStartDone: 0
 --- !u!1 &1946793752
 GameObject:
   m_ObjectHideFlags: 0

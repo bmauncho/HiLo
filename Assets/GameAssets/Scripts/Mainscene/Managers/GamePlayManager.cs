@@ -51,6 +51,7 @@ public class GamePlayManager : MonoBehaviour
         SetActiveCard(card);
         if (cardComponent != null)
         {
+            Debug.Log("c");
             CardData cardData = cardManager.GetCardData();
             cardComponent.SetCard(
                cardData.cardSuite ,
@@ -71,8 +72,7 @@ public class GamePlayManager : MonoBehaviour
 
     public void ToggleGamePlay ()
     {
-        StartCoroutine( gamePlay.ToggleGamePlay(this));
-        ToggleGamePlaySkips();
+        StartCoroutine(gamePlay.ToggleGamePlay(this));
     }
 
     public bool IsGameStarted ()
@@ -110,9 +110,8 @@ public class GamePlayManager : MonoBehaviour
 
         if(!CommandCenter.Instance.IsDemo())
         {
-            bool IsDone = apiManager.SkipApi.IsSkiped;
             apiManager.SkipApi.Skip();
-            yield return new WaitUntil(() => IsDone);
+            yield return new WaitUntil(() => apiManager.SkipApi.IsSkiped);
         }
 
         StartCoroutine(removeCard.removeCurrentCard(deck , poolManager));
@@ -190,10 +189,9 @@ public class GamePlayManager : MonoBehaviour
             Skips.setIsFirstTime(false);
             Skips.ResetSkips();
             gamePlay.showCashOut(false);
-            SetIsFirstTime(false);
         }
         //bet
-        StartCoroutine(currencyManager.Bet());
+        SetIsFirstTime(false);
         //winsequence
         CardData prevCardData = cardManager.GetPrevCardData();
         CardData currCardData = cardManager.GetCurrentCardData();
@@ -227,28 +225,28 @@ public class GamePlayManager : MonoBehaviour
 
         switch (selectedMultiplier)
         {
-            case MultiplierType.High:
+            case MultiplierType.higher:
                 if (prev == ace && curr > prev)
                 {
-                    return MultiplierType.High;
+                    return MultiplierType.higher;
                 }
                 else 
                 {
-                    return MultiplierType.HighOrSame;
+                    return MultiplierType.higher_or_same;
                 }
 
-            case MultiplierType.Low:
+            case MultiplierType.lower:
                 if (prev == king && curr < prev)
                 {
-                    return MultiplierType.Low;
+                    return MultiplierType.lower;
                 }
                 else 
                 {
-                    return MultiplierType.LowOrSame;
+                    return MultiplierType.lower_or_same;
                 }
 
-            case MultiplierType.Same:
-                return MultiplierType.Same;
+            case MultiplierType.same:
+                return MultiplierType.same;
         }
 
         return MultiplierType.None;

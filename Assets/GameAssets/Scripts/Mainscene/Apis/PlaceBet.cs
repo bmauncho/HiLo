@@ -1,4 +1,5 @@
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections;
 using System.Text;
@@ -101,7 +102,8 @@ public class PlaceBet : MonoBehaviour
             {
                 string responseText = webRequest.downloadHandler.text;
                 betResponse = JsonUtility.FromJson<BetResponse>(responseText);
-                string formattedOutput = JsonConvert.SerializeObject(webRequest.downloadHandler.text , Formatting.Indented);
+                var parsedJson = JToken.Parse(responseText);
+                string formattedOutput = JsonConvert.SerializeObject(parsedJson , Formatting.Indented);
                 Debug.Log($"Bet placed successfully:{formattedOutput}");
                 double CashAmount = betResponse.new_wallet_balance;
                 IsBetPlaced = true;

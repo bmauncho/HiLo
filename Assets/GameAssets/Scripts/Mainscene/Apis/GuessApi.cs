@@ -44,6 +44,7 @@ public class GuessApi : MonoBehaviour
     MultiplierManager multipliersMan;
     GamePlayManager gamePlayMan;
     public GuessResponse guessResponse;
+    public bool IsGuessDone = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -55,6 +56,7 @@ public class GuessApi : MonoBehaviour
     [ContextMenu("Guess")]
     public void Guess ()
     {
+        IsGuessDone = false;
         var settings = new JsonSerializerSettings();
         settings.Converters.Add(new FloatTrimConverter());
         settings.Formatting = Formatting.Indented;
@@ -63,16 +65,42 @@ public class GuessApi : MonoBehaviour
         bool IsSkip = gamePlayMan.Get_IsSkip();
 
         //if is firstTime or if is not first time && if skip or not
+        GameState selectedGameState;
+        string selectedSignature;
+
+        if (IsFirstTime)
+        {
+            selectedGameState = apiMan.StartApi.gameResponse.game_state;
+            selectedSignature = apiMan.StartApi.gameResponse.signature;
+            Debug.Log("Using StartApi game_state & signature");
+        }
+        else if (IsSkip)
+        {
+            selectedGameState = apiMan.SkipApi.skipResponse.game_state;
+            selectedSignature = apiMan.SkipApi.skipResponse.signature;
+            Debug.Log("Using SkipApi game_state & signature");
+        }
+        else
+        {
+            selectedGameState = guessResponse.game_state;
+            selectedSignature = guessResponse.signature;
+            Debug.Log("Using guessResponse game_state & signature");
+        }
+
+        Debug.Log($"Selected GameState: {selectedGameState}");
+        Debug.Log($"Selected Signature: {selectedSignature}");
+
         GuessRequest request = new GuessRequest
         {
             client_id = apiMan.GetClientId() ,
             game_id = apiMan.GetGameId() ,
             player_id = apiMan.GetPlayerId() ,
-            bet_id = apiMan.GetBetId() ,
-            game_state = IsFirstTime ? apiMan.StartApi.gameResponse.game_state : IsSkip ? guessResponse.game_state : guessResponse.game_state,
-            bet_choice= multipliersMan.selectedMultiplier.ToString(),
-            signature = IsFirstTime ? apiMan.StartApi.gameResponse.signature: IsSkip ? guessResponse.signature: guessResponse.signature,
+            bet_id = apiMan.SetBetId() ,
+            game_state = selectedGameState ,
+            bet_choice = multipliersMan.selectedMultiplier.ToString() ,
+            signature = selectedSignature ,
         };
+
         string jsonData = JsonConvert.SerializeObject(request , settings);
         Debug.Log(jsonData);
         StartCoroutine(GuessAction(jsonData));
@@ -92,14 +120,16 @@ public class GuessApi : MonoBehaviour
             if (webRequest.result == UnityWebRequest.Result.ConnectionError || webRequest.result == UnityWebRequest.Result.ProtocolError)
             {
                 Debug.LogError("Error: " + webRequest.error);
+                IsGuessDone = true;
             }
             else
             {
                 string responseText = webRequest.downloadHandler.text;
-                guessResponse = JsonUtility.FromJson<GuessResponse>(responseText);
+                guessResponse = JsonConvert.DeserializeObject<GuessResponse>(responseText);
                 var parsedJson = JToken.Parse(responseText);
                 string formattedOutput = JsonConvert.SerializeObject(parsedJson , Formatting.Indented);
                 Debug.Log($"Guess api successfully:{formattedOutput}");
+                IsGuessDone=true;
             }
         }
     }

@@ -14,27 +14,27 @@ public static class ProbabilityCalculator
 
         switch (guessType)
         {
-            case MultiplierType.Low:
+            case MultiplierType.lower:
                 // Cards strictly lower than current
                 favorableRanks = currentRank;
                 break;
 
-            case MultiplierType.High:
+            case MultiplierType.higher:
                 // Cards strictly higher than current
                 favorableRanks = TotalRanks - currentRank - 1;
                 break;
 
-            case MultiplierType.Same:
+            case MultiplierType.same:
                 // Cards with the same rank
                 favorableRanks = 1;
                 break;
 
-            case MultiplierType.LowOrSame:
+            case MultiplierType.lower_or_same:
                 // Cards lower or same
                 favorableRanks = currentRank + 1;
                 break;
 
-            case MultiplierType.HighOrSame:
+            case MultiplierType.higher_or_same:
                 // Cards higher or same
                 favorableRanks = TotalRanks - currentRank;
                 break;

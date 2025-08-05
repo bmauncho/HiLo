@@ -66,11 +66,11 @@ public class WinLoseManager : MonoBehaviour
     {
         return selectedMultiplier switch
         {
-            MultiplierType.High => nextCard > currentCard,
-            MultiplierType.HighOrSame => nextCard >= currentCard,
-            MultiplierType.Low => nextCard < currentCard,
-            MultiplierType.LowOrSame => nextCard <= currentCard,
-            MultiplierType.Same => nextCard == currentCard,
+            MultiplierType.higher => nextCard > currentCard,
+            MultiplierType.higher_or_same => nextCard >= currentCard,
+            MultiplierType.lower => nextCard < currentCard,
+            MultiplierType.lower_or_same => nextCard <= currentCard,
+            MultiplierType.same => nextCard == currentCard,
             _ => false
         };
     }

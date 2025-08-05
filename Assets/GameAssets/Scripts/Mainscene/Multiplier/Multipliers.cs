@@ -11,10 +11,10 @@ public class Multipliers : MonoBehaviour
             switch (card.cardRank)
             {
                 case CardRanks.ACE:
-                    p.SetInteractable(p.multiplier != MultiplierType.Low);
+                    p.SetInteractable(p.multiplier != MultiplierType.lower);
                     break;
                 case CardRanks.KING:
-                    p.SetInteractable(p.multiplier != MultiplierType.High);
+                    p.SetInteractable(p.multiplier != MultiplierType.higher);
                     break;
                 default:
                     p.enableBtn();
@@ -32,47 +32,65 @@ public class Multipliers : MonoBehaviour
         {
             switch (p.multiplier)
             {
-                case MultiplierType.High:
-                    if (!isKing)
-                        p.multiplier = MultiplierType.HighOrSame;
-                    break;
-
-                case MultiplierType.HighOrSame:
-                    if (isKing)
-                    {
-                        p.multiplier = MultiplierType.High;
-                    }
-                    else
-                    {
-                        p.multiplier = MultiplierType.HighOrSame;
-                    }
-                    break;
-
-                case MultiplierType.Low:
-                    if (!isAce)
-                        p.multiplier = MultiplierType.LowOrSame;
-                    break;
-
-                case MultiplierType.LowOrSame:
+                case MultiplierType.higher:
                     if (isAce)
                     {
-                        p.multiplier = MultiplierType.Low;
+                        p.multiplier = MultiplierType.higher;
                     }
                     else
                     {
-                        p.multiplier = MultiplierType.LowOrSame;
+                        p.multiplier = MultiplierType.higher_or_same;
+                    }
+
+                        break;
+
+                case MultiplierType.higher_or_same:
+                    if (isKing)
+                    {
+                        p.multiplier = MultiplierType.higher_or_same;
+                    }
+                    else if (isAce)
+                    {
+                        p.multiplier = MultiplierType.higher;
                     }
                     break;
-                case MultiplierType.Same:
-                    p.multiplier = MultiplierType.Same;
+
+                case MultiplierType.lower:
+                    if (isAce)
+                    {
+                        p.multiplier = MultiplierType.lower;
+                    }
+                    else if (isKing)
+                    {
+                        p.multiplier = MultiplierType.lower;
+                    }
+                    else
+                    {
+                        p.multiplier = MultiplierType.lower_or_same;
+                    }
+
+                        break;
+
+                case MultiplierType.lower_or_same:
+                    if (isKing)
+                    {
+                        p.multiplier = MultiplierType.lower;
+                    }
+                    else
+                    {
+                        p.multiplier = MultiplierType.lower_or_same;
+                    }
+                    break;
+                case MultiplierType.same:
+                    p.multiplier = MultiplierType.same;
                     break;
 
-                default:
-                    if (isKing)
-                        p.multiplier = MultiplierType.High;
-                    else if (isAce)
-                        p.multiplier = MultiplierType.Low;
-                    break;
+                //default:
+                //    //if (isKing)
+                //    //    p.multiplier = MultiplierType.higher_or_same;
+                //    //else if (isAce)
+                //    //    p.multiplier = MultiplierType.lower_or_same;
+                //    break;
             }
         }
     }

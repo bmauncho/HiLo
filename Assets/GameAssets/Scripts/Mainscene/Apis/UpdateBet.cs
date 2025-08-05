@@ -1,4 +1,5 @@
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System.Collections;
 using System.Text;
 using UnityEngine;
@@ -63,7 +64,8 @@ public class UpdateBet : MonoBehaviour
             else
             {
                 updateBetResponse = JsonUtility.FromJson<UpdateBetResponse>(webRequest.downloadHandler.text);
-                string formattedOutput = JsonConvert.SerializeObject(webRequest.downloadHandler.text , Formatting.Indented);
+                var parsedJson = JToken.Parse(webRequest.downloadHandler.text);
+                string formattedOutput = JsonConvert.SerializeObject(parsedJson , Formatting.Indented);
                 Debug.Log("UpdateBet Response: " + formattedOutput);
                 //AmountWon = updateBetResponse.amount_won.ToString();
                 double cashAmount = double.Parse(updateBetResponse.new_wallet_balance);

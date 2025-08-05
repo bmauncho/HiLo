@@ -1,13 +1,15 @@
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using UnityEngine;
+using Random = UnityEngine.Random;
 public enum CardSuites
 {
-    CLUB,
-    DIAMOND,
-    HEART,
-    SPADE,
+    CLUBS,
+    DIAMONDS,
+    HEARTS,
+    SPADES,
 }
 
 public enum CardColor
@@ -115,6 +117,8 @@ public class CardData
 
 public class CardManager : MonoBehaviour
 {
+    GamePlayManager gamePlayManager;
+    ApiManager apiManager;
     [Header("Card Suites and Ranks")]
     public Suites [] suitesList;
     public Ranks [] ranksList;
@@ -131,6 +135,7 @@ public class CardManager : MonoBehaviour
     [Header("Card Data")]
     [SerializeField] private CardData prevCard;
     [SerializeField] private CardData currentCard;
+    bool init = false;
     private void Awake ()
     {
         InitializeDefaultSuiteWeights();
@@ -139,8 +144,9 @@ public class CardManager : MonoBehaviour
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
-    { 
-
+    {
+        gamePlayManager = CommandCenter.Instance.gamePlayManager_;
+        apiManager = CommandCenter.Instance.apiManager_;
     }
 
     // Update is called once per frame
@@ -244,10 +250,10 @@ public class CardManager : MonoBehaviour
     {
         if (suiteWeights.Count == 0)
         {
-            suiteWeights.Add(new SuiteWeight(CardSuites.CLUB , 5f));
-            suiteWeights.Add(new SuiteWeight(CardSuites.DIAMOND , 5f));
-            suiteWeights.Add(new SuiteWeight(CardSuites.HEART , 5f));
-            suiteWeights.Add(new SuiteWeight(CardSuites.SPADE , 5f));
+            suiteWeights.Add(new SuiteWeight(CardSuites.CLUBS , 5f));
+            suiteWeights.Add(new SuiteWeight(CardSuites.DIAMONDS , 5f));
+            suiteWeights.Add(new SuiteWeight(CardSuites.HEARTS , 5f));
+            suiteWeights.Add(new SuiteWeight(CardSuites.SPADES , 5f));
         }
 
         totalSuiteWeight = suiteWeights.Sum(weight => weight.weight); // Precompute total weights
@@ -276,7 +282,7 @@ public class CardManager : MonoBehaviour
                 return weight.cardSuite; // Return the corresponding card suite
             }
         }
-        return CardSuites.CLUB; // Default return if no match found
+        return CardSuites.CLUBS; // Default return if no match found
     }
 
     public CardColor GetRandomCardColor ( CardSuites suite )
@@ -316,11 +322,22 @@ public class CardManager : MonoBehaviour
     {
         prevCard = currentCard;
         CardData data = new CardData();
-        data.cardSuite = GetRandomCardSuite();
-        data.cardColor = GetRandomCardColor(data.cardSuite);
-        data.cardRank = GetRandomCardRank();
+       
+        if (CommandCenter.Instance.IsDemo())
+        {
+            data.cardSuite = GetRandomCardSuite();
+            data.cardColor = GetRandomCardColor(data.cardSuite);
+            data.cardRank = GetRandomCardRank();
+        }
+        else
+        {
+            CardData newData = GetCardDataFromApi();
+            data.cardSuite = newData.cardSuite;
+            data.cardColor = GetRandomCardColor(data.cardSuite);
+            data.cardRank = newData.cardRank;
+        }
 
-        if(!isColorAvailable(data.cardSuite , data.cardColor))
+        if (!isColorAvailable(data.cardSuite , data.cardColor))
         {
             Debug.LogWarning($"Color {data.cardColor} is not available for suite {data.cardSuite}");
             // if black color is not available, fallback to red or a default color
@@ -375,4 +392,81 @@ public class CardManager : MonoBehaviour
         //when we lose
         currentCard = prevCard;
     }
+    //live
+    public CardData GetCardDataFromApi ()
+    {
+        CardData data = new CardData();
+        string currentCard = "";
+
+        bool IsFirstTime = gamePlayManager.Get_IsFirstTime();
+        bool IsSkip = gamePlayManager.Get_IsSkip();
+
+        switch (IsSkip)
+        {
+            case true:
+                currentCard = apiManager.SkipApi.skipResponse.game_state.current_card;
+                //Debug.Log(currentCard);
+                break;
+            case false:
+                switch (init)
+                {
+                    case true:
+                        currentCard = apiManager.guessApi.guessResponse.game_state.current_card;
+                       // Debug.Log(currentCard);
+                        break;
+                    case false:
+                        string rank = GetRandomCardRank().ToString();
+                        string suit = GetRandomCardSuite().ToString();
+                        currentCard = $"{rank}_{suit}";
+                        init = true;
+                       // Debug.Log(currentCard);
+                        break;
+                }
+               
+                break;
+        }
+
+        Debug.Log(currentCard);
+        CardData newData = ParseCard(currentCard);
+        data = new CardData
+        {
+            cardRank = newData.cardRank ,
+            cardSuite = newData.cardSuite,
+        };
+        return data;
+    }
+
+    public CardData ParseCard ( string currentCard )
+    {
+        if (string.IsNullOrWhiteSpace(currentCard))
+            throw new ArgumentException("Invalid card format: <null or empty>");
+
+        string [] parts = currentCard.Split('_');
+        if (parts.Length != 2)
+            throw new ArgumentException("Invalid card format: " + currentCard);
+
+        string part1 = parts [0];
+        string part2 = parts [1];
+
+        bool part1IsSuit = Enum.TryParse<CardSuites>(part1 , true , out var suit1);
+        bool part2IsRank = Enum.TryParse<CardRanks>(part2 , true , out var rank1);
+
+        if (part1IsSuit && part2IsRank)
+        {
+            return new CardData { cardSuite = suit1 , cardRank = rank1 };
+        }
+
+        // Try reversed
+        bool part2IsSuit = Enum.TryParse<CardSuites>(part2 , true , out var suit2);
+        bool part1IsRank = Enum.TryParse<CardRanks>(part1 , true , out var rank2);
+
+        if (part2IsSuit && part1IsRank)
+        {
+            return new CardData { cardSuite = suit2 , cardRank = rank2 };
+        }
+
+        throw new ArgumentException($"Invalid card format or enums do not match: {currentCard}");
+    }
+
+
 }

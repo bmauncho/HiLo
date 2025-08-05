@@ -14,6 +14,7 @@ public class StartGameRequest
     public string player_id;
     public string bet_id;
     public float bet_amount;
+    public string card;
 }
 
 [System.Serializable]
@@ -30,13 +31,18 @@ public class StartGameResponse
 public class GameState
 {
     public string seed;
+    public string deck_hash;
     public string current_card;
+    public string unity_card;
     public int position;
     public float accumulated_win;
     public float bet_amount;
+    public int skips_used;
     public int skips_remaining;
-    public GameHistory game_history;
+    public int max_skips;
+    public GameHistory[] game_history;
     public bool is_game_over;
+    public double final_win;
 }
 
 [System.Serializable]
@@ -60,19 +66,25 @@ public class GameHistory
 public class StartApi : MonoBehaviour
 {
     ApiManager apiMan;
+    CardManager cardMan;
     public StartGameResponse gameResponse;
+    public bool IsStartDone =false; 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         apiMan = CommandCenter.Instance.apiManager_;
+        cardMan = CommandCenter.Instance.cardManager_;
     }
 
     [ContextMenu("start Game")]
     public void startGame ()
     {
+        IsStartDone = false;
         var settings = new JsonSerializerSettings();
         settings.Converters.Add(new FloatTrimConverter());
         settings.Formatting = Formatting.Indented;
+
+        CardData data = cardMan.GetCurrentCardData();
         
         StartGameRequest startGameRequest = new StartGameRequest
         {
@@ -81,6 +93,7 @@ public class StartApi : MonoBehaviour
             player_id = apiMan.GetPlayerId() ,
             bet_id = apiMan.SetBetId(),
             bet_amount = GetBetAmount(),
+            card = $"{data.cardRank}_{data.cardSuite}",
         };
 
         string jsonData = JsonConvert.SerializeObject(startGameRequest , settings);
@@ -102,15 +115,16 @@ public class StartApi : MonoBehaviour
             if (webRequest.result == UnityWebRequest.Result.ConnectionError || webRequest.result == UnityWebRequest.Result.ProtocolError)
             {
                 Debug.LogError("Error: " + webRequest.error);
+                IsStartDone = true;
             }
             else
             {
                 string responseText = webRequest.downloadHandler.text;
-                gameResponse = JsonUtility.FromJson<StartGameResponse>(responseText);
+                gameResponse = JsonConvert.DeserializeObject<StartGameResponse>(responseText);
                 var parsedJson = JToken.Parse(responseText);
                 string formattedOutput = JsonConvert.SerializeObject(parsedJson , Formatting.Indented);
                 Debug.Log($"Start api successfully:{formattedOutput}");
- 
+                IsStartDone = true;
             }
         }
     }
