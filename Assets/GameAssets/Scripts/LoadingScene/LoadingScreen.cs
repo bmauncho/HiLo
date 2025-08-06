@@ -141,10 +141,12 @@ public class LoadingScreen : MonoBehaviour
 
             yield return new WaitUntil(() => GameManager.Instance.IsDataFetched());
 
+            if (!GameManager.Instance.IsDemo())
+            {
+                GameManager.Instance.previewApi.InitializeGame();
 
-            GameManager.Instance.previewApi.InitializeGame();
-
-            yield return new WaitUntil(() => GameManager.Instance.previewApi.IsPreviewDone);
+                yield return new WaitUntil(() => GameManager.Instance.previewApi.IsPreviewDone);
+            }
 
             Debug.Log($"isDataFetched : {GameManager.Instance.IsDataFetched()}");
             handle.Result.ActivateAsync();

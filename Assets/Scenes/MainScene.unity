@@ -5405,7 +5405,7 @@ MonoBehaviour:
       Translation: {fileID: 21300000, guid: 0d35596967ede524281d8efe7e523366, type: 3}
     - language: 1
       Translation: {fileID: 21300000, guid: ec56ffb0bed292a47ab5cff3be7f95d4, type: 3}
-    - language: 0
+    - language: 9
       Translation: {fileID: 21300000, guid: dcf11537d19f6094596651e2f428e11d, type: 3}
   multiplierDetailsList:
   - Rank: 0
