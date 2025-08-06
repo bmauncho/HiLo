@@ -400,12 +400,20 @@ public class CardManager : MonoBehaviour
 
         bool IsFirstTime = gamePlayManager.Get_IsFirstTime();
         bool IsSkip = gamePlayManager.Get_IsSkip();
+        bool IsGameStarted = gamePlayManager.IsGameStarted();
 
         switch (IsSkip)
         {
             case true:
-                currentCard = apiManager.SkipApi.skipResponse.game_state.current_card;
-                //Debug.Log(currentCard);
+                switch (IsGameStarted)
+                {
+                    case true:
+                        currentCard = apiManager.SkipApi.skipResponse.game_state.current_card;
+                        break;
+                    case false:
+                        currentCard = apiManager.previewSkipApi.response.current_card;
+                        break;
+                }
                 break;
             case false:
                 switch (init)
@@ -415,9 +423,7 @@ public class CardManager : MonoBehaviour
                        // Debug.Log(currentCard);
                         break;
                     case false:
-                        string rank = GetRandomCardRank().ToString();
-                        string suit = GetRandomCardSuite().ToString();
-                        currentCard = $"{rank}_{suit}";
+                        currentCard = $"{GameManager.Instance.previewApi.response.current_card}";
                         init = true;
                        // Debug.Log(currentCard);
                         break;
@@ -467,6 +473,5 @@ public class CardManager : MonoBehaviour
 
         throw new ArgumentException($"Invalid card format or enums do not match: {currentCard}");
     }
-
 
 }

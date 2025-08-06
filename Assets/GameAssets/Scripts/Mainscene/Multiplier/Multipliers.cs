@@ -3,7 +3,13 @@ using UnityEngine;
 public class Multipliers : MonoBehaviour
 {
     public Multiplier [] multipliers;
-
+    private void Start ()
+    {
+        if (LanguageMan.instance != null)
+        {
+            LanguageMan.instance.onLanguageRefresh.AddListener(UpdateText);
+        }
+    }
     public void ToggleMultiplier ( CardData card )
     {
         foreach (Multiplier p in multipliers)
@@ -68,7 +74,13 @@ public class Multipliers : MonoBehaviour
             {
                 if(p.multiplier == button.multiplierType)
                 {
-                    p.SetTypeText(button.Type);
+                    foreach(var buttonType in button.translationInfo)
+                    {
+                        if(buttonType.language == LanguageMan.instance.ActiveLanguage)
+                        {
+                            p.SetTypeText(buttonType.Translation);
+                        }
+                    }
                 }
             }
         }

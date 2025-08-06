@@ -29,8 +29,9 @@ public class MultiplierConfig
 public class MultiplierButtonDetails
 {
     public MultiplierType multiplierType;
-    public Sprite Type;
+    public ImageTranslationInfo [] translationInfo;
 }
+
 public class MultiplierManager : MonoBehaviour
 {
     GamePlayManager gamePlayManager;
@@ -40,6 +41,8 @@ public class MultiplierManager : MonoBehaviour
     public Multipliers Multipliers;
     public MultiplierButtonDetails [] buttonDetails;
     public multiplierDetails [] multiplierDetailsList;
+
+    bool Init=false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start ()
     {
@@ -205,23 +208,47 @@ public class MultiplierManager : MonoBehaviour
     {
         bool IsFirstTime = gamePlayManager.Get_IsFirstTime();
         bool IsSkip = gamePlayManager.Get_IsSkip();
+        bool IsGameStarted = gamePlayManager.IsGameStarted();
 
-        BetOptions [] betOptions; 
+        BetOptions [] betOptions;
 
-        if (IsFirstTime)
+        switch (Init)
         {
-            betOptions = apiManager.StartApi.gameResponse.bet_options;
+            case true:
+                switch (IsSkip)
+                {
+                    case true:
+                        switch (IsGameStarted)
+                        {
+                            case true:
+                                betOptions = apiManager.SkipApi.skipResponse.bet_options;
+                                break;
+                            case false:
+                                betOptions = apiManager.previewSkipApi.response.bet_options;
+                                break;
+                        }
+
+                        break;
+                    case false:
+                        switch (IsFirstTime)
+                        {
+                            case true:
+                                betOptions = apiManager.StartApi.gameResponse.bet_options;
+                                break;
+                            case false:
+                                betOptions = apiManager.guessApi.guessResponse.bet_options;
+                                break;
+                        }
+                        break;
+                }
+                break;
+            case false:
+                betOptions = GameManager.Instance.previewApi.response.bet_options;
+                Init = true;
+                break;
         }
-        else if (IsSkip)
-        {
-            betOptions = apiManager.SkipApi.skipResponse.bet_options;
-        }
-        else
-        {
-            betOptions = apiManager.guessApi.guessResponse.bet_options;
-        }
-        
-        foreach(var multiplier in Multipliers.multipliers)
+
+        foreach (var multiplier in Multipliers.multipliers)
         {
             var matchingMultiplier = betOptions
                     .FirstOrDefault(m => parsetoEnum(m.id) == multiplier.multiplier);
@@ -345,20 +372,43 @@ public class MultiplierManager : MonoBehaviour
         MultiplierType mutiplierType = selectedMultiplier;
         List<MultiplierConfig> temp = new List<MultiplierConfig>();
         bool IsFirstTime = gamePlayManager.Get_IsFirstTime();
-
+        bool IsGameStarted = gamePlayManager.IsGameStarted();
         BetOptions [] betOptions;
 
-        if (IsFirstTime)
+        switch (Init)
         {
-            betOptions = apiManager.StartApi.gameResponse.bet_options;
-        }
-        else if (isSkip)
-        {
-            betOptions = apiManager.SkipApi.skipResponse.bet_options;
-        }
-        else
-        {
-            betOptions = apiManager.guessApi.guessResponse.bet_options;
+            case true:
+                switch (isSkip)
+                {
+                    case true:
+                        switch (IsGameStarted)
+                        {
+                            case true:
+                                betOptions = apiManager.SkipApi.skipResponse.bet_options;
+                                break;
+                            case false:
+                                betOptions = apiManager.previewSkipApi.response.bet_options;
+                                break;
+                        }
+                        
+                        break;
+                    case false:
+                        switch (IsFirstTime)
+                        {
+                            case true:
+                                betOptions = apiManager.StartApi.gameResponse.bet_options;
+                                break;
+                            case false:
+                                betOptions = apiManager.guessApi.guessResponse.bet_options;
+                                break;
+                        }
+                        break;
+                }
+                break;
+            case false:
+                betOptions = GameManager.Instance.previewApi.response.bet_options;
+                Init = true;
+                break;
         }
 
         foreach (var multiplier in Multipliers.multipliers)

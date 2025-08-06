@@ -141,6 +141,11 @@ public class LoadingScreen : MonoBehaviour
 
             yield return new WaitUntil(() => GameManager.Instance.IsDataFetched());
 
+
+            GameManager.Instance.previewApi.InitializeGame();
+
+            yield return new WaitUntil(() => GameManager.Instance.previewApi.IsPreviewDone);
+
             Debug.Log($"isDataFetched : {GameManager.Instance.IsDataFetched()}");
             handle.Result.ActivateAsync();
             ConfigMan.Instance.TheDebugObj.SetActive(false);
@@ -177,7 +182,7 @@ public class LoadingScreen : MonoBehaviour
             yield return new WaitForSeconds(0.25f);
             loadingText = $"complete.";
             setLoadingText(loadingText);
-            yield return new WaitForSeconds(0.5f);
+
             if (!startBtn && !LoadingContent)
             {
                 Activate();

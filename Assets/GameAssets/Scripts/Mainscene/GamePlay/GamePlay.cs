@@ -93,7 +93,7 @@ public class GamePlay : MonoBehaviour
             payOutManager.payout.PayoutEffectComplete +=OnEffectComplete;
             showStart();
             hideCashOut();
-            yield return StartCoroutine(endSession());
+            yield return StartCoroutine(endSession(gamePlayManager));
             isGamePlayActive = false;
             multipliersManager.enableGuessMask();
             multipliersManager.disableGuessBtns();
@@ -142,7 +142,7 @@ public class GamePlay : MonoBehaviour
 
     }
 
-    IEnumerator endSession ()
+    IEnumerator endSession ( GamePlayManager gamePlayManager = null)
     {
         if(!CommandCenter.Instance.IsDemo() && winLoseManager.GetTheOutCome() != OutCome.Lose)
         {
@@ -154,6 +154,7 @@ public class GamePlay : MonoBehaviour
             yield return new WaitUntil(() => apiManager.updateBet.isUpdated);
             string winAmount = apiManager.updateBet.new_wallet_balance.ToString("N2" , CultureInfo.CurrentCulture);
             Debug.Log("session ended!");
+            gamePlayManager.SetIsFromGamePlay(true);
 
         }
     }

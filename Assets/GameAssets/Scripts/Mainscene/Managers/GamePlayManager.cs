@@ -30,6 +30,7 @@ public class GamePlayManager : MonoBehaviour
     int playsCounter = 0;
     bool isGuessing = false;
     bool isFromSkipping = false;
+    bool isFromGamePlay = false;
     public void Start ()
     {
         poolManager = CommandCenter.Instance.poolManager_;
@@ -112,8 +113,16 @@ public class GamePlayManager : MonoBehaviour
 
         if(!CommandCenter.Instance.IsDemo())
         {
-            apiManager.SkipApi.Skip();
-            yield return new WaitUntil(() => apiManager.SkipApi.IsSkiped);
+            if (IsGameStarted())
+            {
+                apiManager.SkipApi.Skip();
+                yield return new WaitUntil(() => apiManager.SkipApi.IsSkiped);
+            }
+            else
+            {
+                apiManager.previewSkipApi.previewSkip();
+                yield return new WaitUntil(() => apiManager.previewSkipApi.IsPreviewSkipDone);
+            } 
         }
 
         StartCoroutine(removeCard.removeCurrentCard(deck , poolManager));
@@ -226,6 +235,7 @@ public class GamePlayManager : MonoBehaviour
         else
         {
             yield return StartCoroutine(onlose());
+            SetIsFromGamePlay(true);
 
         } 
         isGuessing = false;
@@ -326,10 +336,17 @@ public class GamePlayManager : MonoBehaviour
         isFromSkipping = value;
     }
 
+    public void SetIsFromGamePlay (bool value)
+    {
+        isFromGamePlay = value;
+    }
+
     public bool Get_IsSkip() { return IsSkip; }
     public bool Get_IsFirstTime() { return IsFirstTime; }
 
     public bool GetIsFromSkipping () { return isFromSkipping; }
+
+    public bool GetIsFromGameplay () { return isFromGamePlay; }
 
     public void resetPlayCounter ()
     {

@@ -7,10 +7,12 @@ public class TextHelper : MonoBehaviour
 {
     private TextManager textManager;
     private TMP_Text textComponent;
+    public TMP_SpriteAsset customSpriteAsset;
     private string lastProcessedText = "";
 
     public bool IsColored = false;
     public bool IsManual = false;
+    public bool IsCustom = false;
 
     private void Start ()
     {
@@ -64,10 +66,10 @@ public class TextHelper : MonoBehaviour
         string Input = text.text;
         string prefix = IsColored ? textManager.GetColoredTextRef() : textManager.GetMainTextRef();
         string UpperCase = textManager.GetUpperCaseTextRef();
-        TMP_SpriteAsset spriteAsset = IsColored ? textManager.GetColoredFont() : textManager.GetMainFont();
+        TMP_SpriteAsset spriteAsset = IsColored ? textManager.GetColoredFont() : IsCustom ? GetCustomSpriteAsset() : textManager.GetMainFont();
         List<(string actual, string available)> charRefrences = new List<(string actual, string available)>(textManager.GetCharacterReferences());
 
-       // Debug.Log(Input);
+        //Debug.Log(Input);
         //call
         TextGenerator.CreateSpriteAssetText(
             Input ,
@@ -85,7 +87,7 @@ public class TextHelper : MonoBehaviour
         string Input = input;
         string prefix = IsColored ? textManager.GetColoredTextRef() : textManager.GetMainTextRef();
         string UpperCase = textManager.GetUpperCaseTextRef();
-        TMP_SpriteAsset spriteAsset = IsColored ? textManager.GetColoredFont() : textManager.GetMainFont();
+        TMP_SpriteAsset spriteAsset = IsColored ? textManager.GetColoredFont() : IsCustom ? GetCustomSpriteAsset() : textManager.GetMainFont();
         List<(string actual, string available)> charRefrences = new List<(string actual, string available)>(textManager.GetCharacterReferences());
 
         //Debug.Log(Input);
@@ -107,7 +109,7 @@ public class TextHelper : MonoBehaviour
         string Input = text.text;
         string prefix = IsColored ? textManager.GetColoredTextRef() : textManager.GetMainTextRef();
         string UpperCase = textManager.GetUpperCaseTextRef();
-        TMP_SpriteAsset spriteAsset = IsColored ? textManager.GetColoredFont() : textManager.GetMainFont();
+        TMP_SpriteAsset spriteAsset = IsColored ? textManager.GetColoredFont() : IsCustom ? GetCustomSpriteAsset() : textManager.GetMainFont();
         List<(string actual, string available)> charRefrences = new List<(string actual, string available)>(textManager.GetCharacterReferences());
 
         Debug.Log(Input);
@@ -120,4 +122,15 @@ public class TextHelper : MonoBehaviour
             spriteAsset ,
             charRefrences);
     }
+
+    public TMP_SpriteAsset GetCustomSpriteAsset ()
+    {
+        if (customSpriteAsset == null)
+        {
+            throw new System.NullReferenceException("Custom Sprite Asset is not assigned.");
+        }
+
+        return customSpriteAsset;
+    }
+
 }

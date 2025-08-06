@@ -14,6 +14,7 @@ public class ApiManager : MonoBehaviour
     public GuessApi guessApi;
     public SkipApi SkipApi;
     public CashOutApi cashOutApi;
+    public PreviewSkipApi previewSkipApi;
     public bool IsFirstPlayDone = false;
     private void Awake ()
     {
