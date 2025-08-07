@@ -46,28 +46,55 @@ public class PayOutManager : MonoBehaviour
         CashOutUI.SetWinMultiplier(winMultiplier);
     }
 
-    public float GetWinAmount ()
+    public double GetWinAmount ()
     {
-        float winAmount = 0;
         if (CommandCenter.Instance.IsDemo())
         {
             int cardValue = (int)multipliersManager.GetSelectedMultiplierType();
             string betAmount = betManager.GetBetAmount();
-            float parsedbetAmount;
-            if (!float.TryParse(betAmount , out parsedbetAmount))
+            double parsedbetAmount;
+            if (!double.TryParse(betAmount , out parsedbetAmount))
             {
                 Debug.LogWarning($"Invalid multiplier format: '{betAmount}'");
                 parsedbetAmount = 0f; // or any default value you consider safe
             }
-            winAmount = cardValue * parsedbetAmount * multiplier();
+           return cardValue * parsedbetAmount * multiplier();
         }
         else
         {
+            bool IsFirstTime = gamePlayManager.Get_IsFirstTime();
+            bool IsSkip = gamePlayManager.Get_IsSkip();
 
-            winAmount = 0;
+            //if is firstTime or if is not first time && if skip or not
+            GameState selectedGameState;
+            GuessResult guess_result;
+
+            switch (IsSkip)
+            {
+                case true:
+                    selectedGameState = apiManager.SkipApi.skipResponse.game_state;
+
+                    Debug.Log("Using SkipApi game_state & signature");
+
+                    return selectedGameState.final_win;
+                case false:
+                    switch (IsFirstTime)
+                    {
+                        case true:
+                            selectedGameState = apiManager.StartApi.gameResponse.game_state;
+
+                            Debug.Log("Using StartApi game_state & signature");
+
+                            return selectedGameState.final_win;
+                        case false:
+                            guess_result = apiManager.guessApi.guessResponse.guess_result;
+
+                            Debug.Log("Using guessResponse game_state & signature");
+
+                            return guess_result.total_win_Amount;
+                    }
+            }
         }
-
-        return winAmount;
     }
 
     public string GetWinMultiplier ()
@@ -83,38 +110,43 @@ public class PayOutManager : MonoBehaviour
 
             //if is firstTime or if is not first time && if skip or not
             GameState selectedGameState;
-            string selectedSignature;
 
-            if (IsFirstTime)
+            switch (IsSkip)
             {
-                selectedGameState = apiManager.StartApi.gameResponse.game_state;
-                selectedSignature = apiManager.StartApi.gameResponse.signature;
-                Debug.Log("Using StartApi game_state & signature");
+                case true:
+                    selectedGameState = apiManager.SkipApi.skipResponse.game_state;
+
+                    Debug.Log("Using SkipApi game_state & signature");
+
+                    return selectedGameState.previous_winning_multiplier.ToString("N2");
+                case false:
+                    switch (IsFirstTime)
+                    {
+                        case true:
+                            selectedGameState = apiManager.StartApi.gameResponse.game_state;
+
+                            Debug.Log("Using StartApi game_state & signature");
+
+                            return selectedGameState.previous_winning_multiplier.ToString("N2");
+                        case false:
+                            selectedGameState = apiManager.guessApi.guessResponse.game_state;
+
+                            Debug.Log("Using guessResponse game_state & signature");
+
+                            return selectedGameState.previous_winning_multiplier.ToString("N2");
+                    }
             }
-            else if (IsSkip)
-            {
-                selectedGameState = apiManager.SkipApi.skipResponse.game_state;
-                selectedSignature = apiManager.SkipApi.skipResponse.signature;
-                Debug.Log("Using SkipApi game_state & signature");
-            }
-            else
-            {
-                selectedGameState = apiManager.guessApi.guessResponse.game_state;
-                selectedSignature = apiManager.guessApi.guessResponse.signature;
-                Debug.Log("Using guessResponse game_state & signature");
-            }
-            return selectedGameState.accumulated_win.ToString("N2");
         }
     }
 
-    public float multiplier ()
+    public double multiplier ()
     {
         string multiplier = GetWinMultiplier().ToString();
 
         multiplier = multiplier.TrimEnd();
 
-        float parsedMultiplier;
-        if (!float.TryParse(multiplier , out parsedMultiplier))
+        double parsedMultiplier;
+        if (!double.TryParse(multiplier , out parsedMultiplier))
         {
             Debug.LogWarning($"Invalid multiplier format: '{multiplier}'");
             parsedMultiplier = 0f; // or any default value you consider safe

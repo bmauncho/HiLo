@@ -130,7 +130,7 @@ public class BetButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, 
 
     public void ActivateMask ()
     {
-        Debug.Log("activate");
+        //Debug.Log("activate");
         Mask.SetActive( true );
     }
 

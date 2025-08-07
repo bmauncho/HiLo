@@ -82,6 +82,6 @@ public class Card : MonoBehaviour
     public void resetCardforGamePlay ()
     {
         HideCardOutline();
-        Debug.Log("Hide card Outine!");
+        //Debug.Log("Hide card Outine!");
     }
 }

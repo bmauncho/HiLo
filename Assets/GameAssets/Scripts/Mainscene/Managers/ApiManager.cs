@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 public class ApiManager : MonoBehaviour
@@ -16,6 +17,7 @@ public class ApiManager : MonoBehaviour
     public CashOutApi cashOutApi;
     public PreviewSkipApi previewSkipApi;
     public bool IsFirstPlayDone = false;
+    public TMP_Text transactiontext;
     private void Awake ()
     {
         SetUp();
@@ -23,7 +25,10 @@ public class ApiManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
+        if (GameManager.Instance)
+        {
+            GameManager.Instance.AddTransactionText(transactiontext);
+        }
     }
 
     // Update is called once per frame

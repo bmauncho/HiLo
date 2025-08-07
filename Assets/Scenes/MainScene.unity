@@ -6217,11 +6217,12 @@ MonoBehaviour:
       current_card: 
       unity_card: 
       position: 0
-      accumulated_win: 0
       bet_amount: 0
       skips_used: 0
       skips_remaining: 0
       max_skips: 0
+      multiplier_modifier: 0
+      previous_winning_multiplier: 0
       game_history:
       - card: 
         value: 0
@@ -8107,11 +8108,12 @@ MonoBehaviour:
       current_card: 
       unity_card: 
       position: 0
-      accumulated_win: 0
       bet_amount: 0
       skips_used: 0
       skips_remaining: 0
       max_skips: 0
+      multiplier_modifier: 0
+      previous_winning_multiplier: 0
       game_history:
       - card: 
         value: 0
@@ -8129,6 +8131,7 @@ MonoBehaviour:
       next_card: 
       next_value: 0
       payout_multiple: 0
+      total_win_Amount: 0
       was_correct: 0
       forced: 0
     bet_options: []
@@ -13487,6 +13490,7 @@ MonoBehaviour:
   cashOutApi: {fileID: 774544716}
   previewSkipApi: {fileID: 598859529}
   IsFirstPlayDone: 0
+  transactiontext: {fileID: 162001652}
 --- !u!1 &1793535990
 GameObject:
   m_ObjectHideFlags: 0
@@ -13540,11 +13544,12 @@ MonoBehaviour:
       current_card: 
       unity_card: 
       position: 0
-      accumulated_win: 0
       bet_amount: 0
       skips_used: 0
       skips_remaining: 0
       max_skips: 0
+      multiplier_modifier: 0
+      previous_winning_multiplier: 0
       game_history:
       - card: 
         value: 0
@@ -13562,11 +13567,13 @@ MonoBehaviour:
       next_card: 
       next_value: 0
       payout_multiple: 0
+      total_win_Amount: 0
       was_correct: 0
       forced: 0
     bet_options: []
     signature: 
   IsSkiped: 0
+  init: 0
 --- !u!1 &1800679249
 GameObject:
   m_ObjectHideFlags: 0
@@ -14437,11 +14444,12 @@ MonoBehaviour:
       current_card: 
       unity_card: 
       position: 0
-      accumulated_win: 0
       bet_amount: 0
       skips_used: 0
       skips_remaining: 0
       max_skips: 0
+      multiplier_modifier: 0
+      previous_winning_multiplier: 0
       game_history:
       - card: 
         value: 0

@@ -35,11 +35,12 @@ public class GameState
     public string current_card;
     public string unity_card;
     public int position;
-    public float accumulated_win;
     public float bet_amount;
     public int skips_used;
     public int skips_remaining;
     public int max_skips;
+    public double multiplier_modifier;
+    public double previous_winning_multiplier;
     public GameHistory[] game_history;
     public bool is_game_over;
     public double final_win;
@@ -50,7 +51,7 @@ public class BetOptions
 {
     public string id;
     public string name;
-    public float multiplier;
+    public double multiplier;
     public bool is_enabled;
 }
 
@@ -116,6 +117,7 @@ public class StartApi : MonoBehaviour
             {
                 Debug.LogError("Error: " + webRequest.error);
                 IsStartDone = true;
+                PromptManager.Instance.ShowErrorPrompt(webRequest.result.ToString() , webRequest.error);
             }
             else
             {
@@ -135,7 +137,7 @@ public class StartApi : MonoBehaviour
         float value;
         if (float.TryParse(betAmount , out  value))
         {
-            Debug.Log("Parsed float: " + value);
+           // Debug.Log("Parsed float: " + value);
         }
         else
         {

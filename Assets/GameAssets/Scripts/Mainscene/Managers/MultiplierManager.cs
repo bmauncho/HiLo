@@ -258,7 +258,7 @@ public class MultiplierManager : MonoBehaviour
             if (matchingMultiplier != null)
             {
                 string multiplierValue = matchingMultiplier.multiplier.ToString();
-                Debug.Log(multiplierValue);
+                //Debug.Log(multiplierValue);
                 if (multiplier.multiplierText != null)
                 {
                     TextHelper textHelper = multiplier.multiplierText.GetComponent<TextHelper>();

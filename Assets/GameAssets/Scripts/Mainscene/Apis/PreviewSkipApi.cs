@@ -28,6 +28,7 @@ public class PreviewSkipApi : MonoBehaviour
     ApiManager apiManager;
     public bool IsPreviewSkipDone = false;
     public PreviewSkipResponse response;
+    bool Init = true;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -54,7 +55,17 @@ public class PreviewSkipApi : MonoBehaviour
                 CommandCenter.Instance.gamePlayManager_.SetIsFromGamePlay(false);
                 break;
             case false:
-                currenCard = response.current_card;
+                switch (Init)
+                {
+                    case true:
+                        currenCard = GameManager.Instance.previewApi.response.current_card;
+                        Init = false;
+                        break;
+                    case false:
+                        currenCard = response.current_card;
+                        break;
+                }
+               
                 break;
         }
 
@@ -88,6 +99,7 @@ public class PreviewSkipApi : MonoBehaviour
             {
                 Debug.LogError("Error: " + webRequest.error);
                 IsPreviewSkipDone = true;
+                PromptManager.Instance.ShowErrorPrompt(webRequest.result.ToString() , webRequest.error);
             }
             else
             {

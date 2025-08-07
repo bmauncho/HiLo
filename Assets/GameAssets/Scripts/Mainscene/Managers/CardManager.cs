@@ -432,7 +432,7 @@ public class CardManager : MonoBehaviour
                 break;
         }
 
-        Debug.Log(currentCard);
+        //Debug.Log(currentCard);
         CardData newData = ParseCard(currentCard);
         data = new CardData
         {

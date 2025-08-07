@@ -33,7 +33,8 @@ public class GuessResult
     public string success;
     public string next_card;
     public int next_value;
-    public float payout_multiple;
+    public double payout_multiple;
+    public double total_win_Amount;
     public bool was_correct;
     public bool forced;
 
@@ -126,6 +127,7 @@ public class GuessApi : MonoBehaviour
             {
                 Debug.LogError("Error: " + webRequest.error);
                 IsGuessDone = true;
+                PromptManager.Instance.ShowErrorPrompt(webRequest.result.ToString() , webRequest.error);
             }
             else
             {

@@ -168,7 +168,7 @@ public class CardHistory : MonoBehaviour
 
         MultiplierType multiplierType = multiplierManager.selectedMultiplier;
 
-        Debug.Log($"multipler type : {multiplierType.ToString()}");
+        //Debug.Log($"multipler type : {multiplierType.ToString()}");
 
         BetHistoryCardData betHistoryCardData = new BetHistoryCardData();
         CardData cardData = cardManager.GetCurrentCardData();
@@ -202,7 +202,7 @@ public class CardHistory : MonoBehaviour
 
             AddHistoryData(cardData, multiplierType,winloseManager.GetTheOutCome());
             historyCards.Add(historyCard);
-            Debug.Log("card Added!");
+            //Debug.Log("card Added!");
             if (historyCards.Count - 2 >= 0)
             {
                 historyCards [historyCards.Count - 2].GetComponent<History>().HideOutLine();
@@ -225,7 +225,7 @@ public class CardHistory : MonoBehaviour
     IEnumerator returnToPool ()
     {
         HistoryData.Clear();
-        Debug.Log("Return history cards to pool!");
+        //Debug.Log("Return history cards to pool!");
         if (historyCards.Count <= 0) yield break;
         int cardsToReturn = historyCards.Count;
         foreach(var card in historyCards)

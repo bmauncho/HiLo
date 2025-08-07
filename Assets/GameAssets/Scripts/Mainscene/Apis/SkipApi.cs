@@ -27,15 +27,14 @@ public class SkipResponse
 public class SkipApi : MonoBehaviour
 {
     ApiManager apiMan;
-    GamePlayManager gamePlayMan;
     public SkipResponse skipResponse;
     public bool IsSkiped;
-    bool skipInit = false;
+    public bool init;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         apiMan = CommandCenter.Instance.apiManager_;
-        gamePlayMan = CommandCenter.Instance.gamePlayManager_;
+        init = true;
     }
 
     public void Skip ()
@@ -44,46 +43,22 @@ public class SkipApi : MonoBehaviour
         var settings = new JsonSerializerSettings();
         settings.Converters.Add(new FloatTrimConverter());
         settings.Formatting = Formatting.Indented;
-
-
-        bool IsFirstTime = gamePlayMan.Get_IsFirstTime();
-        bool IsFromSkip = gamePlayMan.GetIsFromSkipping();
-
         //if is firstTime or if is not first time && if skip or not
         GameState selectedGameState = null;
         string selectedSignature = "";
-        switch (IsFirstTime)
+        switch (init)
         {
             case true:
-                selectedGameState = apiMan.StartApi.gameResponse.game_state;
-                selectedSignature = apiMan.StartApi.gameResponse.signature;
-                Debug.Log("Using StartApi game_state & signature");
+                selectedGameState = apiMan.guessApi.guessResponse.game_state;
+                selectedSignature = apiMan.guessApi.guessResponse.signature;
+                Debug.Log("Using guessResponse game_state & signature");
+                init = false;
                 break;
             case false:
-                switch (IsFromSkip)
-                {
-                    case true:
-                        selectedGameState = skipResponse.game_state;
-                        selectedSignature = skipResponse.signature;
-                        Debug.Log("Using skipresponse game_state & signature");
-                        break;
-                    case false:
-                        selectedGameState = apiMan.guessApi.guessResponse.game_state;
-                        selectedSignature = apiMan.guessApi.guessResponse.signature;
-                        Debug.Log("Using guessResponse game_state & signature");
-                        break;
-                }
+                selectedGameState = skipResponse.game_state;
+                selectedSignature = skipResponse.signature;
+                Debug.Log("Using skipresponse game_state & signature");
                 break;
-        }
-        if (IsFirstTime)
-        {
-            
-        }
-        else
-        {
-            selectedGameState = apiMan.guessApi.guessResponse.game_state;
-            selectedSignature = apiMan.guessApi.guessResponse.signature;
-            Debug.Log("Using guessResponse game_state & signature");
         }
 
         Debug.Log($"Selected GameState: {selectedGameState}");
@@ -119,6 +94,7 @@ public class SkipApi : MonoBehaviour
             {
                 Debug.LogError("Error: " + webRequest.error);
                 IsSkiped = true;
+                PromptManager.Instance.ShowErrorPrompt(webRequest.result.ToString() , webRequest.error);
             }
             else
             {
@@ -135,6 +111,7 @@ public class SkipApi : MonoBehaviour
     public void ResetSkipInit ()
     {
         IsSkiped = false;
+        init = true;
     }
 
 }
