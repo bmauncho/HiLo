@@ -37,6 +37,7 @@ public class MultiplierManager : MonoBehaviour
     GamePlayManager gamePlayManager;
     CardManager cardManager;
     ApiManager apiManager;
+    public MultiplierType prevSelectedMultiplier;
     public MultiplierType selectedMultiplier;
     public Multipliers Multipliers;
     public MultiplierButtonDetails [] buttonDetails;
@@ -82,6 +83,7 @@ public class MultiplierManager : MonoBehaviour
 
     public void SetSelectedMultiplier ( MultiplierType multiplierType )
     {
+        prevSelectedMultiplier = selectedMultiplier;
         selectedMultiplier = multiplierType;
     }
 
@@ -330,10 +332,9 @@ public class MultiplierManager : MonoBehaviour
                 bool isKing = multiDetails.Rank == CardRanks.KING && multi.multiplierType == MultiplierType.higher;
                 bool isAce = multiDetails.Rank == CardRanks.ACE && multi.multiplierType == MultiplierType.lower;
 
-                float multiplierValue = 0;
+                double multiplierValue = 0;
 
                 string multiplierValueString = string.Empty;
-                int favourable = ProbabilityCalculator.GetFavorableCardCount(currentCard , multi.multiplierType);
 
                 if (isKing || isAce)
                 {
@@ -341,15 +342,15 @@ public class MultiplierManager : MonoBehaviour
                 }
                 else
                 {
-                    float parsedMultiplier;
-                    if (!float.TryParse(multi.Multiplier , out parsedMultiplier))
+                   
+                    if (!double.TryParse(multi.Multiplier , out double parsedMultiplier))
                     {
                         Debug.LogWarning($"Invalid multiplier format: '{multi.Multiplier}'");
                         parsedMultiplier = 0f; // or any default value you consider safe
                     }
 
 
-                    multiplierValue = ProbabilityCalculator.GetMultiplier(favourable , parsedMultiplier);
+                    multiplierValue = ProbabilityCalculator.GetMultiplier(GetPrevSelectedMultiplier(),parsedMultiplier);
                 }
 
                 multiplierValueString = multiplierValue == 0 ? string.Empty : multiplierValue.ToString("F2");
@@ -499,6 +500,44 @@ public class MultiplierManager : MonoBehaviour
             Debug.LogWarning($"Failed to parse {multiplier}, returning default value");
             return MultiplierType.None;
         }
+    }
+
+    public double GetPrevSelectedMultiplier ()
+    {
+        CardData data = cardManager.GetPrevCardData();
+        string multiplierValueString = string.Empty;
+        if (prevSelectedMultiplier == MultiplierType.None)
+        {
+            prevSelectedMultiplier = selectedMultiplier;
+        }
+
+        foreach (var multiplier in multiplierDetailsList)
+        {
+            if(multiplier.Rank == data.cardRank)
+            {
+                var matchingMultiplier = multiplier.multipliers.
+                FirstOrDefault(m => m.multiplierType == prevSelectedMultiplier);
+
+                if (matchingMultiplier != null)
+                {
+                    multiplierValueString = matchingMultiplier.Multiplier;
+                }
+                else
+                {
+                    throw new Exception($"matching multiplier is null");
+                }
+                    break;
+            }
+        }
+
+        multiplierValueString = multiplierValueString.Trim('x');
+
+        if(!double.TryParse(multiplierValueString,out double prevMultiplier))
+        {
+            throw new Exception($"could not parse string {multiplierValueString} to double ");
+        }
+
+        return prevMultiplier;
     }
 
 }
