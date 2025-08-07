@@ -28,7 +28,7 @@ public class PayOut : MonoBehaviour
         if(winLoseManager.GetTheOutCome() == OutCome.Lose || 
             winLoseManager.GetTheOutCome() == OutCome.None)
         {
-            Debug.Log("Lost or None");
+            //Debug.Log("Lost or None");
             PayoutEffectComplete?.Invoke();
             yield break;
         }

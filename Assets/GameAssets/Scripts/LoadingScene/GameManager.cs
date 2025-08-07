@@ -137,7 +137,7 @@ public class GameManager : MonoBehaviour
     public void ShowTransaction ( string thetrans )
     {
         transaction = "No.";
-        thetrans = transaction + " 748838" + thetrans;
+        thetrans = transaction + thetrans;
         for (int i = 0 ; i < TransactionsText.Length ; i++)
         {
             TransactionsText [i].text = thetrans;

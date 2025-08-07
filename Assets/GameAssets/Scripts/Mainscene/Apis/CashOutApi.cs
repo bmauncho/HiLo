@@ -20,8 +20,8 @@ public class CashOutResponse
 {
     public string status;
     public string message;
+    public double final_win;
     public GameState game_state;
-    public string signature;
 }
 public class CashOutApi : MonoBehaviour
 {
@@ -100,7 +100,7 @@ public class CashOutApi : MonoBehaviour
     IEnumerator CashOutAction (string jsonData)
     {
         string baseUrl = ConfigMan.Instance.Base_url;
-        string ApiUrl = "https://b.api.ibibe.africa" + "/skip/hilo";
+        string ApiUrl = "https://b.api.ibibe.africa" + "/cashout/hilo";
         using (UnityWebRequest webRequest = new UnityWebRequest(ApiUrl , "POST"))
         {
             byte [] bodyRaw = Encoding.UTF8.GetBytes(jsonData);

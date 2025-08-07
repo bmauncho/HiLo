@@ -14,7 +14,7 @@ public class AddCard : MonoBehaviour
 
     public IEnumerator addNewCard (Deck deck,PoolManager poolManager,Action ChangeCard = null)
     {
-        Debug.Log("Adding new card.");
+        //Debug.Log("Adding new card.");
         Transform transform = deck.newCard.transform;
         GameObject newCard = poolManager.GetFromPool(PoolType.Cards , transform.position , Quaternion.identity , transform);
         newCard.transform.localPosition = Vector3.zero;
@@ -33,7 +33,7 @@ public class AddCard : MonoBehaviour
                 .AppendCallback(() =>
                 {
                     //Get the card component and show it
-                    Debug.Log("Set New Card!");
+                    //Debug.Log("Set New Card!");
                     ChangeCard?.Invoke();
 
                     //Debug.Log(cardComponent.name);

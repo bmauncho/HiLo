@@ -13,7 +13,7 @@ public class RemoveCard : MonoBehaviour
     public IEnumerator removeCurrentCard (Deck deck,PoolManager poolManager)
     {
         //1.move to end point
-        Debug.Log("Removing current card.");
+        //Debug.Log("Removing current card.");
         Vector3 endPoint = new Vector3(-300f , -75f , 0);
         Vector3 endRotation = new Vector3(0 , 0 , 45f);
 
@@ -32,7 +32,7 @@ public class RemoveCard : MonoBehaviour
 
         sequence.OnComplete(() =>
         {
-            Debug.Log("Card moved to end point and rotated.");
+            //Debug.Log("Card moved to end point and rotated.");
             //2. return to pool
             poolManager.ReturnToPool(PoolType.Cards , card);
             deck.prevCard.RemoveOwner();

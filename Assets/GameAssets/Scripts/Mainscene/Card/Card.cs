@@ -55,7 +55,7 @@ public class Card : MonoBehaviour
 
     public void ShowCardOutline ()
     {
-        Debug.Log("Show card Outine!");
+        //Debug.Log("Show card Outine!");
         CardOutline.SetActive(true);
     }
 

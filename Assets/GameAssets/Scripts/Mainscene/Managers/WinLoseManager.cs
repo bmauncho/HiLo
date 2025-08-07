@@ -172,7 +172,7 @@ public class WinLoseManager : MonoBehaviour
 
             multiplierManager.refreshMultplierValues(multiplierManager.GetCurrentMultipliers());
 
-            Debug.Log("New card added-win!");
+            //Debug.Log("New card added-win!");
         }));
         yield return new WaitUntil(() => IsAddNewCardComplete);
         yield return new WaitForSeconds(.25f);

@@ -258,6 +258,18 @@ public class MultiplierManager : MonoBehaviour
             if (matchingMultiplier != null)
             {
                 string multiplierValue = matchingMultiplier.multiplier.ToString();
+
+                CardData cardData = cardManager.GetCurrentCardData();
+
+                bool isKing = cardData.cardRank == CardRanks.KING && multiplier.multiplier == MultiplierType.higher_or_same;
+                bool isAce = cardData.cardRank == CardRanks.ACE && multiplier.multiplier == MultiplierType.lower_or_same;
+
+                if(isKing || isAce || multiplierValue == "0")
+                {
+                    Debug.Log("Is king or is Ace");
+                    multiplierValue = string.Empty;
+                }
+
                 //Debug.Log(multiplierValue);
                 if (multiplier.multiplierText != null)
                 {
@@ -329,15 +341,16 @@ public class MultiplierManager : MonoBehaviour
                 if (isSkip && multi.multiplierType == MultiplierType.same)
                     continue;
 
-                bool isKing = multiDetails.Rank == CardRanks.KING && multi.multiplierType == MultiplierType.higher;
-                bool isAce = multiDetails.Rank == CardRanks.ACE && multi.multiplierType == MultiplierType.lower;
+                bool isKing = multiDetails.Rank == CardRanks.KING && multi.multiplierType == MultiplierType.higher_or_same;
+                bool isAce = multiDetails.Rank == CardRanks.ACE && multi.multiplierType == MultiplierType.lower_or_same;
 
                 double multiplierValue = 0;
 
                 string multiplierValueString = string.Empty;
 
-                if (isKing || isAce)
+                if (isKing || isAce || multi.Multiplier == "0")
                 {
+                    Debug.Log("Is king or is Ace");
                     multiplierValueString = string.Empty;
                 }
                 else
@@ -414,6 +427,7 @@ public class MultiplierManager : MonoBehaviour
 
         foreach (var multiplier in Multipliers.multipliers)
         {
+
             var matchingMultiplier = betOptions
                     .FirstOrDefault(m => parsetoEnum(m.id) == multiplier.multiplier);
             string multiplierValueString = string.Empty;
@@ -422,7 +436,19 @@ public class MultiplierManager : MonoBehaviour
                 string multiplierValue = matchingMultiplier.multiplier.ToString();
                 CardData cardData = cardManager.GetCurrentCardData();
 
-                multiplierValueString = multiplierValue;
+                bool isKing = cardData.cardRank == CardRanks.KING && multiplier.multiplier == MultiplierType.higher;
+                bool isAce = cardData.cardRank == CardRanks.ACE && multiplier.multiplier == MultiplierType.lower;
+
+                if(isAce || isKing)
+                {
+                    Debug.Log("Is king or is Ace");
+                    multiplierValueString = string.Empty;
+                }
+                else
+                {
+                    multiplierValueString = multiplierValue;
+                }
+                    
 
                 temp.Add(new MultiplierConfig
                 {

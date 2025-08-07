@@ -7,6 +7,7 @@ public class CurrencyManager : MonoBehaviour
 {
     PayOutManager payOutManager;
     ApiManager apiManager;
+    GamePlayManager gamePlayManager;
     public double CashAmount;
     public double winAmount;
     public double cumilativeWinAMount;
@@ -16,6 +17,7 @@ public class CurrencyManager : MonoBehaviour
     {
         payOutManager = CommandCenter.Instance.PayOutManager_;
         apiManager = CommandCenter.Instance.apiManager_;
+        gamePlayManager = CommandCenter.Instance.gamePlayManager_;
 
         if (CommandCenter.Instance)
         {
@@ -46,7 +48,15 @@ public class CurrencyManager : MonoBehaviour
     public string GetTotalWinAmount ()
     {
         winAmount = payOutManager.GetWinAmount();
-        cumilativeWinAMount += winAmount;
+        if (CommandCenter.Instance.IsDemo())
+        {
+            cumilativeWinAMount += winAmount;
+        }
+        else
+        {
+            cumilativeWinAMount = winAmount;
+        }
+
         return cumilativeWinAMount.ToString("N2" , CultureInfo.CurrentCulture); ;
     }
 
@@ -88,7 +98,10 @@ public class CurrencyManager : MonoBehaviour
         }
         else
         {
-
+            if (!gamePlayManager.gamePlay.IsGamePlayActive())
+            {
+                CashAmount = apiManager.updateBet.new_wallet_balance;
+            }
         }
 
         walletAmountText.text = CashAmount.ToString("N2" , CultureInfo.CurrentCulture);

@@ -60,6 +60,7 @@ public class UpdateBet : MonoBehaviour
             {
                 Debug.LogError("Error: " + webRequest.result);
                 isUpdated = true;
+                PromptManager.Instance.ShowErrorPrompt(webRequest.result.ToString() ,webRequest.error);
             }
             else
             {

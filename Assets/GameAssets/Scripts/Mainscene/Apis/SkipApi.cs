@@ -52,7 +52,6 @@ public class SkipApi : MonoBehaviour
                 selectedGameState = apiMan.guessApi.guessResponse.game_state;
                 selectedSignature = apiMan.guessApi.guessResponse.signature;
                 Debug.Log("Using guessResponse game_state & signature");
-                init = false;
                 break;
             case false:
                 selectedGameState = skipResponse.game_state;
@@ -60,7 +59,7 @@ public class SkipApi : MonoBehaviour
                 Debug.Log("Using skipresponse game_state & signature");
                 break;
         }
-
+        init = false;
         Debug.Log($"Selected GameState: {selectedGameState}");
         Debug.Log($"Selected Signature: {selectedSignature}");
 

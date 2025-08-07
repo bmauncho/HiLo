@@ -86,13 +86,12 @@ public class GamePlay : MonoBehaviour
             multipliersManager.RefreshMultipliers();
             multipliersManager.Multipliers.UpdateText();
             payOutManager.resetPayout();
+            gamePlayManager.setisfromskiping(false);
         }
         else
         {
             isGameOver = false;
             payOutManager.payout.PayoutEffectComplete +=OnEffectComplete;
-            showStart();
-            hideCashOut();
             yield return StartCoroutine(endSession(gamePlayManager));
             isGamePlayActive = false;
             multipliersManager.enableGuessMask();
@@ -107,8 +106,10 @@ public class GamePlay : MonoBehaviour
             payOutManager.payout.PayoutEffectComplete -= OnEffectComplete;
             gamePlayManager.resetPlayCounter();
             apiManager.SkipApi.ResetSkipInit();
-
+            gamePlayManager.setisfromskiping(false);
             winLoseManager.resetOutCome();
+            showStart();
+            hideCashOut();
         }
 
         gamePlayManager.ToggleGamePlaySkips();
@@ -148,7 +149,8 @@ public class GamePlay : MonoBehaviour
         {
             apiManager.cashOutApi.CashOut();
             yield return new WaitUntil(() => apiManager.cashOutApi.IsCashOutDone);
-            double winAMount = apiManager.cashOutApi.cashOutResponse.game_state.final_win;
+            double winAMount = apiManager.cashOutApi.cashOutResponse.final_win;
+            Debug.Log(winAMount);
             apiManager.updateBet.SetAmountWon(winAMount);
             apiManager.updateBet.UpdateTheBet();
             yield return new WaitUntil(() => apiManager.updateBet.isUpdated);
@@ -159,5 +161,6 @@ public class GamePlay : MonoBehaviour
         }
     }
 
+    public bool IsGamePlayActive () { return isGamePlayActive; }
 }
 

@@ -27,10 +27,10 @@ public class GamePlayManager : MonoBehaviour
     public CashOutUI cashOutUI;
     public bool IsFirstTime = false;
     public bool IsSkip = false;
-    int playsCounter = 0;
     bool isGuessing = false;
     bool isFromSkipping = false;
     bool isFromGamePlay = false;
+    [SerializeField]bool isSkipping = false;
     public void Start ()
     {
         poolManager = CommandCenter.Instance.poolManager_;
@@ -90,12 +90,21 @@ public class GamePlayManager : MonoBehaviour
 
     public void Skip ()
     {
+        if (isSkipping)
+        {
+            return;
+        }
+        isSkipping = true;
         StartCoroutine(SkipCoroutine());
     }
 
     IEnumerator SkipCoroutine ()
     {
-        if(!Skips.AllowSkip()) yield break;
+        if (!Skips.AllowSkip())
+        {
+            isSkipping = false;
+            yield break;
+        }
         CommandCenter.Instance.soundManager_.PlaySound("SkipButton");
         Debug.Log($" allow skips : {Skips.AllowSkip()}");
         IsSkips = false;
@@ -153,11 +162,13 @@ public class GamePlayManager : MonoBehaviour
             }
 
 
-            Debug.Log("New card added!");
+           // Debug.Log("New card added!");
         }));
         yield return new WaitUntil(() => IsSkips);
         addCard.OnComplete -= canSkip;
         Skips.SkipCard();
+        setisfromskiping(true);
+        isSkipping = false;
         yield return null;
     }
 
@@ -192,7 +203,6 @@ public class GamePlayManager : MonoBehaviour
             Debug.LogWarning("no multiplier is selected");
             return;
         }
-        playsCounter++;
         cashOutUI.Refresh();
         SetIsSkip(false);
         StartCoroutine(guessing());
@@ -208,12 +218,10 @@ public class GamePlayManager : MonoBehaviour
             Skips.setIsFirstTime(false);
             Skips.ResetSkips();
             gamePlay.showCashOut(false);
+            apiManager.SetIsFirstPlayDone(true);
+
         }
 
-        if(playsCounter > 1)
-        {
-            apiManager.SetIsFirstPlayDone(true);
-        }
 
         //bet
         SetIsFirstTime(false);
@@ -239,8 +247,8 @@ public class GamePlayManager : MonoBehaviour
 
         } 
         isGuessing = false;
-        gamePlay.SetCashOutButtonInteractivity(true);
         setisfromskiping(false);
+        gamePlay.SetCashOutButtonInteractivity(true);
         yield return null;
     }
 
@@ -328,7 +336,6 @@ public class GamePlayManager : MonoBehaviour
     public void SetIsSkip(bool value )
     {
         IsSkip = value;
-        setisfromskiping(!value);
     }
 
     public void setisfromskiping(bool value )
@@ -350,8 +357,9 @@ public class GamePlayManager : MonoBehaviour
 
     public void resetPlayCounter ()
     {
-        playsCounter = 0;
-        apiManager.SetIsFirstPlayDone( false );
+        apiManager.SetIsFirstPlayDone(false);
+        Skips.setIsFirstTime(true);
+        Skips.ResetSkips();
     }
 
 }

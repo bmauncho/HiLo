@@ -48,10 +48,9 @@ public class ApiManager : MonoBehaviour
 
     public string SetBetId ()
     {
-        int id = Random.Range(1 , 1000000000);
         string betId = ConfigMan.Instance.GetBetId();
         BetId = betId;
-        return id.ToString();
+        return BetId;
     }
 
     public void GetBetAmount (string amount)
