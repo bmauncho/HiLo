@@ -24,7 +24,7 @@ public class RetainCard : MonoBehaviour
         CommandCenter.Instance.soundManager_.PlaySound("WrongGuess");
         yield return StartCoroutine(Swing(card.transform,15f,10));
 
-        Debug.Log("loseAnim Played!");
+        //Debug.Log("loseAnim Played!");
     }
 
 

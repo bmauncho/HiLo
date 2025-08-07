@@ -123,7 +123,7 @@ public class PayOutManager : MonoBehaviour
                 case true:
                     selectedGameState = apiManager.SkipApi.skipResponse.game_state;
 
-                    Debug.Log("Using SkipApi game_state & signature");
+                    //Debug.Log("Using SkipApi game_state & signature");
 
                     return selectedGameState.previous_winning_multiplier.ToString("N2");
                 case false:
@@ -132,13 +132,13 @@ public class PayOutManager : MonoBehaviour
                         case true:
                             selectedGameState = apiManager.StartApi.gameResponse.game_state;
 
-                            Debug.Log("Using StartApi game_state & signature");
+                            //Debug.Log("Using StartApi game_state & signature");
 
                             return selectedGameState.previous_winning_multiplier.ToString("N2");
                         case false:
                             selectedGameState = apiManager.guessApi.guessResponse.game_state;
 
-                            Debug.Log("Using guessResponse game_state & signature");
+                           // Debug.Log("Using guessResponse game_state & signature");
 
                             return selectedGameState.previous_winning_multiplier.ToString("N2");
                     }

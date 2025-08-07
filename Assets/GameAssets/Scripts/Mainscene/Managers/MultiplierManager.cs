@@ -266,7 +266,7 @@ public class MultiplierManager : MonoBehaviour
 
                 if(isKing || isAce || multiplierValue == "0")
                 {
-                    Debug.Log("Is king or is Ace");
+                    //Debug.Log("Is king or is Ace");
                     multiplierValue = string.Empty;
                 }
 
@@ -350,7 +350,7 @@ public class MultiplierManager : MonoBehaviour
 
                 if (isKing || isAce || multi.Multiplier == "0")
                 {
-                    Debug.Log("Is king or is Ace");
+                    //Debug.Log("Is king or is Ace");
                     multiplierValueString = string.Empty;
                 }
                 else
@@ -436,12 +436,12 @@ public class MultiplierManager : MonoBehaviour
                 string multiplierValue = matchingMultiplier.multiplier.ToString();
                 CardData cardData = cardManager.GetCurrentCardData();
 
-                bool isKing = cardData.cardRank == CardRanks.KING && multiplier.multiplier == MultiplierType.higher;
-                bool isAce = cardData.cardRank == CardRanks.ACE && multiplier.multiplier == MultiplierType.lower;
+                bool isKing = cardData.cardRank == CardRanks.KING && multiplier.multiplier == MultiplierType.higher_or_same;
+                bool isAce = cardData.cardRank == CardRanks.ACE && multiplier.multiplier == MultiplierType.lower_or_same;
 
-                if(isAce || isKing)
+                if(isAce || isKing || multiplierValue == "0")
                 {
-                    Debug.Log("Is king or is Ace");
+                    //Debug.Log("Is king or is Ace");
                     multiplierValueString = string.Empty;
                 }
                 else

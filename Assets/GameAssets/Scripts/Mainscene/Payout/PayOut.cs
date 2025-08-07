@@ -10,6 +10,7 @@ public class PayOut : MonoBehaviour
     WinLoseManager winLoseManager;
     public GameObject Holder;
     public GameObject EffectHolder;
+    public GameObject Bg;
     public TMP_Text cashOut;
     public TMP_Text amountWon;
     public Action PayoutEffectComplete;
@@ -59,11 +60,13 @@ public class PayOut : MonoBehaviour
     public void EnableHolder ()
     {
         Holder.SetActive(true);
+        Bg.SetActive(true);
     }
     
     public void DisableHolder ()
     {
         Holder.SetActive(false);
+        Bg.SetActive(false);
     }
 
     public void EnableEffectHolder ()

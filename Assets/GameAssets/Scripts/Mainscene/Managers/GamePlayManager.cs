@@ -52,9 +52,10 @@ public class GamePlayManager : MonoBehaviour
         deck.newCard.SetOwner(card);
         Card cardComponent = card.GetComponent<Card>();
         SetActiveCard(card);
+        CardData cardData = new CardData();
         if (cardComponent != null)
         {
-            CardData cardData = cardManager.GetCardData();
+            cardData = cardManager.GetCardData();
             cardComponent.SetCard(
                cardData.cardSuite ,
                cardData.cardRank ,
@@ -66,8 +67,8 @@ public class GamePlayManager : MonoBehaviour
             cardComponent.hideCardBg();
             cardComponent.HideCardOutline();
         }
-        multiplierManager.Multipliers.ToggleMultiplier(cardManager.GetCurrentCardData());
-        multiplierManager.Multipliers.ToggleMultiplierType(cardManager.GetCurrentCardData());
+        multiplierManager.Multipliers.ToggleMultiplier(cardData);
+        multiplierManager.Multipliers.ToggleMultiplierType(cardData);
         multiplierManager.RefreshMultipliers();
         multiplierManager.Multipliers.UpdateText();
         multiplierManager.disableGuessBtns();
@@ -149,6 +150,7 @@ public class GamePlayManager : MonoBehaviour
                 cardData.cardRank,
                 cardData.cardColor);
 
+            multiplierManager.Multipliers.ToggleMultiplier(cardData);
             multiplierManager.Multipliers.ToggleMultiplierType(cardData);
             multiplierManager.Multipliers.UpdateText();
 
@@ -219,9 +221,7 @@ public class GamePlayManager : MonoBehaviour
             Skips.ResetSkips();
             gamePlay.showCashOut(false);
             apiManager.SetIsFirstPlayDone(true);
-
         }
-
 
         //bet
         SetIsFirstTime(false);
@@ -232,7 +232,7 @@ public class GamePlayManager : MonoBehaviour
         MultiplierType multiplierType = multiplierManager.selectedMultiplier;
         winLoseManager.outCome(prevCardData , currCardData , multiplierType);
         Skips.refreshSkips();
-        Debug.Log("win sequence setUp done!");
+        //Debug.Log("win sequence setUp done!");
         yield return StartCoroutine(winLoseManager.WinSequence());
         yield return new WaitForSeconds(.1f);
 

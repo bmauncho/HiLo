@@ -96,7 +96,7 @@ public class WinLoseManager : MonoBehaviour
         IsAddNewCardComplete = false;
         Debug.Log("win");
         //update card history
-        Debug.Log("Update card History!");
+       // Debug.Log("Update card History!");
 
         //show next card
         Deck deck = gamePlayManager.deck;
@@ -119,8 +119,8 @@ public class WinLoseManager : MonoBehaviour
                 cardData.cardRank ,
                 cardData.cardColor);
 
-            multiplierManager.Multipliers.ToggleMultiplier(cardManager.GetCurrentCardData());
-            multiplierManager.Multipliers.ToggleMultiplierType(cardManager.GetCurrentCardData());
+            multiplierManager.Multipliers.ToggleMultiplier(cardData);
+            multiplierManager.Multipliers.ToggleMultiplierType(cardData);
             multiplierManager.Multipliers.UpdateText();
 
             if (gamePlayManager.IsGameStarted())
@@ -133,12 +133,12 @@ public class WinLoseManager : MonoBehaviour
             }
 
 
-            Debug.Log("New card added-win!");
+            //Debug.Log("New card added-win!");
         }));
         yield return new WaitUntil(()=>IsAddNewCardComplete);
         //update multilier 
 
-        Debug.Log("Update Multiplier");
+        //Debug.Log("Update Multiplier");
 
         addCard.OnComplete -= OnAddCardComplete;
         gamePlayManager.cardHistory.ShowHistory();
@@ -169,6 +169,10 @@ public class WinLoseManager : MonoBehaviour
                 cardData.cardSuite ,
                 cardData.cardRank ,
                 cardData.cardColor);
+
+            multiplierManager.Multipliers.ToggleMultiplier(cardData);
+            multiplierManager.Multipliers.ToggleMultiplierType(cardData);
+            multiplierManager.Multipliers.UpdateText();
 
             multiplierManager.refreshMultplierValues(multiplierManager.GetCurrentMultipliers());
 

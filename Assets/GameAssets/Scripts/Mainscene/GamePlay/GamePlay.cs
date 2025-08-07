@@ -18,6 +18,8 @@ public class GamePlay : MonoBehaviour
     public TMP_Text cashOutAmount;
     bool isGameOver = false;
     public Button cashOutButton;
+    bool IsStart = false;
+    bool IsCashOut = false;
 
     private void Start ()
     {
@@ -67,6 +69,11 @@ public class GamePlay : MonoBehaviour
     {
         if (!isGamePlayActive)
         {
+            if (IsStart)
+            {
+                yield break;
+            }
+            IsStart = true;
             hideStart();
             showCashOut(true);
             isGamePlayActive = true;
@@ -87,9 +94,15 @@ public class GamePlay : MonoBehaviour
             multipliersManager.Multipliers.UpdateText();
             payOutManager.resetPayout();
             gamePlayManager.setisfromskiping(false);
+            IsStart = false;
         }
         else
         {
+            if (IsCashOut)
+            {
+                yield break;
+            }
+            IsCashOut = true;
             isGameOver = false;
             payOutManager.payout.PayoutEffectComplete +=OnEffectComplete;
             yield return StartCoroutine(endSession(gamePlayManager));
@@ -110,6 +123,7 @@ public class GamePlay : MonoBehaviour
             winLoseManager.resetOutCome();
             showStart();
             hideCashOut();
+            IsCashOut = false;
         }
 
         gamePlayManager.ToggleGamePlaySkips();

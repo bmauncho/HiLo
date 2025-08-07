@@ -31,6 +31,7 @@ public class Multipliers : MonoBehaviour
 
     public void ToggleMultiplierType ( CardData card )
     {
+        //Debug.Log($"CardData - rank : {card.cardRank}");
         bool isAce = card.cardRank == CardRanks.ACE;
         bool isKing = card.cardRank == CardRanks.KING;
 

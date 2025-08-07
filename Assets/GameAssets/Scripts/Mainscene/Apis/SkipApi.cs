@@ -59,7 +59,7 @@ public class SkipApi : MonoBehaviour
                 Debug.Log("Using skipresponse game_state & signature");
                 break;
         }
-        init = false;
+
         Debug.Log($"Selected GameState: {selectedGameState}");
         Debug.Log($"Selected Signature: {selectedSignature}");
 
@@ -104,6 +104,8 @@ public class SkipApi : MonoBehaviour
                 Debug.Log($"skip api response:{formattedOutput}");
                 IsSkiped = true;
             }
+
+            init = false;
         }
     }
 
