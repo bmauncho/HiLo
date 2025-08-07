@@ -20,7 +20,7 @@ public class NextCard : MonoBehaviour
         Card cardComponenet = deck.newCard.GetTheOwner().GetComponent<Card>();
         if (!CommandCenter.Instance.IsDemo())
         {
-            StartCoroutine(currencyManager.Bet());
+            yield return StartCoroutine(currencyManager.Bet());
             yield return StartCoroutine(guess());
         }
         CardData cardData = cardManager.GetCardData();

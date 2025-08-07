@@ -77,9 +77,8 @@ public class CurrencyManager : MonoBehaviour
         }
         else
         {
-            bool IsDone = apiManager.placeBet.IsBetPlaced;
             apiManager.placeBet.Bet();
-            yield return new WaitUntil(() => IsDone);
+            yield return new WaitUntil(() => apiManager.placeBet.IsBetPlaced);
             CashAmount = (double)apiManager.placeBet.betResponse.new_wallet_balance;
         }
         walletAmountText.text = CashAmount.ToString("N2" , CultureInfo.CurrentCulture); ;
@@ -101,6 +100,7 @@ public class CurrencyManager : MonoBehaviour
             if (!gamePlayManager.gamePlay.IsGamePlayActive())
             {
                 CashAmount = apiManager.updateBet.new_wallet_balance;
+                Debug.Log($"Cash amount {CashAmount}");
             }
         }
 

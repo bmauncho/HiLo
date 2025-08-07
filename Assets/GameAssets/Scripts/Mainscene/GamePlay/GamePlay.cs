@@ -20,6 +20,7 @@ public class GamePlay : MonoBehaviour
     public Button cashOutButton;
     bool IsStart = false;
     bool IsCashOut = false;
+    bool isSessionCashOut = false;
 
     private void Start ()
     {
@@ -176,5 +177,6 @@ public class GamePlay : MonoBehaviour
     }
 
     public bool IsGamePlayActive () { return isGamePlayActive; }
+
 }
 
