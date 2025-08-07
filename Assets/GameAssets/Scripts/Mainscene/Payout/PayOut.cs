@@ -8,6 +8,7 @@ using UnityEngine;
 public class PayOut : MonoBehaviour
 {
     WinLoseManager winLoseManager;
+    GamePlayManager gamePlayManager;
     public GameObject Holder;
     public GameObject EffectHolder;
     public GameObject Bg;
@@ -41,6 +42,7 @@ public class PayOut : MonoBehaviour
         EnableHolder();
         EnableEffectHolder();
         UpdatePayoutUI(cashout_, amountwon_);
+        CommandCenter.Instance.currencyMan_.updateCashOutWinings();
         CommandCenter.Instance.soundManager_.PlaySound("Win");
         Holder.transform.DOPunchScale(new Vector3(0.2f , 0.2f , 0.2f) , 1f , 0 , 1);
         yield return new WaitForSeconds(3);

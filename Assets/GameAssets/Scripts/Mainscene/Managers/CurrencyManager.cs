@@ -95,15 +95,17 @@ public class CurrencyManager : MonoBehaviour
                 CashAmount += winnings;
             }
         }
-        else
-        {
-            if (!gamePlayManager.gamePlay.IsGamePlayActive())
-            {
-                CashAmount = apiManager.updateBet.new_wallet_balance;
-                Debug.Log($"Cash amount {CashAmount}");
-            }
-        }
 
+        walletAmountText.text = CashAmount.ToString("N2" , CultureInfo.CurrentCulture);
+    }
+
+    public void updateCashOutWinings ()
+    {
+        string totalWininings = apiManager.updateBet.updateBetResponse.new_wallet_balance;
+        if (double.TryParse(totalWininings , out double winnings))
+        {
+            CashAmount = winnings;
+        }
         walletAmountText.text = CashAmount.ToString("N2" , CultureInfo.CurrentCulture);
     }
 }
