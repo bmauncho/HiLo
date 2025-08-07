@@ -42,6 +42,7 @@ public class GameState
     public double multiplier_modifier;
     public double previous_winning_multiplier;
     public GameHistory[] game_history;
+    public RNGModification[] rng_modifications;
     public bool is_game_over;
     public double final_win;
 }
@@ -63,7 +64,13 @@ public class GameHistory
     public int position;
 }
 
-
+[System.Serializable]
+public class RNGModification
+{
+    public int position;
+    public string original_card;
+    public string forced_card;
+}
 public class StartApi : MonoBehaviour
 {
     ApiManager apiMan;

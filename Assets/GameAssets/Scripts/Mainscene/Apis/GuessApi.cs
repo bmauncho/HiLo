@@ -74,7 +74,7 @@ public class GuessApi : MonoBehaviour
             case true:
                 selectedGameState = apiMan.StartApi.gameResponse.game_state;
                 selectedSignature = apiMan.StartApi.gameResponse.signature;
-                //Debug.Log("Using StartApi game_state & signature");
+                Debug.Log("Using StartApi game_state & signature");
                 break;
             case false:
                 switch (IsFromSkip)
@@ -82,12 +82,12 @@ public class GuessApi : MonoBehaviour
                     case true:
                         selectedGameState = apiMan.SkipApi.skipResponse.game_state;
                         selectedSignature = apiMan.SkipApi.skipResponse.signature;
-                       // Debug.Log("Using guessResponse game_state & signature");
+                        Debug.Log("Using guessResponse game_state & signature");
                         break;
                     case false:
                         selectedGameState = guessResponse.game_state;
                         selectedSignature = guessResponse.signature;
-                        //Debug.Log("Using guessResponse game_state & signature");
+                        Debug.Log("Using guessResponse game_state & signature");
                         break;
                 }
                 break;
