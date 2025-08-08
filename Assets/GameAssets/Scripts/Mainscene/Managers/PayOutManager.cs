@@ -76,7 +76,7 @@ public class PayOutManager : MonoBehaviour
                     case true:
                         selectedGameState = apiManager.SkipApi.skipResponse.game_state;
 
-                        //Debug.Log("Using SkipApi game_state & signature");
+                        Debug.Log("Using SkipApi game_state & signature");
 
                         return selectedGameState.final_win;
                     case false:
@@ -85,13 +85,13 @@ public class PayOutManager : MonoBehaviour
                             case true:
                                 selectedGameState = apiManager.StartApi.gameResponse.game_state;
 
-                                //Debug.Log("Using StartApi game_state & signature");
+                                Debug.Log("Using StartApi game_state & signature");
 
                                 return selectedGameState.final_win;
                             case false:
                                 guess_result = apiManager.guessApi.guessResponse.guess_result;
 
-                                //Debug.Log("Using guessResponse game_state & signature");
+                                Debug.Log("Using guessResponse game_state & signature");
 
                                 return guess_result.total_win_Amount;
                         }
@@ -106,42 +106,49 @@ public class PayOutManager : MonoBehaviour
 
     public string GetWinMultiplier ()
     {
-        if(CommandCenter.Instance.IsDemo())
+        if (CommandCenter.Instance.IsDemo())
         {
             return multipliersManager.GetMultiplier();
         }
         else
         {
-            bool IsFirstTime = gamePlayManager.Get_IsFirstTime();
-            bool IsSkip = gamePlayManager.Get_IsSkip();
-
-            //if is firstTime or if is not first time && if skip or not
-            GameState selectedGameState;
-
-            switch (IsSkip)
+            if (gamePlayManager.gamePlay.isGamePlayActive)
             {
-                case true:
-                    selectedGameState = apiManager.SkipApi.skipResponse.game_state;
+                bool IsFirstTime = gamePlayManager.Get_IsFirstTime();
+                bool IsSkip = gamePlayManager.Get_IsSkip();
 
-                    //Debug.Log("Using SkipApi game_state & signature");
+                //if is firstTime or if is not first time && if skip or not
+                GameState selectedGameState;
 
-                    return selectedGameState.previous_winning_multiplier.ToString("N2");
-                case false:
-                    switch (IsFirstTime)
-                    {
-                        case true:
-                            selectedGameState = apiManager.StartApi.gameResponse.game_state;
+                switch (IsSkip)
+                {
+                    case true:
+                        selectedGameState = apiManager.SkipApi.skipResponse.game_state;
 
-                            //Debug.Log("Using StartApi game_state & signature");
+                        //Debug.Log("Using SkipApi game_state & signature");
 
-                            return selectedGameState.previous_winning_multiplier.ToString("N2");
-                        case false:
-                            selectedGameState = apiManager.guessApi.guessResponse.game_state;
+                        return selectedGameState.previous_winning_multiplier.ToString("N2");
+                    case false:
+                        switch (IsFirstTime)
+                        {
+                            case true:
+                                selectedGameState = apiManager.StartApi.gameResponse.game_state;
 
-                           // Debug.Log("Using guessResponse game_state & signature");
+                                //Debug.Log("Using StartApi game_state & signature");
 
-                            return selectedGameState.previous_winning_multiplier.ToString("N2");
-                    }
+                                return selectedGameState.previous_winning_multiplier.ToString("N2");
+                            case false:
+                                selectedGameState = apiManager.guessApi.guessResponse.game_state;
+
+                                // Debug.Log("Using guessResponse game_state & signature");
+
+                                return selectedGameState.previous_winning_multiplier.ToString("N2");
+                        }
+                }
+            }
+            else
+            {
+                return apiManager.cashOutApi.cashOutResponse.game_state.previous_winning_multiplier.ToString();
             }
         }
     }

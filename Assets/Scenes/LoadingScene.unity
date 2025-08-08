@@ -630,8 +630,20 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6777487939459791550, guid: 6ca31c49fd6214f1e8bba2eaa30c4988, type: 3}
+      propertyPath: GameId
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6777487939459791550, guid: 6ca31c49fd6214f1e8bba2eaa30c4988, type: 3}
       propertyPath: IsDemo
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6777487939459791550, guid: 6ca31c49fd6214f1e8bba2eaa30c4988, type: 3}
+      propertyPath: ClientId
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6777487939459791550, guid: 6ca31c49fd6214f1e8bba2eaa30c4988, type: 3}
+      propertyPath: PlayerId
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8645518408272877438, guid: 6ca31c49fd6214f1e8bba2eaa30c4988, type: 3}
       propertyPath: TranslationDocument

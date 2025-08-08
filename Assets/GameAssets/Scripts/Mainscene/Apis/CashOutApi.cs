@@ -57,7 +57,7 @@ public class CashOutApi : MonoBehaviour
             case true:
                 selectedGameState = apiMan.SkipApi.skipResponse.game_state;
                 selectedSignature = apiMan.SkipApi.skipResponse.signature;
-                //Debug.Log("Using SkipApi game_state & signature");
+                Debug.Log("Using SkipApi game_state & signature");
                 break;
             case false:
                 switch (apiMan.IsFirstPlayDone)
@@ -66,12 +66,12 @@ public class CashOutApi : MonoBehaviour
 
                         selectedGameState = apiMan.guessApi.guessResponse.game_state;
                         selectedSignature = apiMan.guessApi.guessResponse.signature;
-                        //Debug.Log("Using guessResponse game_state & signature");
+                        Debug.Log("Using guessResponse game_state & signature");
                         break;
                     case false:
                         selectedGameState = apiMan.StartApi.gameResponse.game_state;
                         selectedSignature = apiMan.StartApi.gameResponse.signature;
-                        //Debug.Log("Using StartApi game_state & signature");
+                        Debug.Log("Using StartApi game_state & signature");
                         init = true;
                         break;
                 }
@@ -113,6 +113,7 @@ public class CashOutApi : MonoBehaviour
             {
                 Debug.LogError("Error: " + webRequest.error);
                 IsCashOutDone = true;
+                PromptManager.Instance.ShowErrorPrompt(webRequest.result.ToString(),webRequest.error);
             }
             else
             {
