@@ -106,6 +106,7 @@ public class GamePlay : MonoBehaviour
             IsCashOut = true;
             isGameOver = false;
             payOutManager.payout.PayoutEffectComplete +=OnEffectComplete;
+            refreshCashOutUi(gamePlayManager);
             yield return StartCoroutine(endSession(gamePlayManager));
             isGamePlayActive = false;
             multipliersManager.enableGuessMask();
@@ -173,6 +174,14 @@ public class GamePlay : MonoBehaviour
             Debug.Log("session ended!");
             gamePlayManager.SetIsFromGamePlay(true);
 
+        }
+    }
+
+    public void refreshCashOutUi ( GamePlayManager gamePlayManager = null )
+    {
+        if (winLoseManager.GetTheOutCome() == OutCome.Lose)
+        {
+            gamePlayManager.cashOutUI.Refresh();
         }
     }
 

@@ -108,4 +108,9 @@ public class CurrencyManager : MonoBehaviour
         }
         walletAmountText.text = CashAmount.ToString("N2" , CultureInfo.CurrentCulture);
     }
+
+    public bool IsMoneyDepleted ()
+    {
+        return CashAmount < 0;
+    }
 }

@@ -76,6 +76,11 @@ public class GamePlayManager : MonoBehaviour
 
     public void ToggleGamePlay ()
     {
+        if (currencyManager.IsMoneyDepleted())
+        {
+            PromptManager.Instance.ShowErrorPrompt("Insufficient Balance" , "No money to place bets!");
+            return;
+        }
         StartCoroutine(gamePlay.ToggleGamePlay(this));
     }
 
