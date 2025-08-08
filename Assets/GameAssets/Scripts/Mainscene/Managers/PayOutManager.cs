@@ -23,7 +23,8 @@ public class PayOutManager : MonoBehaviour
 
     public  void ShowPayOut ()
     {
-       StartCoroutine(payout.ShowPayOut (this));
+        StartCoroutine(updatePayout());
+        StartCoroutine(payout.ShowPayOut (this));
     }
 
     public IEnumerator updatePayout ()
@@ -148,6 +149,7 @@ public class PayOutManager : MonoBehaviour
             }
             else
             {
+                Debug.Log($" win multiplier - {apiManager.cashOutApi.cashOutResponse.game_state.previous_winning_multiplier.ToString()}");
                 return apiManager.cashOutApi.cashOutResponse.game_state.previous_winning_multiplier.ToString();
             }
         }
