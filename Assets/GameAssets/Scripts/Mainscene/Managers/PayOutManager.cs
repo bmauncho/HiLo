@@ -23,7 +23,6 @@ public class PayOutManager : MonoBehaviour
 
     public  void ShowPayOut ()
     {
-        StartCoroutine(updatePayout());
         StartCoroutine(payout.ShowPayOut (this));
     }
 
@@ -113,8 +112,11 @@ public class PayOutManager : MonoBehaviour
         }
         else
         {
+            Debug.Log($"IS GAMEPLAY ACTIVE {gamePlayManager.gamePlay.isGamePlayActive}");
+
             if (gamePlayManager.gamePlay.isGamePlayActive)
             {
+                Debug.Log("is gameplay win Multiplier");
                 bool IsFirstTime = gamePlayManager.Get_IsFirstTime();
                 bool IsSkip = gamePlayManager.Get_IsSkip();
 
@@ -149,6 +151,7 @@ public class PayOutManager : MonoBehaviour
             }
             else
             {
+                Debug.Log("is not gameplay win Multiplier");
                 Debug.Log($" win multiplier - {apiManager.cashOutApi.cashOutResponse.game_state.previous_winning_multiplier.ToString()}");
                 return apiManager.cashOutApi.cashOutResponse.game_state.previous_winning_multiplier.ToString();
             }

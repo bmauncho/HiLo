@@ -36,6 +36,9 @@ public class PayOut : MonoBehaviour
             yield break;
         }
 
+        yield return StartCoroutine(payOutManager.updatePayout());
+
+
         string cashout_ = payOutMan.GetWinMultiplier();
         string amountwon_ = payOutMan.GetWinAmount().ToString("N2" , CultureInfo.CurrentCulture);
 

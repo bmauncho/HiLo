@@ -16526,7 +16526,9 @@ MonoBehaviour:
   winMultiplier: 0.00x
   winAmount: 0.00
   winMultiplierText: {fileID: 2027132445}
+  winMultiplierTextHelper: {fileID: 2027132447}
   winAmountText: {fileID: 851215842}
+  winAmountTextHelper: {fileID: 851215844}
 --- !u!1 &1764988501
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,7 +6,9 @@ public class CashOutUI : MonoBehaviour
     public string winMultiplier = "0.00x";
     public string winAmount = "0.00";
     public TMP_Text winMultiplierText;
+    public TextHelper winMultiplierTextHelper;
     public TMP_Text winAmountText;
+    public TextHelper winAmountTextHelper;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -39,7 +41,7 @@ public class CashOutUI : MonoBehaviour
     {
         if ( winMultiplierText != null )
         {
-            winMultiplierText.GetComponent<TextHelper>().ManualRefresh(winMultiplier);
+            winMultiplierTextHelper.ManualRefresh(winMultiplier);
         }
     }
 
@@ -52,7 +54,7 @@ public class CashOutUI : MonoBehaviour
     {
         if ( winAmountText != null )
         {
-            winAmountText.GetComponent<TextHelper>().ManualRefresh(winAmount);
+            winAmountTextHelper.ManualRefresh(winAmount);
         }
     }
 
