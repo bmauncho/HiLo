@@ -99,8 +99,9 @@ public class CashOutApi : MonoBehaviour
 
     IEnumerator CashOutAction (string jsonData)
     {
+        string testUrl = "https://b.api.ibibe.africa";
         string baseUrl = ConfigMan.Instance.Base_url;
-        string ApiUrl = "https://b.api.ibibe.africa" + "/cashout/hilo";
+        string ApiUrl =  baseUrl + "/cashout/hilo";
         using (UnityWebRequest webRequest = new UnityWebRequest(ApiUrl , "POST"))
         {
             byte [] bodyRaw = Encoding.UTF8.GetBytes(jsonData);
