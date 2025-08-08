@@ -16,6 +16,7 @@ public class GamePlay : MonoBehaviour
     public GameObject start;
     public GameObject cashOut;
     public TMP_Text cashOutAmount;
+    public TextHelper cashOutAmountTexthelper;
     bool isGameOver = false;
     public Button cashOutButton;
     bool IsStart = false;
@@ -75,6 +76,8 @@ public class GamePlay : MonoBehaviour
                 yield break;
             }
             IsStart = true;
+            ResetCashAmount();
+            payOutManager.resetPayout();
             hideStart();
             showCashOut(true);
             isGamePlayActive = true;
@@ -82,8 +85,6 @@ public class GamePlay : MonoBehaviour
             betManager.Bet.DecreaseBtn.ActivateMask();
             yield return StartCoroutine(startSession());
             gamePlayManager.SetIsFirstTime(true);
-            ResetCashAmount();
-            SetCashOutAmount("0.00");
             multipliersManager.disableGuessMask();
             multipliersManager.enableGuessBtns();
             yield return StartCoroutine(gamePlayManager.cardHistory.ResetHistoryData());
@@ -93,7 +94,6 @@ public class GamePlay : MonoBehaviour
             multipliersManager.Multipliers.ToggleMultiplierType(cardManager.GetCurrentCardData());
             multipliersManager.RefreshMultipliers();
             multipliersManager.Multipliers.UpdateText();
-            payOutManager.resetPayout();
             gamePlayManager.setisfromskiping(false);
             IsStart = false;
         }
@@ -134,7 +134,7 @@ public class GamePlay : MonoBehaviour
     public void SetCashOutAmount ( string amount )
     {
         cashOutAmount.text = amount;
-        GetComponentInChildren<TextHelper>().ManualRefresh(amount);
+        cashOutAmountTexthelper.ManualRefresh(amount);
     }
 
     public void ResetCashAmount ()

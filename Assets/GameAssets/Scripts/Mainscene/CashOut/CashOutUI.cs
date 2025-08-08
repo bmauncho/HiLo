@@ -7,6 +7,7 @@ public class CashOutUI : MonoBehaviour
     public string winAmount = "0.00";
     public TMP_Text winMultiplierText;
     public TMP_Text winAmountText;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {

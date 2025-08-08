@@ -4163,6 +4163,7 @@ MonoBehaviour:
   start: {fileID: 1988888470}
   cashOut: {fileID: 569828966}
   cashOutAmount: {fileID: 638148818}
+  cashOutAmountTexthelper: {fileID: 638148820}
   cashOutButton: {fileID: 948996268}
 --- !u!1 &467743755
 GameObject:
