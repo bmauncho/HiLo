@@ -111,6 +111,6 @@ public class CurrencyManager : MonoBehaviour
 
     public bool IsMoneyDepleted ()
     {
-        return CashAmount < 0;
+        return CashAmount <= 0;
     }
 }

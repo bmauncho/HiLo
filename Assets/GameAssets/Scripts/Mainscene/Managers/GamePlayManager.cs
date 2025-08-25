@@ -81,6 +81,7 @@ public class GamePlayManager : MonoBehaviour
             PromptManager.Instance.ShowErrorPrompt("Insufficient Balance" , "No money to place bets!");
             return;
         }
+        
         StartCoroutine(gamePlay.ToggleGamePlay(this));
     }
 
@@ -200,6 +201,13 @@ public class GamePlayManager : MonoBehaviour
     {
         if (isGuessing)
         {
+            return;
+        }
+
+        if(currencyManager.IsMoneyDepleted())
+        {
+            PromptManager.Instance.ShowErrorPrompt("Insufficient Balance", "No money to place bets!");
+            StartCoroutine(gamePlay.ToggleGamePlay(this));
             return;
         }
 

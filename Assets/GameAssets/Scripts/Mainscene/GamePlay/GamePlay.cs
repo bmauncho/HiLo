@@ -12,6 +12,7 @@ public class GamePlay : MonoBehaviour
     BetManager betManager;
     PayOutManager payOutManager;
     ApiManager apiManager;
+    CurrencyManager currencyManager;
     public bool isGamePlayActive = false;
     public GameObject start;
     public GameObject cashOut;
@@ -31,6 +32,7 @@ public class GamePlay : MonoBehaviour
         betManager = CommandCenter.Instance.betManager_;
         payOutManager = CommandCenter.Instance.PayOutManager_;
         apiManager = CommandCenter.Instance.apiManager_;
+        currencyManager = CommandCenter.Instance.currencyMan_;
     }
 
     public void showStart ()
@@ -161,7 +163,8 @@ public class GamePlay : MonoBehaviour
 
     IEnumerator endSession ( GamePlayManager gamePlayManager = null)
     {
-        if(!CommandCenter.Instance.IsDemo() && winLoseManager.GetTheOutCome() != OutCome.Lose)
+        if(!CommandCenter.Instance.IsDemo() && 
+            winLoseManager.GetTheOutCome() != OutCome.Lose)
         {
             apiManager.cashOutApi.CashOut();
             yield return new WaitUntil(() => apiManager.cashOutApi.IsCashOutDone);
