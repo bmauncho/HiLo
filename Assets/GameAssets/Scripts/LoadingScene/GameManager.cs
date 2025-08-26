@@ -91,6 +91,7 @@ public class GameManager : MonoBehaviour
         using (UnityWebRequest www = UnityWebRequestHelper.GetWithTimestamp(url))
         {
             www.useHttpContinue = false;
+            www.timeout = 10;
             www.SetRequestHeader("Cache-Control" , "no-cache, no-store, must-revalidate");
             www.SetRequestHeader("Pragma" , "no-cache");
             www.SetRequestHeader("Expires" , "0");
