@@ -33,6 +33,7 @@ public class GamePlay : MonoBehaviour
         payOutManager = CommandCenter.Instance.PayOutManager_;
         apiManager = CommandCenter.Instance.apiManager_;
         currencyManager = CommandCenter.Instance.currencyMan_;
+       // ResetCashAmount();
     }
 
     public void showStart ()
@@ -135,8 +136,13 @@ public class GamePlay : MonoBehaviour
 
     public void SetCashOutAmount ( string amount )
     {
-        cashOutAmount.text = amount;
-        cashOutAmountTexthelper.ManualRefresh(amount);
+        string cashAmount = amount;
+        Debug.Log("before formarting : "+ cashAmount );
+        cashAmount = PrecisionFormatter.culturedFormat( cashAmount,2 );
+        Debug.Log("after formarting : "+ cashAmount );
+        cashOutAmount.text = cashAmount;
+        Debug.Log(cashOutAmount.text );
+        cashOutAmountTexthelper.ManualRefresh(cashAmount);
     }
 
     public void ResetCashAmount ()

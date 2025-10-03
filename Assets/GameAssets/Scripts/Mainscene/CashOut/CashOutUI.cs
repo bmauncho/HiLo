@@ -24,9 +24,11 @@ public class CashOutUI : MonoBehaviour
 
     public void Refresh ()
     {
-        winMultiplier = "0.00x";
+        winMultiplier = "0.00";
+        winMultiplier = PrecisionFormatter.culturedFormat(winMultiplier,2);
         winAmount = "0.00";
-        SetWinMultiplier(winMultiplier);    
+        winAmount = PrecisionFormatter.culturedFormat(winAmount,2);
+        SetWinMultiplier(winMultiplier +  "x");    
         SetWinAmount(winAmount);
         UpdateWinAmount();
     }

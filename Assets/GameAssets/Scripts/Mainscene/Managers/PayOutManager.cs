@@ -29,10 +29,10 @@ public class PayOutManager : MonoBehaviour
     public IEnumerator updatePayout ()
     {
         string winAmount = currencyManager.GetTotalWinAmount();
+        gamePlayManager.gamePlay.SetCashOutAmount(winAmount);
         string winMultiplier = GetWinMultiplier();
         CashOutUI.SetWinAmount(winAmount);
         CashOutUI.SetWinMultiplier(winMultiplier+"x");
-        gamePlayManager.gamePlay.SetCashOutAmount(winAmount);
         CommandCenter.Instance.currencyMan_.CollectWinnings();
         yield return null;
     }
@@ -40,10 +40,12 @@ public class PayOutManager : MonoBehaviour
     public void resetPayout ()
     {
         string winAmount = "0.00";
-        string winMultiplier = "0.00x";
+        winAmount = PrecisionFormatter.culturedFormat(winAmount, 2);
+        string winMultiplier = "0.00";
+        winMultiplier = PrecisionFormatter .culturedFormat (winMultiplier, 2);
         CashOutUI.SetWinAmount(winAmount);
         CashOutUI.UpdateWinAmount();
-        CashOutUI.SetWinMultiplier(winMultiplier);
+        CashOutUI.SetWinMultiplier(winMultiplier +"x");
     }
 
     public double GetWinAmount ()

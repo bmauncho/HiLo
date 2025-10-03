@@ -24,17 +24,17 @@ public class CurrencyManager : MonoBehaviour
             if(CommandCenter.Instance.gameMode == GameMode.Demo)
             {
                 CashAmount = 2000;
-                walletAmountText.text = CashAmount.ToString("N2" , CultureInfo.CurrentCulture); ;
+                string CASHAMOUNT = CashAmount.ToString();
+                CASHAMOUNT = PrecisionFormatter.culturedFormat(CASHAMOUNT , 2);
+                walletAmountText.text = CASHAMOUNT;
             }
             else
             {
                 string cashamount = apiManager.GetCashAmount();
-                if(double.TryParse(cashamount,out double amount))
-                {
-                    CashAmount += amount;
-                }
-                
-                walletAmountText.text = CashAmount.ToString("N2" , CultureInfo.CurrentCulture); ;
+                CashAmount = double.Parse(cashamount);
+                Debug.Log($"cashamount : {cashamount}");
+
+                walletAmountText.text = cashamount;
             }   
         }
     }
@@ -57,7 +57,7 @@ public class CurrencyManager : MonoBehaviour
             cumilativeWinAMount = winAmount;
         }
 
-        return cumilativeWinAMount.ToString("N2" , CultureInfo.CurrentCulture); ;
+        return cumilativeWinAMount.ToString("n2" , CultureInfo.InvariantCulture); ;
     }
 
     public IEnumerator Bet ()
@@ -65,15 +65,7 @@ public class CurrencyManager : MonoBehaviour
         if (CommandCenter.Instance.IsDemo())
         {
             string betAmount = CommandCenter.Instance.betManager_.GetBetAmount();
-
-            if (double.TryParse(betAmount , out double bet))
-            {
-                CashAmount -= bet;
-            }
-            else
-            {
-                Debug.LogWarning($"Invalid bet amount: {betAmount}");
-            }
+            CashAmount -= double.Parse(betAmount);
         }
         else
         {
@@ -81,7 +73,9 @@ public class CurrencyManager : MonoBehaviour
             yield return new WaitUntil(() => apiManager.placeBet.IsBetPlaced);
             CashAmount = (double)apiManager.placeBet.betResponse.new_wallet_balance;
         }
-        walletAmountText.text = CashAmount.ToString("N2" , CultureInfo.CurrentCulture); ;
+        string CASHAMOUNT = CashAmount.ToString("n2",CultureInfo.InvariantCulture);
+        //CASHAMOUNT = PrecisionFormatter.culturedFormat(CASHAMOUNT , 2);
+        walletAmountText.text = CASHAMOUNT;
     }
 
 
@@ -90,23 +84,29 @@ public class CurrencyManager : MonoBehaviour
         if (CommandCenter.Instance.IsDemo())
         {
             string totalWininings = GetTotalWinAmount();
-            if (double.TryParse(totalWininings , out double winnings))
-            {
-                CashAmount += winnings;
-            }
+            CashAmount += double.Parse(totalWininings , CultureInfo.InvariantCulture);
         }
 
-        walletAmountText.text = CashAmount.ToString("N2" , CultureInfo.CurrentCulture);
+        if (CashAmount <= 0)
+        {
+            CashAmount = 0;
+        }
+        string CASHAMOUNT = CashAmount.ToString("n2");
+        walletAmountText.text = CASHAMOUNT;
     }
 
     public void updateCashOutWinings ()
     {
         string totalWininings = apiManager.updateBet.updateBetResponse.new_wallet_balance;
-        if (double.TryParse(totalWininings , out double winnings))
+
+        CashAmount = double.Parse(totalWininings,CultureInfo.InvariantCulture);
+
+        if (CashAmount <= 0)
         {
-            CashAmount = winnings;
+            CashAmount = 0;
         }
-        walletAmountText.text = CashAmount.ToString("N2" , CultureInfo.CurrentCulture);
+        string CASHAMOUNT = CashAmount.ToString("n2");
+        walletAmountText.text = CASHAMOUNT;
     }
 
     public bool IsMoneyDepleted ()

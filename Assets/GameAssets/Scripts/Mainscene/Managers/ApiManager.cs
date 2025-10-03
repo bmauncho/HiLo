@@ -42,8 +42,15 @@ public class ApiManager : MonoBehaviour
         Player_Id = GameManager.Instance.GetPlayerId();
         Game_Id = GameManager.Instance.GetGameId();
         Client_id = GameManager.Instance.GetClientId();
-        CashAmount = GameManager.Instance.GetCashAmount();
+        setUpCashAmount();
         //Debug.Log("SetUpDone!");
+    }
+
+    void setUpCashAmount ()
+    {
+        string cashAmount = GameManager.Instance.GetCashAmount();
+        cashAmount = PrecisionFormatter.culturedFormat(cashAmount , 2);
+        CashAmount = cashAmount;
     }
 
     public string SetBetId ()

@@ -1,6 +1,7 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Collections;
+using System.Globalization;
 using System.Text;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -78,6 +79,7 @@ public class UpdateBet : MonoBehaviour
 
     public void SetAmountWon ( double Amount )
     {
-        AmountWon = Amount.ToString();
+        AmountWon = Amount.ToString("n2" , CultureInfo.InvariantCulture);
+        Debug.Log($"Amount won : {AmountWon}");
     }
 }
