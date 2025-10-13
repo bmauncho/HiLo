@@ -38,7 +38,7 @@ public class UpdateBet : MonoBehaviour
         isUpdated = false;
         UpdateBetRequest updateBetRequest = new UpdateBetRequest
         {
-            bet_id = CommandCenter.Instance.apiManager_.placeBet.bet_id,
+            bet_id = CommandCenter.Instance.apiManager_.GetBetId(),
             amount_won = AmountWon ,
             client_id = CommandCenter.Instance.apiManager_.GetClientId() ,
         };
