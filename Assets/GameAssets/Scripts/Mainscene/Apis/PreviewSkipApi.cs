@@ -74,7 +74,7 @@ public class PreviewSkipApi : MonoBehaviour
             client_id=apiManager.GetClientId(),
             game_id=apiManager.GetGameId(),
             player_id=apiManager.GetPlayerId(),
-            bet_id=apiManager.SetBetId(),
+            bet_id=apiManager.GetBetId(),
             bet_amount= isBetAmount?betamount:5,
             current_card = currenCard,
         };

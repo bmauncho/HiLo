@@ -89,11 +89,11 @@ public class ApiManager : MonoBehaviour
     {
         return BetId;
     }
-    [ContextMenu("Text Bet Id")]
-    public void TestBetId ()
-    {
-        BetId = SetBetId();
-    }
+    //[ContextMenu("Text Bet Id")]
+    //public void TestBetId ()
+    //{
+    //    BetId = SetBetId();
+    //}
 
     public string GetCashAmount ()
     {

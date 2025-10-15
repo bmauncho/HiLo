@@ -101,7 +101,7 @@ public class GuessApi : MonoBehaviour
             client_id = apiMan.GetClientId() ,
             game_id = apiMan.GetGameId() ,
             player_id = apiMan.GetPlayerId() ,
-            bet_id = apiMan.SetBetId() ,
+            bet_id = apiMan.GetBetId(),
             game_state = selectedGameState ,
             bet_choice = multipliersMan.selectedMultiplier.ToString() ,
             signature = selectedSignature ,
