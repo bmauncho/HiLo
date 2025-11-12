@@ -45,7 +45,7 @@ public class WinLoseManager : MonoBehaviour
             currCard.cardRank ,
             selectedMultiplier);
 
-        Debug.Log($"Testing: {prevCard.cardRank} vs {currCard.cardRank}, Guess: {selectedMultiplier}, Result: {isWin}");
+        //Debug.Log($"Testing: {prevCard.cardRank} vs {currCard.cardRank}, Guess: {selectedMultiplier}, Result: {isWin}");
 
         if (isWin)
         {
@@ -94,7 +94,7 @@ public class WinLoseManager : MonoBehaviour
     IEnumerator win ()
     {
         IsAddNewCardComplete = false;
-        Debug.Log("win");
+        //Debug.Log("win");
         //update card history
        // Debug.Log("Update card History!");
 
@@ -148,7 +148,7 @@ public class WinLoseManager : MonoBehaviour
     IEnumerator lose ()
     {
         IsAddNewCardComplete = false;
-        Debug.Log("lose");
+       // Debug.Log("lose");
         //update card history
         //show next card
         Deck deck = gamePlayManager.deck;

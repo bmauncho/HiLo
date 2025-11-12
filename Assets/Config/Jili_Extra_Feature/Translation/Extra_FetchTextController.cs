@@ -5,6 +5,7 @@ using TMPro;
 
 public class Extra_FetchTextController : MonoBehaviour
 {
+    public Extra_LanguageMan TheOwner;
     public TextMeshProUGUI myText;
     public string CODE;
     private void OnEnable()
@@ -14,20 +15,22 @@ public class Extra_FetchTextController : MonoBehaviour
     }
     void Setup()
     {
-        if (!Extra_LanguageMan.instance||Extra_LanguageMan.instance&&Extra_LanguageMan.instance.Data.Length==0)
+        if (TheOwner)
         {
-            Invoke(nameof(Setup), 0.1f);
+            RefreshFetch();
+
         }
         else
         {
-            RefreshFetch();
+            Debug.Log("NoOwner_"+transform.name);
         }
+       
     }
     [ContextMenu("Refresh")]
     public void RefreshFetch() 
     {
         if (CODE == "")
             return;
-        myText.SetText(Extra_LanguageMan.instance.RequestForText(CODE));
+        myText.SetText(TheOwner.RequestForText(CODE));
     }
 }

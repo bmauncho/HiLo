@@ -99,10 +99,15 @@ public class GameManager : MonoBehaviour
 
             if (www.result == UnityWebRequest.Result.Success)
             {
-                Debug.Log("Received: " + www.downloadHandler.text);
+                //Debug.Log("Received: " + www.downloadHandler.text);
                 playerInfo = JsonUtility.FromJson<PlayerInfo>(www.downloadHandler.text);
                 CashAmount = playerInfo.wallet_balance;
                 isDataFetched = true;
+                CommandCenter.Instance.betManager_.SetUpBetValues();
+                CommandCenter.Instance.apiManager_.SetUp();
+                CommandCenter.Instance.SetUp();
+                CommandCenter.Instance.currencyMan_.SetUp();
+                previewApi.InitializeGame();
             }
             else
             {
@@ -112,6 +117,7 @@ public class GameManager : MonoBehaviour
                 PromptManager.Instance.ShowErrorPrompt(
                     www.responseCode.ToString() , 
                     www.result.ToString() + www.error.ToString());
+                CommandCenter.Instance.apiManager_.SetUp();
             }
         }
     }

@@ -5,6 +5,7 @@ namespace Config_Assets
     using UnityEngine.UI;
     public class FreeGiftBtn : MonoBehaviour
     {
+        public Extra_LanguageMan extra_LanguageMan;
         public int Level;
         public TMP_Text LevelText;
         public GameObject[] LevelsObj;
@@ -16,7 +17,7 @@ namespace Config_Assets
         public GameObject ClaimedHolder;
         private void OnEnable()
         {
-
+            extra_LanguageMan = GetComponentInParent<Extra_LanguageMan>();
             Refresh();
         }
         [ContextMenu("Refresh")]
@@ -76,7 +77,7 @@ namespace Config_Assets
                 ClaimedHolder.SetActive(false);
             }
 
-            Extra_LanguageMan.instance.DynamicAssignCode(LockText.GetComponent<Extra_FetchTextController>(), NewString);
+            extra_LanguageMan.DynamicAssignCode(LockText.GetComponent<Extra_FetchTextController>(), NewString);
 
 
         }

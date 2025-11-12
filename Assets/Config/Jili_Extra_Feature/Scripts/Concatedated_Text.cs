@@ -11,16 +11,21 @@ namespace Config_Assets
     }
     public class Concatedated_Text : MonoBehaviour
     {
+        public Extra_LanguageMan extra_LanguageMan;
         public ConcaText[] TheTexts;
         private void OnEnable()
         {
+            if (!extra_LanguageMan)
+            {
+                extra_LanguageMan = GetComponentInParent<Extra_LanguageMan>();
+            }
             string FullString = "";
             for (int i = 0; i < TheTexts.Length; i++)
             {
                 string which = TheTexts[i].TheText;
                 if (TheTexts[i].UseTranslation)
                 {
-                    which = Extra_LanguageMan.instance.FetchTranslation(which);
+                    which = extra_LanguageMan.FetchTranslation(which);
                 }
                 else if (TheTexts[i].FetchTime)
                 {

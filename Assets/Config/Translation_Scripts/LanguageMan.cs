@@ -8,6 +8,7 @@ using TMPro;
 using UnityEngine.UI;
 using UnityEditor;
 using UnityEngine.Events;
+using System.Linq;
 [System.Serializable]
 public class OnLanguageRefresh : UnityEvent { }
 
@@ -89,6 +90,12 @@ public class LanguageMan : MonoBehaviour
         onLanguageRefresh.Invoke();
 
     }
+    string CleanString(string Which)
+    {
+        string source = Which;
+        string result = string.Concat(source.Where(c => !char.IsWhiteSpace(c)));
+        return result;
+    }
     [ContextMenu("AssignCode")]
     public void AssignCodes()
     {
@@ -109,7 +116,12 @@ public class LanguageMan : MonoBehaviour
             for (int r = 0; r < Data.Length; r++)
             {
                 //                Debug.Log(Data[r]);
-                if (Data[r] == thetext&& !texts[i].IsHardCoded)
+                string cleaneddata = Data[r];
+                string cleanedtext = thetext;
+                cleaneddata = CleanString(cleaneddata);
+                cleanedtext = CleanString(cleanedtext);
+
+                if (cleaneddata == cleanedtext&& !texts[i].IsHardCoded)
                 {
                    
                     Debug.Log(Data[r]);
@@ -133,6 +145,7 @@ public class LanguageMan : MonoBehaviour
             }
             if (!found)
             {
+                texts[i].CODE = "";
                 Debug.Log("NoTrans_" + thetext);
             }
 
@@ -157,15 +170,14 @@ public class LanguageMan : MonoBehaviour
         RefreshAll();
         SetExtraLanguage();
     }
-    void SetExtraLanguage()
+
+    [System.Obsolete]
+    public void SetExtraLanguage()
     {
-        if (!Extra_LanguageMan.instance)
+        Extra_LanguageMan[] templanguages = FindObjectsOfType<Extra_LanguageMan>();
+        for(int i = 0; i < templanguages.Length; i++)
         {
-            Invoke(nameof(SetExtraLanguage), 1f);
-        }
-        else
-        {
-            Extra_LanguageMan.instance.SetLanguage(ActiveLanguage);
+            templanguages[i].SetLanguage(ActiveLanguage);
         }
     }
     public string FetchTranslation(string TheString)

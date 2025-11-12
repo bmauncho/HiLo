@@ -78,7 +78,7 @@ public class PlaceBet : MonoBehaviour
             client_id = Client_id
         };
         string jsonData = JsonUtility.ToJson(betRequest , true);
-        Debug.Log("place bet payload " + jsonData);
+        //Debug.Log("place bet payload " + jsonData);
         GameManager.Instance.ShowTransaction(bet_id);
         StartCoroutine(placeBet(jsonData));
     }
@@ -104,7 +104,7 @@ public class PlaceBet : MonoBehaviour
                 betResponse = JsonUtility.FromJson<BetResponse>(responseText);
                 var parsedJson = JToken.Parse(responseText);
                 string formattedOutput = JsonConvert.SerializeObject(parsedJson , Formatting.Indented);
-                Debug.Log($"Bet placed successfully:{formattedOutput}");
+               // Debug.Log($"Bet placed successfully:{formattedOutput}");
                 double CashAmount = betResponse.new_wallet_balance;
                 IsBetPlaced = true;
             }

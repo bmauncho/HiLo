@@ -74,7 +74,7 @@ public class GuessApi : MonoBehaviour
             case true:
                 selectedGameState = apiMan.StartApi.gameResponse.game_state;
                 selectedSignature = apiMan.StartApi.gameResponse.signature;
-                Debug.Log("Using StartApi game_state & signature");
+               // Debug.Log("Using StartApi game_state & signature");
                 break;
             case false:
                 switch (IsFromSkip)
@@ -82,19 +82,19 @@ public class GuessApi : MonoBehaviour
                     case true:
                         selectedGameState = apiMan.SkipApi.skipResponse.game_state;
                         selectedSignature = apiMan.SkipApi.skipResponse.signature;
-                        Debug.Log("Using guessResponse game_state & signature");
+                        //Debug.Log("Using guessResponse game_state & signature");
                         break;
                     case false:
                         selectedGameState = guessResponse.game_state;
                         selectedSignature = guessResponse.signature;
-                        Debug.Log("Using guessResponse game_state & signature");
+                        //Debug.Log("Using guessResponse game_state & signature");
                         break;
                 }
                 break;
         }
 
-        Debug.Log($"Selected GameState: {selectedGameState}");
-        Debug.Log($"Selected Signature: {selectedSignature}");
+        //Debug.Log($"Selected GameState: {selectedGameState}");
+       // Debug.Log($"Selected Signature: {selectedSignature}");
 
         GuessRequest request = new GuessRequest
         {
@@ -108,7 +108,7 @@ public class GuessApi : MonoBehaviour
         };
 
         string jsonData = JsonConvert.SerializeObject(request , settings);
-        Debug.Log($"Guess api request:{jsonData}");
+        //Debug.Log($"Guess api request:{jsonData}");
         StartCoroutine(GuessAction(jsonData));
     }
 
@@ -136,7 +136,7 @@ public class GuessApi : MonoBehaviour
                 guessResponse = JsonConvert.DeserializeObject<GuessResponse>(responseText);
                 var parsedJson = JToken.Parse(responseText);
                 string formattedOutput = JsonConvert.SerializeObject(parsedJson , Formatting.Indented);
-                Debug.Log($"Guess api response:{formattedOutput}");
+                //Debug.Log($"Guess api response:{formattedOutput}");
                 IsGuessDone=true;
             }
         }

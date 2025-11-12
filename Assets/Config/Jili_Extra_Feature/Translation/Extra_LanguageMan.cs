@@ -17,19 +17,10 @@ public class Extra_LanguageMan : MonoBehaviour
     
     public string All_Game_Text;
     public string[] Data;
-    public static Extra_LanguageMan instance;
     void Awake()
     {
-        if (instance)
-        {
-            Destroy(gameObject);
-        }
-        else
-        {
-            instance = this;
 
-        }
-       
+        SetUp();
         RefreshAll();
         if (Data.Length == 0)
         {
@@ -37,7 +28,22 @@ public class Extra_LanguageMan : MonoBehaviour
 
         }
     }
-   
+    private void Start()
+    {
+        
+    }
+    void SetUp()
+    {
+        if (!LanguageMan.instance)
+        {
+            Invoke(nameof(SetUp), 0.1f);
+        }
+        else
+        {
+            LanguageMan.instance.SetExtraLanguage();
+        }
+    }
+
 
     public string RequestForText(string CODE)
     {
@@ -104,6 +110,8 @@ public class Extra_LanguageMan : MonoBehaviour
                     Debug.Log(Data[r]);
 
                     texts[i].CODE = Data[r - 1];
+                    texts[i].TheOwner = this;
+
 #if UNITY_EDITOR
                     EditorUtility.SetDirty(texts[i]);
 #endif
@@ -114,6 +122,8 @@ public class Extra_LanguageMan : MonoBehaviour
             }
             if (!found)
             {
+                texts[i].TheOwner = this;
+                texts[i].CODE = "";
                 Debug.Log("NoTrans_" + thetext);
             }
 

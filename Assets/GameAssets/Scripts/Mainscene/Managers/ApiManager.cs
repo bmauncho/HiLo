@@ -18,10 +18,10 @@ public class ApiManager : MonoBehaviour
     public PreviewSkipApi previewSkipApi;
     public bool IsFirstPlayDone = false;
     public TMP_Text transactiontext;
-    private void Awake ()
-    {
-        SetUp();
-    }
+    //private void Awake ()
+    //{
+    //    SetUp();
+    //}
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -29,6 +29,8 @@ public class ApiManager : MonoBehaviour
         {
             GameManager.Instance.AddTransactionText(transactiontext);
         }
+
+        SetUp();
     }
 
     // Update is called once per frame

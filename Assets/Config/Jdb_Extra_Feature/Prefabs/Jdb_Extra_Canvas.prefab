@@ -295,6 +295,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb7b0b9f7bff74e248a959156cd5343d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TheOwner: {fileID: 3786300529339826244}
   myText: {fileID: 4561638150226236381}
   CODE: L_9
 --- !u!1 &260761373758362063
@@ -446,6 +447,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb7b0b9f7bff74e248a959156cd5343d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TheOwner: {fileID: 3786300529339826244}
   myText: {fileID: 9201586659950878597}
   CODE: L_10
 --- !u!1 &690534421102022453
@@ -1006,6 +1008,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb7b0b9f7bff74e248a959156cd5343d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TheOwner: {fileID: 3786300529339826244}
   myText: {fileID: 3851940037130335258}
   CODE: L_7
 --- !u!1 &919170456898045218
@@ -1157,6 +1160,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb7b0b9f7bff74e248a959156cd5343d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TheOwner: {fileID: 3786300529339826244}
   myText: {fileID: 6959556529092612010}
   CODE: L_13
 --- !u!1 &1057098103229751286
@@ -1925,6 +1929,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb7b0b9f7bff74e248a959156cd5343d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TheOwner: {fileID: 3786300529339826244}
   myText: {fileID: 7643282179079385063}
   CODE: L_15
 --- !u!1 &2133589448519375441
@@ -2499,6 +2504,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb7b0b9f7bff74e248a959156cd5343d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TheOwner: {fileID: 3786300529339826244}
   myText: {fileID: 4558196598137965682}
   CODE: L_12
 --- !u!1 &2775591876525303409
@@ -3239,7 +3245,7 @@ MonoBehaviour:
   IdlePos: {x: 0, y: 0}
   OpenRightPos: -82
   OpenLeftPos: 74
-  CloseRightPos: 74
+  CloseRightPos: 81
   CloseLeftPos: -82
   OpenAnim: {fileID: 8691261437022338045}
   CloseAnim: {fileID: 5073414642124465826}
@@ -4045,6 +4051,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb7b0b9f7bff74e248a959156cd5343d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TheOwner: {fileID: 3786300529339826244}
   myText: {fileID: 8545989025178042344}
   CODE: L_7
 --- !u!1 &4325570659612179166
@@ -4196,6 +4203,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb7b0b9f7bff74e248a959156cd5343d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TheOwner: {fileID: 3786300529339826244}
   myText: {fileID: 8027221369007309}
   CODE: L_4
 --- !u!1 &4540152102009894886
@@ -4598,6 +4606,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb7b0b9f7bff74e248a959156cd5343d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TheOwner: {fileID: 3786300529339826244}
   myText: {fileID: 342514024123389035}
   CODE: L_14
 --- !u!1 &4861645418554306832
@@ -5315,6 +5324,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb7b0b9f7bff74e248a959156cd5343d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TheOwner: {fileID: 3786300529339826244}
   myText: {fileID: 7099217657436726062}
   CODE: L_8
 --- !u!1 &5554527044306695446
@@ -5849,6 +5859,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb7b0b9f7bff74e248a959156cd5343d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TheOwner: {fileID: 3786300529339826244}
   myText: {fileID: 5742701379471993754}
   CODE: L_3
 --- !u!1 &5838219950441815124
@@ -8503,6 +8514,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb7b0b9f7bff74e248a959156cd5343d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TheOwner: {fileID: 3786300529339826244}
   myText: {fileID: 5643848600146248054}
   CODE: L_11
 --- !u!1 &8729874046232701524
@@ -9190,6 +9202,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb7b0b9f7bff74e248a959156cd5343d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TheOwner: {fileID: 3786300529339826244}
   myText: {fileID: 8923968334729706319}
   CODE: L_6
 --- !u!1 &8985130050323693520
@@ -9484,6 +9497,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb7b0b9f7bff74e248a959156cd5343d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TheOwner: {fileID: 3786300529339826244}
   myText: {fileID: 9051934837785457315}
   CODE: L_5
 --- !u!1 &9157418687023625439

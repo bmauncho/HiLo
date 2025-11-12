@@ -339,7 +339,7 @@ public class CardManager : MonoBehaviour
 
         if (!isColorAvailable(data.cardSuite , data.cardColor))
         {
-            Debug.LogWarning($"Color {data.cardColor} is not available for suite {data.cardSuite}");
+            //Debug.LogWarning($"Color {data.cardColor} is not available for suite {data.cardSuite}");
             // if black color is not available, fallback to red or a default color
             // if red color is not available, fallback to black or a default color
             if (data.cardColor == CardColor.BLACK)
@@ -470,8 +470,8 @@ public class CardManager : MonoBehaviour
         {
             return new CardData { cardSuite = suit2 , cardRank = rank2 };
         }
-
+        string errorMessage = $"Invalid card format or enums do not match: {currentCard}";
+        PromptManager.Instance.ShowErrorPrompt("Card Error" , errorMessage);
         throw new ArgumentException($"Invalid card format or enums do not match: {currentCard}");
     }
-
 }

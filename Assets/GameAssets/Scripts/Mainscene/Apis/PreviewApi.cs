@@ -50,7 +50,7 @@ public class PreviewApi : MonoBehaviour
         };
 
         string jsonData = JsonConvert.SerializeObject(request , settings);
-        Debug.Log($"Initialize api request:{jsonData}");
+        //Debug.Log($"Initialize api request:{jsonData}");
         StartCoroutine(GuessAction(jsonData));
     }
 
@@ -76,7 +76,7 @@ public class PreviewApi : MonoBehaviour
                 response = JsonConvert.DeserializeObject<PreviewResponse>(responseText);
                 var parsedJson = JToken.Parse(responseText);
                 string formattedOutput = JsonConvert.SerializeObject(parsedJson , Formatting.Indented);
-                Debug.Log($"Intialize api response:{formattedOutput}");
+                //Debug.Log($"Intialize api response:{formattedOutput}");
                 IsPreviewDone = true;
             }
         }

@@ -1,8 +1,10 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 public enum BetType { Increase, Decrease }
 public class BetManager : MonoBehaviour
 {
-    private string [] BetAmounts = { "1" , "2" , "3" , "5" , "10" , "20" , "30" , "50" , "100" , "200" , "300" , "500" };
+    public List<string> BetAmounts = new List<string> { "1" , "2" , "3" , "5" , "10" , "20" , "30" , "50" , "100" , "200" , "300" , "500" };
     public int betIndex = 3;
     public string betAmount = "";
     public Bet Bet;
@@ -10,13 +12,23 @@ public class BetManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        refresh();
+        //refresh();
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public void SetUpBetValues ()
+    {
+        if( ConfigMan.Instance.BetValues == null || ConfigMan.Instance.BetValues.Length == 0)
+        {
+            return;
+        }
+        BetAmounts = new List<string>(ConfigMan.Instance.BetValues.ToList());
+        refresh();
     }
 
     void refresh ()
@@ -27,7 +39,7 @@ public class BetManager : MonoBehaviour
 
     public void IncreaseBetAmount_click()
     {
-        if (betIndex < BetAmounts.Length - 1)
+        if (betIndex < BetAmounts.Count - 1)
         {
             betIndex++;
             betAmount = BetAmounts [betIndex];
@@ -47,7 +59,7 @@ public class BetManager : MonoBehaviour
 
     public void IncreaseBetAmount_Hold ()
     {
-        if (betIndex < BetAmounts.Length - 1)
+        if (betIndex < BetAmounts.Count - 1)
         {
             betIndex++;
             betAmount = BetAmounts [betIndex];
@@ -72,7 +84,7 @@ public class BetManager : MonoBehaviour
 
     public bool IsHighestBetAmount ()
     {
-        return betIndex >= BetAmounts.Length-1;
+        return betIndex >= BetAmounts.Count-1;
     }
 
     public bool IsLowestBetAmount ()

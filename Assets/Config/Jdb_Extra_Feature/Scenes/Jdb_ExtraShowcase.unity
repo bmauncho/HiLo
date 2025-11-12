@@ -899,12 +899,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cce2d40bdd14a4d04b880aa73307703b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SwitchViewValue: 1.21
+  MaxScaleMultiplier: 3.2
+  canvasScaler: {fileID: 0}
   IsLandScape: 0
   CurrentScale: {x: 0, y: 0}
   ScaleMultiplier: {x: 0, y: 0}
   NewScaleMultiplier: 0
   ScaleFactor: 0
-  canvasScaler: {fileID: 0}
 --- !u!4 &1278912562
 Transform:
   m_ObjectHideFlags: 0

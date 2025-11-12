@@ -51,7 +51,7 @@ MonoBehaviour:
   Player_Id: 284
   Game_Id: 46
   Client_id: 279
-  CashAmount: 
+  CashAmount: 2000
   playerInfo:
     id: 
     names: 

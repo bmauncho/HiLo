@@ -503,7 +503,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: V 1.8
+  m_text: V 3.8
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1160,7 +1160,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -212.5771, y: -474.875}
+  m_AnchoredPosition: {x: -212.5771, y: -465.30002}
   m_SizeDelta: {x: 412.91, y: 78.077}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1143567676834120784
@@ -1458,7 +1458,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: V 1.6
+  m_text: V __
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2751,10 +2751,15 @@ MonoBehaviour:
   ClientId: 
   Currency: 
   Base_url: https://admin-api3.ibibe.africa
+  Redirect_Url: https://casino.client.ibibe.africa/
   Refresh:
     m_PersistentCalls:
       m_Calls: []
   currencyMan: {fileID: 2897226647955109063}
+  BetValues: []
+  BetDenomiations: []
+  BetMultipliers: []
+  IsSandbox: 0
   TheDebugObj: {fileID: 1197424381939933970}
   PlayerIdText: {fileID: 2186839038250927185}
   GameIdText: {fileID: 7599855475657984909}
@@ -2807,8 +2812,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -50.00003, y: -137.59088}
-  m_SizeDelta: {x: 419.0323, y: 552.9318}
+  m_AnchoredPosition: {x: -50.00003, y: -138.83354}
+  m_SizeDelta: {x: 419.0323, y: 555.4171}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5698410243524868125
 CanvasRenderer:
@@ -4322,10 +4327,10 @@ RectTransform:
   - {fileID: 1768576248846293003}
   m_Father: {fileID: 6740589040820590835}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 31.295391, y: -121}
-  m_SizeDelta: {x: 214.4453, y: 47.5293}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 31.295391, y: -391}
+  m_SizeDelta: {x: 214.4453, y: 47.529297}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2257462657996604098
 CanvasRenderer:
@@ -5488,9 +5493,9 @@ RectTransform:
   - {fileID: 8947564564556776358}
   m_Father: {fileID: 6740589040820590835}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 8.400003, y: -244.59999}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 8.400003, y: -515}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &6901706717382553555
@@ -5755,9 +5760,9 @@ RectTransform:
   - {fileID: 4043959757973983860}
   m_Father: {fileID: 6740589040820590835}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 8.8, y: -264.9}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 8.8, y: -535.30005}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &7103677078940425970

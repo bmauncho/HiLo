@@ -105,7 +105,7 @@ public class StartApi : MonoBehaviour
         };
 
         string jsonData = JsonConvert.SerializeObject(startGameRequest , settings);
-        Debug.Log($"Start api request:{jsonData}"); ;
+        //Debug.Log($"Start api request:{jsonData}"); ;
         StartCoroutine(StartGame(jsonData));
     }
 
@@ -133,7 +133,7 @@ public class StartApi : MonoBehaviour
                 gameResponse = JsonConvert.DeserializeObject<StartGameResponse>(responseText);
                 var parsedJson = JToken.Parse(responseText);
                 string formattedOutput = JsonConvert.SerializeObject(parsedJson , Formatting.Indented);
-                Debug.Log($"Start api response:{formattedOutput}");
+                //Debug.Log($"Start api response:{formattedOutput}");
                 IsStartDone = true;
             }
         }

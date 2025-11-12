@@ -41,6 +41,35 @@ public class FetchImageContoller : MonoBehaviour
                 }
                
             }
+        }else{
+            for (int i = 0; i < Objs.Length; i++)
+            {
+                if (Objs[i].TheLanguage == TheLanguage.English)
+                {
+                    Objs[i].gameObject.SetActive(true);
+                    imagefound = true;
+                }
+                else
+                {
+                    Objs[i].gameObject.SetActive(false);
+                }
+
+            }
+            if (imagefound == false)
+            {
+                for (int i = 0; i < Objs.Length; i++)
+                {
+                    if (i==0)
+                    {
+                        Objs[i].gameObject.SetActive(true);
+                    }
+                    else
+                    {
+                        Objs[i].gameObject.SetActive(false);
+                    }
+
+                }
+            }
         }
     }
 }

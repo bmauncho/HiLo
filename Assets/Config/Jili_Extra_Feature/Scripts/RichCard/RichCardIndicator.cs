@@ -5,6 +5,7 @@ namespace Config_Assets
     using TMPro;
     public class RichCardIndicator : MonoBehaviour
     {
+        public Extra_LanguageMan extra_LanguageMan;
         public GameObject AccumulatedWinObj;
         public float AccumulatedWins;
 
@@ -47,7 +48,7 @@ namespace Config_Assets
         public void CloseIndicator()
         {
             AccumulatedWinObj.SetActive(true);
-            AccumulatedWinsText.text = Extra_LanguageMan.instance.FetchTranslation("Use cards to get") + " " + AccumulatedWins.ToString("n2");
+            AccumulatedWinsText.text = extra_LanguageMan.FetchTranslation("Use cards to get") + " " + AccumulatedWins.ToString("n2");
             if (ExtraMan.Instance.richCardMan.AvailableRichCards <= 0)
             {
                 Invoke(nameof(FinalClose), 3);

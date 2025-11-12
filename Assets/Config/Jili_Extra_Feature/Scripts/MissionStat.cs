@@ -5,6 +5,7 @@ namespace Config_Assets
     using TMPro;
     public class MissionStat : MonoBehaviour
     {
+        public Extra_LanguageMan extra_LanguageMan;
         public GameObject LockObj;
         public TMP_Text CountText;
         public TMP_Text TotalBetText;
@@ -13,6 +14,7 @@ namespace Config_Assets
         public Image IconImage;
         private void OnEnable()
         {
+            extra_LanguageMan = GetComponentInParent<Extra_LanguageMan>();
             Refresh();
         }
 
@@ -29,7 +31,7 @@ namespace Config_Assets
             FillSlider.value = Amount / MaxAmount;
             CountText.text = "(" + Amount.ToString() + "/" + MaxAmount.ToString() + ")";
             string TheString = "Total bet over";
-            TheString = Extra_LanguageMan.instance.FetchTranslation(TheString);
+            TheString = extra_LanguageMan.FetchTranslation(TheString);
             TotalBetText.text = TheString + " " + MaxAmount.ToString();
 
 

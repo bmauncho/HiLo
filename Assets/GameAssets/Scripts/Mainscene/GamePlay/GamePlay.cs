@@ -137,11 +137,11 @@ public class GamePlay : MonoBehaviour
     public void SetCashOutAmount ( string amount )
     {
         string cashAmount = amount;
-        Debug.Log("before formarting : "+ cashAmount );
+        //Debug.Log("before formarting : "+ cashAmount );
         cashAmount = PrecisionFormatter.culturedFormat( cashAmount,2 );
-        Debug.Log("after formarting : "+ cashAmount );
+        //Debug.Log("after formarting : "+ cashAmount );
         cashOutAmount.text = cashAmount;
-        Debug.Log(cashOutAmount.text );
+       // Debug.Log(cashOutAmount.text );
         cashOutAmountTexthelper.ManualRefresh(cashAmount);
     }
 
@@ -162,7 +162,7 @@ public class GamePlay : MonoBehaviour
             apiManager.StartApi.startGame();
 
             yield return new WaitUntil(() => apiManager.StartApi.IsStartDone);
-            Debug.Log("session started!");
+            //Debug.Log("session started!");
         }
 
     }

@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine.Events;
 using System.Security.Cryptography;
 using System;
+using System.Globalization;
 
 [System.Serializable]
 public class ConfigRefresh : UnityEvent { }
@@ -19,8 +20,14 @@ public class ConfigMan : MonoBehaviour
     public string ClientId;
     public string Currency;
     public string Base_url = "https://admin-api3.ibibe.africa";
+    public string Redirect_Url= "https://casino.client.ibibe.africa/";
     public ConfigRefresh Refresh;
     public CurrencyMan currencyMan;
+    [Header("GameValues")]
+    public string[] BetValues;
+    public string[] BetDenomiations;
+    public string[] BetMultipliers;
+    public bool IsSandbox;
 
     [Header("Debug Canvas")]
     public GameObject TheDebugObj;
@@ -87,12 +94,23 @@ public class ConfigMan : MonoBehaviour
     }
     public void RefreshConfig()
     {
-        Debug.Log("ConfigReceived" +
-            "\nPlayerId:" + PlayerId +
-            "\nClientId:" + ClientId + "" +
-            "\nGameId:" + GameId + "" +
-             "\nBaseUrl:" + Base_url + "" +
-            "\nDemoMode:" + IsDemo.ToString());
+        if(Base_url== "https://admin-api3.ibibe.africa")
+        {
+            IsSandbox = true;
+        }
+        else
+        {
+            IsSandbox = false;
+        }
+        if (IsSandbox)
+        {
+            Debug.Log("ConfigReceived" +
+                "\nPlayerId:" + PlayerId +
+                "\nClientId:" + ClientId + "" +
+                "\nGameId:" + GameId + "" +
+                 "\nBaseUrl:" + Base_url + "" +
+                "\nDemoMode:" + IsDemo.ToString());
+        }
         Refresh.Invoke();
 
     }
@@ -111,6 +129,7 @@ public class ConfigMan : MonoBehaviour
         ClientId = Id;
        // Debug.Log("TheFetchedClientIdIs_" + ClientId);
     }
+    
     public void CheckTextInput()
     {
         if (!string.IsNullOrEmpty(PlayerIdText.text))
@@ -125,6 +144,7 @@ public class ConfigMan : MonoBehaviour
         {
             PassClientId(ClientIdText.text);
         }
+        
     }
     public string GetBetId_NoDash()
     {

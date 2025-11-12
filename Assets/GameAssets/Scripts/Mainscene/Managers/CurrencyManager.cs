@@ -19,9 +19,14 @@ public class CurrencyManager : MonoBehaviour
         apiManager = CommandCenter.Instance.apiManager_;
         gamePlayManager = CommandCenter.Instance.gamePlayManager_;
 
+        SetUp();
+    }
+
+    public void SetUp ()
+    {
         if (CommandCenter.Instance)
         {
-            if(CommandCenter.Instance.gameMode == GameMode.Demo)
+            if (CommandCenter.Instance.gameMode == GameMode.Demo)
             {
                 CashAmount = 2000;
                 string CASHAMOUNT = CashAmount.ToString();
@@ -32,10 +37,10 @@ public class CurrencyManager : MonoBehaviour
             {
                 string cashamount = apiManager.GetCashAmount();
                 CashAmount = double.Parse(cashamount);
-                Debug.Log($"cashamount : {cashamount}");
+                //Debug.Log($"cashamount : {cashamount}");
 
                 walletAmountText.text = cashamount;
-            }   
+            }
         }
     }
 

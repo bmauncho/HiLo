@@ -17,6 +17,9 @@ public class FetchUserInfo : MonoBehaviour
     [System.Serializable]
     public class GameData
     {
+        public string[] Bet_Values;
+        public string[] Bet_Denomiations;
+        public string[] Bet_Multipliers;
         public string currency;
         public string clientId;
         public string gameId;
@@ -26,6 +29,7 @@ public class FetchUserInfo : MonoBehaviour
         public string userId;
         public string timestamp;
         public string Base_url = "https://admin-api3.ibibe.africa";
+        public string Redirect_Url = "https://casino.client.ibibe.africa/";
     }
     public GameData data;
     private void Start()
@@ -70,12 +74,21 @@ public class FetchUserInfo : MonoBehaviour
             SetCurrency(data.currency);
             SetLanguage(data.language);
             SetUrl(data.Base_url);
-
+            configMan.BetValues = data.Bet_Values;
+            configMan.BetDenomiations = data.Bet_Denomiations;
+            configMan.BetMultipliers = data.Bet_Multipliers;
+            configMan.Redirect_Url = data.Redirect_Url;
             string isoTime = data.timestamp;
+            Debug.Log("IsoTime_"+isoTime);
             DateTime utcTime = DateTime.Parse(isoTime, null, System.Globalization.DateTimeStyles.RoundtripKind);
-            DateTime localTime = utcTime.ToLocalTime();
-            //Debug.Log("Local Time: " + localTime.ToString());
+            Debug.Log("Utc_" + utcTime.ToString());
+            //DateTime localTime = utcTime.ToLocalTime();
+            TimeZoneInfo localZone = TimeZoneInfo.Local;
+            DateTime localTime =TimeZoneInfo.ConvertTimeFromUtc(utcTime,localZone);
+            Debug.Log("Local Time: " + localTime.ToString());
+
             double timediff = GetTimeElapsed(localTime).TotalSeconds;
+            Debug.Log("Elapsed_" + timediff);
             if (timediff > (60 * 10))
             {
                // Debug.Log("ShouldQuit");
@@ -199,6 +212,7 @@ public class FetchUserInfo : MonoBehaviour
         configMan.PassCurrency(Which);
 
     }
+    
     public void SetUrl(string which)
     {
        // Debug.Log("url: " + which);

@@ -6,15 +6,20 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 public class ViewMan : MonoBehaviour
 {
+    [Header("Tweakable")]
+    public float SwitchViewValue = 1.21f;
+    public float MaxScaleMultiplier = 3.2f;
+    public CanvasScaler canvasScaler;
+
+    [Header("None_Tweakable")]
     public bool IsLandScape;
+
     public Vector2 CurrentScale;
     Vector2 RefScale = new Vector2(1280, 720);
     public Vector2 ScaleMultiplier;
     public float NewScaleMultiplier;
     public float ScaleFactor;
-    public float ScaleOffset;
     float forceupdatetimestamp;
-    public CanvasScaler canvasScaler;
     AnimationCurve ScaleCurve = new AnimationCurve();
     private void Start()
     {
@@ -29,7 +34,7 @@ public class ViewMan : MonoBehaviour
         ScaleMultiplier.x = RefScale.x / CurrentScale.x;
         ScaleMultiplier.y = RefScale.y / CurrentScale.y;
         NewScaleMultiplier = (ScaleMultiplier.x / ScaleMultiplier.y);
-        if (NewScaleMultiplier > 1.21f)
+        if (NewScaleMultiplier > SwitchViewValue)
         {
             if (IsLandScape || forceupdatetimestamp > Time.time)
             {
@@ -45,9 +50,9 @@ public class ViewMan : MonoBehaviour
         }
         if (canvasScaler)
         {
-            ScaleFactor = ((3.2f / NewScaleMultiplier));
+            ScaleFactor = ((MaxScaleMultiplier / NewScaleMultiplier));
             ScaleFactor *= ScaleCurve.Evaluate(ScaleFactor);
-            if (NewScaleMultiplier < 3.2f)
+            if (NewScaleMultiplier < MaxScaleMultiplier)
             {
                 canvasScaler.matchWidthOrHeight = 1;
                 if (IsLandScape)
@@ -63,7 +68,7 @@ public class ViewMan : MonoBehaviour
             }
             else
             {
-                canvasScaler.matchWidthOrHeight = ScaleFactor + ScaleOffset;
+                canvasScaler.matchWidthOrHeight = ScaleFactor;
 
                 canvasScaler.screenMatchMode = CanvasScaler.ScreenMatchMode.MatchWidthOrHeight;
             }
@@ -104,5 +109,22 @@ public class ViewMan : MonoBehaviour
         }
 #endif
 
+    }
+     public bool IsLandscape()
+    {
+        CurrentScale = new Vector2(Screen.width, Screen.height);
+        ScaleMultiplier.x = RefScale.x / CurrentScale.x;
+        ScaleMultiplier.y = RefScale.y / CurrentScale.y;
+       NewScaleMultiplier = (ScaleMultiplier.x / ScaleMultiplier.y);
+        if (NewScaleMultiplier > SwitchViewValue)
+        {
+            Debug.Log("IsPotrait");
+            return false;
+        }
+        else
+        {
+            Debug.Log("IsLandscape");
+            return true;
+        }
     }
 }
