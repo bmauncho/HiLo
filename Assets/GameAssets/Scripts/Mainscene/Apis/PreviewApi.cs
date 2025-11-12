@@ -57,7 +57,9 @@ public class PreviewApi : MonoBehaviour
     IEnumerator GuessAction ( string jsonData )
     {
         string baseUrl = ConfigMan.Instance.Base_url;
-        string ApiUrl = "https://b.api.ibibe.africa" + "/preview/hilo";
+        string testUrl = "https://b.api.ibibe.africa";
+        string TotemUrl = "https://b.games.ibibe";
+        string ApiUrl = TotemUrl + "/preview/hilo";
         using (UnityWebRequest webRequest = new UnityWebRequest(ApiUrl , "POST"))
         {
             byte [] bodyRaw = Encoding.UTF8.GetBytes(jsonData);
@@ -78,6 +80,7 @@ public class PreviewApi : MonoBehaviour
                 string formattedOutput = JsonConvert.SerializeObject(parsedJson , Formatting.Indented);
                 //Debug.Log($"Intialize api response:{formattedOutput}");
                 IsPreviewDone = true;
+                CommandCenter.Instance.gamePlayManager_.SetActiveCard();
             }
         }
     }

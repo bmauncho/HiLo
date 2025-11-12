@@ -41,7 +41,6 @@ public class GamePlayManager : MonoBehaviour
         payOutManager = CommandCenter.Instance.PayOutManager_ ;
         currencyManager = CommandCenter.Instance.currencyMan_ ;
         apiManager = CommandCenter.Instance.apiManager_;
-        Invoke(nameof(SetActiveCard),.25f);
     }
 
     public void SetActiveCard ()

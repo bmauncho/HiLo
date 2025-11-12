@@ -81,8 +81,9 @@ public class SkipApi : MonoBehaviour
     IEnumerator skipAction(string jsonData )
     {
         string testUrl = "https://b.api.ibibe.africa";
+        string TotemUrl = "https://b.games.ibibe";
         string baseUrl = ConfigMan.Instance.Base_url;
-        string ApiUrl = testUrl + "/skip/hilo";
+        string ApiUrl = TotemUrl + "/skip/hilo";
         using (UnityWebRequest webRequest = new UnityWebRequest(ApiUrl , "POST"))
         {
             byte [] bodyRaw = Encoding.UTF8.GetBytes(jsonData);

@@ -115,8 +115,9 @@ public class GuessApi : MonoBehaviour
     IEnumerator GuessAction(string jsonData )
     {
         string testUrl = "https://b.api.ibibe.africa";
+        string TotemUrl = "https://b.games.ibibe";
         string baseUrl = ConfigMan.Instance.Base_url;
-        string ApiUrl = testUrl + "/guess/hilo";
+        string ApiUrl = TotemUrl + "/guess/hilo";
         using (UnityWebRequest webRequest = new UnityWebRequest(ApiUrl , "POST"))
         {
             byte [] bodyRaw = Encoding.UTF8.GetBytes(jsonData);

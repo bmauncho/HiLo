@@ -68,15 +68,16 @@ public class GameManager : MonoBehaviour
             {
                 CashAmount = "2000";
             }
-            //Debug.Log($"is Demo {ConfigMan.Instance.IsDemo}");
+            Debug.Log($"is Demo {ConfigMan.Instance.IsDemo}");
             isDemo = ConfigMan.Instance.IsDemo;
             FetchPlayerInfo();
         }
         else
         {
-            //Debug.Log($"is Demo {ConfigMan.Instance.IsDemo}");
+            Debug.Log($"is Demo {ConfigMan.Instance.IsDemo}");
             isDemo = ConfigMan.Instance.IsDemo;
             FetchPlayerInfo();
+            CommandCenter.Instance.gamePlayManager_.SetActiveCard();  
         }
     }
 
@@ -105,6 +106,7 @@ public class GameManager : MonoBehaviour
                 isDataFetched = true;
                 CommandCenter.Instance.betManager_.SetUpBetValues();
                 CommandCenter.Instance.apiManager_.SetUp();
+                CommandCenter.Instance.apiManager_.placeBet.configureIds();
                 CommandCenter.Instance.SetUp();
                 CommandCenter.Instance.currencyMan_.SetUp();
                 previewApi.InitializeGame();

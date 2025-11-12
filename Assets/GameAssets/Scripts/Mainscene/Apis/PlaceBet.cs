@@ -53,9 +53,9 @@ public class PlaceBet : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start ()
     {
-        configureIds();
+        //configureIds();
     }
-    private void configureIds ()
+    public void configureIds ()
     {
         //Debug.Log("configure - " + GetType().Name);
         Player_Id = GameManager.Instance.GetPlayerId();
