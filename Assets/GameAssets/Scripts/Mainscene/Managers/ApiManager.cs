@@ -30,7 +30,7 @@ public class ApiManager : MonoBehaviour
             GameManager.Instance.AddTransactionText(transactiontext);
         }
 
-        SetUp();
+        //SetUp();
     }
 
     // Update is called once per frame
@@ -44,6 +44,7 @@ public class ApiManager : MonoBehaviour
         Player_Id = GameManager.Instance.GetPlayerId();
         Game_Id = GameManager.Instance.GetGameId();
         Client_id = GameManager.Instance.GetClientId();
+        BetAmount = CommandCenter.Instance.betManager_.betAmount;
         setUpCashAmount();
         //Debug.Log("SetUpDone!");
     }

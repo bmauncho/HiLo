@@ -13,6 +13,8 @@ public class BetManager : MonoBehaviour
     void Start()
     {
         //refresh();
+        betIndex = 0;
+        betAmount = BetAmounts[betIndex];
     }
 
     // Update is called once per frame
@@ -23,11 +25,14 @@ public class BetManager : MonoBehaviour
 
     public void SetUpBetValues ()
     {
-        if( ConfigMan.Instance.BetValues == null || ConfigMan.Instance.BetValues.Length == 0)
+        if (CommandCenter.Instance != null && !CommandCenter.Instance.IsDemo())
         {
-            return;
+            if (ConfigMan.Instance.BetValues != null || ConfigMan.Instance.BetValues.Length > 0)
+            {
+                return;
+            }
+            BetAmounts = new List<string>(ConfigMan.Instance.BetValues.ToList());
         }
-        BetAmounts = new List<string>(ConfigMan.Instance.BetValues.ToList());
         refresh();
     }
 

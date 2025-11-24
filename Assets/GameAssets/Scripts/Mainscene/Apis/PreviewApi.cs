@@ -35,6 +35,7 @@ public class PreviewApi : MonoBehaviour
 
     public void InitializeGame ()
     {
+        Debug.Log("Preview Api Initialized");
         IsPreviewDone = false;
         var settings = new JsonSerializerSettings();
         settings.Converters.Add(new FloatTrimConverter());

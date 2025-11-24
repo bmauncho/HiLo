@@ -92,6 +92,7 @@ public class ConfigMan : MonoBehaviour
        // Debug.Log("TheFetchedPlayerIdIs_" + TheId);
         Invoke(nameof(RefreshConfig), 0.1f);
     }
+    [ContextMenu("RefreshConfig")]
     public void RefreshConfig()
     {
         if(Base_url== "https://admin-api3.ibibe.africa")

@@ -88,6 +88,7 @@ public class StartApi : MonoBehaviour
     public void startGame ()
     {
         IsStartDone = false;
+        GameManager.Instance.IsCalled = false;
         var settings = new JsonSerializerSettings();
         settings.Converters.Add(new FloatTrimConverter());
         settings.Formatting = Formatting.Indented;
@@ -127,6 +128,7 @@ public class StartApi : MonoBehaviour
                 Debug.LogError("Error: " + webRequest.error);
                 IsStartDone = true;
                 PromptManager.Instance.ShowErrorPrompt(webRequest.result.ToString() , webRequest.error);
+
             }
             else
             {

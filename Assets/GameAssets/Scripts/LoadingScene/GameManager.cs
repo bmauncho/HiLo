@@ -33,6 +33,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TMP_Text [] TransactionsText;
     string transaction = string.Empty;
     public PreviewApi previewApi;
+    public bool IsCalled = false;
     private void Awake ()
     {
         Application.targetFrameRate = 144;
@@ -43,10 +44,18 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(this);
         Instance = this;
     }
+    int count = 0;
+    public void TestConfig ()
+    {
+        count++;
+        Debug.Log("TestingConfig" + count );
+    }
 
     public void FetchConfigData ()
     {
-        //Debug.Log("FetchingConfig");
+        if(IsCalled) return;    
+        IsCalled = true;
+        Debug.Log("FetchingConfig");
         if (ConfigMan.Instance.ReceivedConfigs)
         {
             if (!string.IsNullOrEmpty(ConfigMan.Instance.PlayerId))
@@ -179,5 +188,10 @@ public class GameManager : MonoBehaviour
     public bool IsDemo ()
     {
         return isDemo;
+    }
+
+    private void OnApplicationQuit ()
+    {
+        IsCalled = false;
     }
 }
