@@ -80,13 +80,31 @@ public class GameManager : MonoBehaviour
             Debug.Log($"is Demo {ConfigMan.Instance.IsDemo}");
             isDemo = ConfigMan.Instance.IsDemo;
             FetchPlayerInfo();
+            if (isDemo)
+            {
+                CommandCenter.Instance.SetGameMode(GameMode.Demo);
+            }
+            else
+            {
+                CommandCenter.Instance.SetGameMode(GameMode.Live);
+            }
         }
         else
         {
             Debug.Log($"is Demo {ConfigMan.Instance.IsDemo}");
             isDemo = ConfigMan.Instance.IsDemo;
-            FetchPlayerInfo();
-            CommandCenter.Instance.gamePlayManager_.SetActiveCard();  
+
+            CommandCenter.Instance.gamePlayManager_.SetActiveCard();
+            CommandCenter.Instance.betManager_.SetUpBetValues();
+            if (isDemo)
+            {
+                CommandCenter.Instance.SetGameMode(GameMode.Demo);
+            }
+            else
+            {
+                FetchPlayerInfo();
+                CommandCenter.Instance.SetGameMode(GameMode.Live);
+            }
         }
     }
 
@@ -117,6 +135,7 @@ public class GameManager : MonoBehaviour
                 CommandCenter.Instance.apiManager_.SetUp();
                 CommandCenter.Instance.apiManager_.placeBet.configureIds();
                 CommandCenter.Instance.SetUp();
+                CommandCenter.Instance.SetGameMode(GameMode.Live);
                 CommandCenter.Instance.currencyMan_.SetUp();
                 previewApi.InitializeGame();
             }

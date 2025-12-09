@@ -18,11 +18,8 @@ public class NextCard : MonoBehaviour
     public IEnumerator nextCard ( Deck deck,CardManager cardManager)
     {
         Card cardComponenet = deck.newCard.GetTheOwner().GetComponent<Card>();
-        if (!CommandCenter.Instance.IsDemo())
-        {
-            yield return StartCoroutine(currencyManager.Bet());
-            yield return StartCoroutine(guess());
-        }
+         yield return StartCoroutine(currencyManager.Bet());
+         yield return StartCoroutine(guess());
         CardData cardData = cardManager.GetCardData();
 
         yield return null;

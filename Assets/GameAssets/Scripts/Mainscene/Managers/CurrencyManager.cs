@@ -59,7 +59,7 @@ public class CurrencyManager : MonoBehaviour
         }
         else
         {
-            cumilativeWinAMount = winAmount;
+            //cumilativeWinAMount = winAmount;
         }
 
         return cumilativeWinAMount.ToString("n2" , CultureInfo.InvariantCulture); ;
@@ -78,6 +78,7 @@ public class CurrencyManager : MonoBehaviour
             yield return new WaitUntil(() => apiManager.placeBet.IsBetPlaced);
             CashAmount = (double)apiManager.placeBet.betResponse.new_wallet_balance;
         }
+        Debug.Log(CashAmount);
         string CASHAMOUNT = CashAmount.ToString("n2",CultureInfo.InvariantCulture);
         //CASHAMOUNT = PrecisionFormatter.culturedFormat(CASHAMOUNT , 2);
         walletAmountText.text = CASHAMOUNT;
@@ -88,7 +89,7 @@ public class CurrencyManager : MonoBehaviour
     {
         if (CommandCenter.Instance.IsDemo())
         {
-            string totalWininings = GetTotalWinAmount();
+            string totalWininings = winAmount.ToString(CultureInfo.InvariantCulture);
             CashAmount += double.Parse(totalWininings , CultureInfo.InvariantCulture);
         }
 
@@ -96,12 +97,19 @@ public class CurrencyManager : MonoBehaviour
         {
             CashAmount = 0;
         }
+        Debug.Log(CashAmount);
         string CASHAMOUNT = CashAmount.ToString("n2");
         walletAmountText.text = CASHAMOUNT;
     }
 
     public void updateCashOutWinings ()
     {
+        if (CommandCenter.Instance.IsDemo())
+        {
+            CollectWinnings();
+            return;
+        }
+
         string totalWininings = apiManager.updateBet.updateBetResponse.new_wallet_balance;
 
         CashAmount = double.Parse(totalWininings,CultureInfo.InvariantCulture);

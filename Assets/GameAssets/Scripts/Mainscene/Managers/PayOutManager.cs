@@ -33,7 +33,7 @@ public class PayOutManager : MonoBehaviour
         string winMultiplier = GetWinMultiplier();
         CashOutUI.SetWinAmount(winAmount);
         CashOutUI.SetWinMultiplier(winMultiplier+"x");
-        CommandCenter.Instance.currencyMan_.CollectWinnings();
+        //CommandCenter.Instance.currencyMan_.CollectWinnings();
         yield return null;
     }
 

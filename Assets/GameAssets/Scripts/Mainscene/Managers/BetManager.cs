@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -25,9 +26,9 @@ public class BetManager : MonoBehaviour
 
     public void SetUpBetValues ()
     {
-        if (CommandCenter.Instance != null && !CommandCenter.Instance.IsDemo())
+        if (CommandCenter.Instance != null)
         {
-            if (ConfigMan.Instance.BetValues != null || ConfigMan.Instance.BetValues.Length > 0)
+            if (ConfigMan.Instance.BetValues == null || ConfigMan.Instance.BetValues.Length <= 0)
             {
                 return;
             }
@@ -50,6 +51,13 @@ public class BetManager : MonoBehaviour
             betAmount = BetAmounts [betIndex];
             Bet.SetBetAmount (betAmount);
         }
+
+        Bet.IncreaseBtn.transform.DOPunchScale(-new Vector3(0.2f , 0.2f , 0.2f) , .25f , 0 , 1).OnComplete(() =>
+        {
+            Bet.IncreaseBtn.transform.localScale = Vector3.one;
+        });
+
+        UpdateBetButtons();
     }
 
     public void DecreaseBetAmount_Click()
@@ -59,8 +67,40 @@ public class BetManager : MonoBehaviour
             betIndex--;
             betAmount = BetAmounts [betIndex];
             Bet.SetBetAmount(betAmount);
+
         }
+
+        Bet.DecreaseBtn.transform.DOPunchScale(-new Vector3(0.2f , 0.2f , 0.2f) , .25f , 0 , 1).OnComplete(() =>
+        {
+            Bet.DecreaseBtn.transform.localScale = Vector3.one;
+        });
+
+        UpdateBetButtons();
     }
+
+    private void UpdateBetButtons ()
+    {
+        // If at MIN value (index == 0)
+        if (betIndex <= 0)
+        {
+            Bet.DecreaseBtn.ActivateMask();      // Deactivate decrease
+            Bet.IncreaseBtn.DeactivateMask();    // Activate increase
+            return;
+        }
+
+        // If at MAX value (index == last)
+        if (betIndex >= BetAmounts.Count - 1)
+        {
+            Bet.DecreaseBtn.DeactivateMask();    // Activate decrease
+            Bet.IncreaseBtn.ActivateMask();      // Deactivate increase
+            return;
+        }
+
+        // Else: BOTH ACTIVE
+        Bet.DecreaseBtn.DeactivateMask();        // Active
+        Bet.IncreaseBtn.DeactivateMask();        // Active
+    }
+
 
     public void IncreaseBetAmount_Hold ()
     {

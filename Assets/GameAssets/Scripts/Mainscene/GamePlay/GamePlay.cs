@@ -106,6 +106,14 @@ public class GamePlay : MonoBehaviour
             {
                 yield break;
             }
+
+            if (isSessionCashOut)
+            {
+                yield break;
+            }
+
+            isSessionCashOut = true;
+
             IsCashOut = true;
             isGameOver = false;
             payOutManager.payout.PayoutEffectComplete +=OnEffectComplete;
@@ -129,6 +137,7 @@ public class GamePlay : MonoBehaviour
             showStart();
             hideCashOut();
             IsCashOut = false;
+            isSessionCashOut = false;
         }
 
         gamePlayManager.ToggleGamePlaySkips();
@@ -169,6 +178,11 @@ public class GamePlay : MonoBehaviour
 
     IEnumerator endSession ( GamePlayManager gamePlayManager = null)
     {
+        if(winLoseManager.GetTheOutCome() == OutCome.Lose)
+        {
+            yield break;
+        }
+
         if(!CommandCenter.Instance.IsDemo() && 
             winLoseManager.GetTheOutCome() != OutCome.Lose)
         {

@@ -552,7 +552,7 @@ public class MultiplierManager : MonoBehaviour
                 {
                     throw new Exception($"matching multiplier is null");
                 }
-                    break;
+                break;
             }
         }
 

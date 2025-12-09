@@ -5,8 +5,8 @@ public class Bet : MonoBehaviour
 {
     public string BetAmount = string.Empty;
     public TMP_Text betAmountText;
-    public BetButton IncreaseBtn;
-    public BetButton DecreaseBtn;
+    public BetBtnMask IncreaseBtn;
+    public BetBtnMask DecreaseBtn;
     public void SetBetAmount(string amount )
     {
         BetAmount = amount;
