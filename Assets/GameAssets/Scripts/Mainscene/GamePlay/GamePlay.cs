@@ -183,6 +183,7 @@ public class GamePlay : MonoBehaviour
             yield break;
         }
 
+
         if(!CommandCenter.Instance.IsDemo() && 
             winLoseManager.GetTheOutCome() != OutCome.Lose)
         {
@@ -191,7 +192,16 @@ public class GamePlay : MonoBehaviour
             double winAMount = apiManager.cashOutApi.cashOutResponse.final_win;
             Debug.Log(winAMount);
             apiManager.updateBet.SetAmountWon(winAMount);
-            apiManager.updateBet.UpdateTheBet();
+
+            if (winAMount > 0)
+            {
+                apiManager.updateBet.UpdateTheBet();
+            }
+            else
+            {
+                apiManager.updateBet.isUpdated = true;
+            }
+
             yield return new WaitUntil(() => apiManager.updateBet.isUpdated);
             string winAmount = apiManager.updateBet.new_wallet_balance.ToString("N2" , CultureInfo.CurrentCulture);
             Debug.Log("session ended!");
